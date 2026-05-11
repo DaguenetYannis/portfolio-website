@@ -1,0 +1,404 @@
+---
+import BaseLayout from '@/components/layout/BaseLayout.astro';
+import VisualPanel from '@/components/visuals/VisualPanel.astro';
+
+const heroImage = new URL('../../../plots/abm_v3/phase_space/phase_space_global_green_readiness_incoming_xy_1995_2016_portfolio.png', import.meta.url);
+const visual1 = heroImage;
+const visual2 = new URL('../../../plots/abm_v3/phase_space/phase_space_vector_field_green_readiness_incoming_xy_1995_2016_portfolio.png', import.meta.url);
+const visual3 = new URL('../../../plots/abm_v3/phase_space/phase_space_sector_green_readiness_outgoing_3d_1995_2016_portfolio.png', import.meta.url);
+const visual4 = new URL('../../../plots/abm_v3/phase_space/phase_space_nodes_top10_output_green_readiness_incoming_3d_1995_2016_portfolio.png', import.meta.url);
+
+const badges = [
+  'Agent-based modelling',
+  'Economic complexity',
+  'Input-output networks',
+  'Green transition',
+  'Phase-space analysis',
+  'Policy simulation'
+];
+---
+
+<BaseLayout title="Adaptive Green Transition in Global Production Networks" description="A complexity-economics and agent-based modelling framework exploring uneven green transition pathways across the global production system.">
+  <section class="project-hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Project</p>
+          <h1>Adaptive Green Transition in Global Production Networks</h1>
+          <p class="hero-text">
+            A complexity-economics and agent-based modelling framework exploring uneven green transition pathways across the world production network.
+          </p>
+          <div class="badge-list">
+            {badges.map((badge) => (
+              <span class="badge">{badge}</span>
+            ))}
+          </div>
+          <div class="project-links">
+            <a href="/projects" class="text-link">Back to projects</a>
+            <a href="/" class="text-link">Homepage</a>
+          </div>
+        </div>
+
+        <div class="hero-media">
+          <VisualPanel
+            title="Historical trajectory of green readiness"
+            caption="Historical trajectory of the global production system across green capability and local green-ness, 1995-2016."
+            showAction={false}
+          >
+            <img src={heroImage} alt="Global green readiness trajectory, 1995-2016" />
+          </VisualPanel>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="project-framing">
+    <div class="container-narrow">
+      <h2>Project framing</h2>
+      <p>
+        The framework represents the global economy as country-sector production nodes, each embedded in a structured input-output network. The project investigates how these nodes move through a green-readiness space that combines productive capability and local green-ness.
+      </p>
+      <p>
+        The model is designed to explore transition as uneven, path-dependent, and capability-constrained. The visual evidence suggests historical movement is shaped by production scale, network exposure, and local green transition factors.
+      </p>
+      <p>
+        This work is intended as a bridge from historical empirical structure toward agent-based policy simulation, with careful emphasis on what the model can investigate rather than what it proves.
+      </p>
+    </div>
+  </section>
+
+  <section class="core-question">
+    <div class="container-narrow">
+      <h2>Core question</h2>
+      <p class="question">
+        How do productive capabilities, network exposure, and production constraints shape uneven movement toward greener production states?
+      </p>
+    </div>
+  </section>
+
+  <section class="storyline">
+    <div class="container">
+      <h2>Analytical storyline</h2>
+      <div class="story-grid">
+        <article class="story-card">
+          <h3>Production nodes are heterogeneous</h3>
+          <p>
+            Country-sector nodes differ in capability, scale, and green readiness. The project studies these differences as core drivers of transition opportunity.
+          </p>
+        </article>
+        <article class="story-card">
+          <h3>Green transition is path-dependent</h3>
+          <p>
+            The framework investigates how historical position and capability shape future movement rather than implying a single uniform path.
+          </p>
+        </article>
+        <article class="story-card">
+          <h3>Network exposure changes transition possibilities</h3>
+          <p>
+            Input-output links determine how nodes are exposed to green inputs and external production pressures, affecting their transition landscape.
+          </p>
+        </article>
+        <article class="story-card">
+          <h3>Policy simulations must preserve production constraints</h3>
+          <p>
+            Scenario analysis is grounded in production realities, not abstract optimisation, and preserves economic structure while exploring policy effects.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="visual-evidence">
+    <div class="container">
+      <h2>Visual evidence</h2>
+      <div class="visual-grid">
+        <VisualPanel
+          title="Green capability and local green-ness rise together, but not smoothly"
+          caption="The global trajectory suggests that capability accumulation and local green-ness move together over time, but not as a smooth linear transition."
+          showAction={false}
+        >
+          <img src={visual1} alt="Global trajectory of green capability and local green-ness" />
+        </VisualPanel>
+
+        <VisualPanel
+          title="Historical movement fields show uneven motion across the green-readiness space"
+          caption="The movement field highlights directional asymmetries in the transition landscape, supporting a view of transition as path-dependent and structurally uneven."
+          showAction={false}
+        >
+          <img src={visual2} alt="Movement field across green readiness space" />
+        </VisualPanel>
+
+        <VisualPanel
+          title="Sector trajectories reveal distinct capability-constrained transition paths"
+          caption="Sector-level trajectories show that production activities do not share a single transition path. Their movement differs by capability position and network-embedded green-ness."
+          showAction={false}
+        >
+          <img src={visual3} alt="Sector trajectories in green readiness space" />
+        </VisualPanel>
+
+        <VisualPanel
+          title="Large production nodes do not share a single green transition path"
+          caption="The largest production nodes follow divergent movements across green capability, local green-ness, and incoming network green-ness."
+          showAction={false}
+        >
+          <img src={visual4} alt="Top production nodes transition trajectories" />
+        </VisualPanel>
+      </div>
+    </div>
+  </section>
+
+  <section class="modelling-logic">
+    <div class="container-narrow">
+      <h2>Modelling logic</h2>
+      <ol class="pipeline-list">
+        <li>Historical input-output data</li>
+        <li>Country-sector agents</li>
+        <li>Green capability and network green-ness state variables</li>
+        <li>Phase-space trajectories</li>
+        <li>Behavioural ABM and scenario exploration</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="skills-demonstrated">
+    <div class="container">
+      <h2>Skills demonstrated</h2>
+      <div class="skill-grid">
+        <span>Data pipeline design</span>
+        <span>Economic modelling</span>
+        <span>Network analysis</span>
+        <span>Agent-based modelling</span>
+        <span>Carbon transition analysis</span>
+        <span>Visual communication</span>
+        <span>Policy interpretation</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="interpretation-limits">
+    <div class="container-narrow">
+      <h2>Interpretation and limits</h2>
+      <p>
+        This is a modelling framework, not a deterministic forecast. Phase-space trajectories support interpretation of historical movement.
+      </p>
+      <p>
+        Scenario simulations should be read as structured exploration, not prediction. The work is designed to help identify plausible transition dynamics while preserving production constraints.
+      </p>
+      <p>
+        Future extensions may improve behavioural calibration and policy scenario design with richer empirical grounding.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .project-hero {
+    padding: var(--space-3xl) 0;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--space-3xl);
+    align-items: start;
+  }
+
+  .hero-copy {
+    max-width: 620px;
+  }
+
+  .eyebrow {
+    margin: 0 0 var(--space-md);
+    color: var(--color-text-muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-size: var(--font-size-xs);
+  }
+
+  h1 {
+    margin: 0 0 var(--space-lg);
+    font-size: var(--font-size-4xl);
+    line-height: 1.05;
+  }
+
+  .hero-text {
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin-bottom: var(--space-2xl);
+    max-width: 680px;
+  }
+
+  .badge-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .badge {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    padding: 0.5rem 0.85rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+  }
+
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+    align-items: center;
+  }
+
+  .text-link {
+    color: var(--color-accent-primary);
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+  }
+
+  .text-link:hover {
+    color: var(--color-accent-primary-hover);
+  }
+
+  .project-framing,
+  .core-question,
+  .storyline,
+  .visual-evidence,
+  .modelling-logic,
+  .skills-demonstrated,
+  .interpretation-limits {
+    padding: var(--space-3xl) 0;
+  }
+
+  .project-framing p,
+  .interpretation-limits p {
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin-bottom: var(--space-lg);
+  }
+
+  .question {
+    background-color: var(--color-panel);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    color: var(--color-text);
+    font-size: var(--font-size-lg);
+    line-height: 1.8;
+  }
+
+  .story-grid,
+  .visual-grid,
+  .skill-grid {
+    display: grid;
+    gap: var(--space-xl);
+  }
+
+  .story-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .story-card {
+    background-color: var(--color-panel);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+  }
+
+  .story-card h3 {
+    margin-top: 0;
+    margin-bottom: var(--space-md);
+    font-size: var(--font-size-xl);
+    color: var(--color-text);
+  }
+
+  .story-card p {
+    margin: 0;
+    color: var(--color-text-secondary);
+    line-height: 1.75;
+  }
+
+  .visual-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .visual-grid img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+  }
+
+  .pipeline-list {
+    margin: var(--space-xl) 0 0;
+    padding-left: var(--space-xl);
+    color: var(--color-text-secondary);
+  }
+
+  .pipeline-list li {
+    margin-bottom: var(--space-md);
+    line-height: 1.8;
+  }
+
+  .skills-demonstrated h2 {
+    margin-bottom: var(--space-xl);
+  }
+
+  .skill-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .skill-grid span {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md) var(--space-lg);
+    display: inline-block;
+    color: var(--color-text);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+  }
+
+  .interpretation-limits h2 {
+    margin-bottom: var(--space-lg);
+  }
+
+  @media (max-width: 900px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .story-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .skill-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    h1 {
+      font-size: var(--font-size-3xl);
+    }
+
+    .hero-text {
+      margin-bottom: var(--space-xl);
+    }
+
+    .badge-list {
+      gap: var(--space-xs);
+    }
+
+    .project-links {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .skill-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

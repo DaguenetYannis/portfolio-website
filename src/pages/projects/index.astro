@@ -1,0 +1,67 @@
+---
+import BaseLayout from '@/components/layout/BaseLayout.astro';
+import ProjectCard from '@/components/projects/ProjectCard.astro';
+
+const projects = [
+  {
+    title: 'Adaptive Green Transition in Global Production Networks',
+    description: 'A framework for studying green transition pathways as heterogeneous, path-dependent movements in a networked production system.',
+    tags: ['agent-based modelling', 'economic complexity', 'network analysis'],
+    outputType: 'research' as const,
+    status: 'completed' as const,
+    href: '/projects/adaptive-green-transition'
+  }
+];
+---
+
+<BaseLayout title="Projects | Analytical Portfolio">
+  <section class="projects-page">
+    <div class="container">
+      <h1>Projects</h1>
+      <p class="intro-text">
+        Selected analytical work in policy, institutional research, and network-based modelling.
+      </p>
+      <div class="project-grid">
+        {projects.map((project) => (
+          <ProjectCard
+            title={project.title}
+            description={project.description}
+            tags={project.tags}
+            outputType={project.outputType}
+            status={project.status}
+            href={project.href}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .projects-page {
+    padding: var(--space-3xl) 0;
+  }
+
+  h1 {
+    margin-bottom: var(--space-md);
+  }
+
+  .intro-text {
+    color: var(--color-text-secondary);
+    max-width: 760px;
+    line-height: 1.8;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-xl);
+  }
+
+  @media (max-width: 640px) {
+    .projects-page {
+      padding: var(--space-2xl) 0;
+    }
+  }
+</style>
