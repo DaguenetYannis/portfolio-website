@@ -1,0 +1,17 @@
+{
+  "name": "analytical-portfolio",
+  "version": "0.1.0",
+  "description": "A calm, dark-mode-first policy and institutional analytical portfolio",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "latest"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
