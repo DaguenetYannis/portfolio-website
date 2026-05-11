@@ -7,6 +7,7 @@ interface Props {
 }
 
 const { title, caption, showAction = false } = Astro.props;
+const hasVisualContent = Astro.slots.has('default');
 ---
 
 <figure class="visual-panel">
@@ -22,10 +23,13 @@ const { title, caption, showAction = false } = Astro.props;
   </div>
 
   <div class="visual-content">
-    <div class="visual-placeholder">
-      <p>Chart/Diagram Placeholder</p>
-    </div>
-    <slot />
+    {hasVisualContent ? (
+      <slot />
+    ) : (
+      <div class="visual-placeholder">
+        <p>Chart/Diagram Placeholder</p>
+      </div>
+    )}
   </div>
 
   {caption && <figcaption class="visual-caption">{caption}</figcaption>}

@@ -2,11 +2,11 @@
 import BaseLayout from '@/components/layout/BaseLayout.astro';
 import VisualPanel from '@/components/visuals/VisualPanel.astro';
 
-const heroImage = new URL('../../../plots/abm_v3/phase_space/phase_space_global_green_readiness_incoming_xy_1995_2016_portfolio.png', import.meta.url);
+const heroImage = '/outputs/plots/adaptive-green-transition/phase_space_global_green_readiness_incoming_xy_1995_2016_portfolio.png';
 const visual1 = heroImage;
-const visual2 = new URL('../../../plots/abm_v3/phase_space/phase_space_vector_field_green_readiness_incoming_xy_1995_2016_portfolio.png', import.meta.url);
-const visual3 = new URL('../../../plots/abm_v3/phase_space/phase_space_sector_green_readiness_outgoing_3d_1995_2016_portfolio.png', import.meta.url);
-const visual4 = new URL('../../../plots/abm_v3/phase_space/phase_space_nodes_top10_output_green_readiness_incoming_3d_1995_2016_portfolio.png', import.meta.url);
+const visual2 = '/outputs/plots/adaptive-green-transition/phase_space_vector_field_green_readiness_incoming_xy_1995_2016_portfolio.png';
+const visual3 = '/outputs/plots/adaptive-green-transition/phase_space_sector_green_readiness_outgoing_3d_1995_2016_portfolio.png';
+const visual4 = '/outputs/plots/adaptive-green-transition/phase_space_nodes_top10_output_green_readiness_incoming_3d_1995_2016_portfolio.png';
 
 const badges = [
   'Agent-based modelling',
@@ -45,7 +45,7 @@ const badges = [
             caption="Historical trajectory of the global production system across green capability and local green-ness, 1995-2016."
             showAction={false}
           >
-            <img src={heroImage} alt="Global green readiness trajectory, 1995-2016" />
+            <img class="hero-plot" src={heroImage} alt="Global green readiness trajectory, 1995-2016" />
           </VisualPanel>
         </div>
       </div>
@@ -205,6 +205,12 @@ const badges = [
 
   .hero-copy {
     max-width: 620px;
+  }
+
+  .hero-plot {
+    width: 100%;
+    max-height: 520px;
+    object-fit: contain;
   }
 
   .eyebrow {
