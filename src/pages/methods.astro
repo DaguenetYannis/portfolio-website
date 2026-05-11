@@ -1,17 +1,150 @@
 ---
 // Methods and Methodology page
+import BaseLayout from '@/components/layout/BaseLayout.astro';
+import VisualPanel from '@/components/visuals/VisualPanel.astro';
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Methods</title>
-  </head>
-  <body>
-    <main>
+<BaseLayout title="Methods | Analytical Portfolio">
+  <section class="methods-section">
+    <div class="container-narrow">
       <h1>Methodology</h1>
-      <p>Content coming soon.</p>
-    </main>
-  </body>
-</html>
+      
+      <section class="methods-content">
+        <h2>Overview</h2>
+        <p>
+          This work emphasizes institutional analysis, policy frameworks, and evidence-based assessment. The methodology integrates systematic approaches with clear communication of findings.
+        </p>
+      </section>
+
+      <section class="methods-content">
+        <h2>Analytical Framework</h2>
+        <p>
+          Projects follow a structured approach to institutional and policy analysis:
+        </p>
+        <ol class="framework-list">
+          <li><strong>Scoping:</strong> Define research questions and institutional boundaries</li>
+          <li><strong>Mapping:</strong> Systematic mapping of actors, processes, and frameworks</li>
+          <li><strong>Analysis:</strong> Evidence synthesis and institutional assessment</li>
+          <li><strong>Synthesis:</strong> Development of findings and recommendations</li>
+          <li><strong>Communication:</strong> Clear presentation through writing and visualization</li>
+        </ol>
+      </section>
+
+      <section class="methods-content">
+        <h2>Methods and Tools</h2>
+        <p>
+          Analysis combines qualitative and quantitative approaches:
+        </p>
+        <ul class="methods-list">
+          <li>Document review and policy analysis</li>
+          <li>Institutional mapping and process analysis</li>
+          <li>Data synthesis and visualization</li>
+          <li>Structured stakeholder engagement</li>
+          <li>Evidence-based assessment frameworks</li>
+        </ul>
+      </section>
+    </div>
+  </section>
+
+  <section class="methods-visual">
+    <div class="container">
+      <VisualPanel
+        title="Analytical Process"
+        caption="Placeholder showing the systematic methodology for institutional analysis."
+        showAction={false}
+      />
+    </div>
+  </section>
+
+  <section class="methods-section">
+    <div class="container-narrow">
+      <section class="methods-content">
+        <h2>Data and Evidence</h2>
+        <p>
+          Projects prioritize transparency about data sources, limitations, and assumptions. Evidence is sourced from:
+        </p>
+        <ul class="methods-list">
+          <li>Published research and institutional documents</li>
+          <li>Official policy and governance frameworks</li>
+          <li>Structured stakeholder interviews</li>
+          <li>Publicly available data and analysis</li>
+        </ul>
+      </section>
+
+      <section class="methods-content">
+        <h2>Communication</h2>
+        <p>
+          Findings are communicated through multiple formats designed for clarity and accessibility:
+        </p>
+        <ul class="methods-list">
+          <li>Written analysis and reports</li>
+          <li>Visual diagrams and data visualizations</li>
+          <li>Interactive frameworks and tools</li>
+          <li>Summary briefs and policy notes</li>
+        </ul>
+      </section>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .methods-section {
+    padding: var(--space-3xl) 0;
+  }
+
+  .methods-content {
+    margin-bottom: var(--space-3xl);
+  }
+
+  .methods-content h2 {
+    margin-top: var(--space-2xl);
+    margin-bottom: var(--space-lg);
+  }
+
+  .methods-content p {
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin-bottom: var(--space-lg);
+  }
+
+  .framework-list {
+    margin: var(--space-lg) 0;
+    padding-left: var(--space-xl);
+  }
+
+  .framework-list li {
+    margin-bottom: var(--space-md);
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+  }
+
+  .framework-list strong {
+    color: var(--color-text);
+  }
+
+  .methods-list {
+    margin: var(--space-lg) 0;
+    padding-left: var(--space-xl);
+  }
+
+  .methods-list li {
+    margin-bottom: var(--space-md);
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+  }
+
+  .methods-visual {
+    padding: var(--space-3xl) 0;
+  }
+
+  @media (max-width: 768px) {
+    .methods-section,
+    .methods-visual {
+      padding: var(--space-2xl) 0;
+    }
+
+    .methods-content {
+      margin-bottom: var(--space-2xl);
+    }
+  }
+</style>

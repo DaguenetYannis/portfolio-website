@@ -1,9 +1,6 @@
 /* Global Styles */
-:root {
-  /* Import design tokens */
-  @import url('./tokens.css');
-  @import url('./typography.css');
-}
+@import url('./tokens.css');
+@import url('./typography.css');
 
 * {
   margin: 0;
@@ -16,12 +13,65 @@ html {
   background-color: var(--color-bg);
   color: var(--color-text);
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg);
 }
 
+/* Container for main content below header */
 main {
-  padding: var(--space-lg);
+  flex: 1;
+  width: 100%;
+}
+
+/* Responsive container wrapper */
+.container {
+  max-width: var(--size-max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+  width: 100%;
+}
+
+.container-narrow {
+  max-width: var(--size-max-width-narrow);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+  width: 100%;
+}
+
+/* Section spacing */
+section {
+  padding: var(--space-3xl) 0;
+}
+
+section:not(:last-child) {
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+/* Reset default list styles */
+ul, ol {
+  list-style: none;
+}
+
+/* Focus states for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 2px;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection color */
+::selection {
+  background-color: var(--color-accent-primary);
+  color: var(--color-bg);
 }

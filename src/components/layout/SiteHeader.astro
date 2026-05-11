@@ -1,0 +1,62 @@
+---
+// SiteHeader.astro - Top navigation and branding
+import Navigation from '../navigation/Navigation.astro';
+---
+
+<header class="site-header">
+  <div class="header-content">
+    <div class="logo">
+      <a href="/">Portfolio</a>
+    </div>
+    <Navigation />
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--color-bg);
+    border-bottom: 1px solid var(--color-border-subtle);
+    backdrop-filter: blur(8px);
+    background-color: rgba(15, 20, 25, 0.8);
+  }
+
+  .header-content {
+    max-width: var(--size-max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    flex-shrink: 0;
+  }
+
+  .logo a {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    letter-spacing: -0.5px;
+  }
+
+  .logo a:hover {
+    color: var(--color-accent-primary);
+  }
+
+  @media (max-width: 640px) {
+    .header-content {
+      padding: 0 var(--space-md);
+    }
+
+    .logo a {
+      font-size: var(--font-size-lg);
+    }
+  }
+</style>

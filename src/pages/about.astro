@@ -1,17 +1,87 @@
 ---
 // About page
+import BaseLayout from '@/components/layout/BaseLayout.astro';
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>About</title>
-  </head>
-  <body>
-    <main>
+<BaseLayout title="About | Analytical Portfolio">
+  <section class="about-section">
+    <div class="container-narrow">
       <h1>About</h1>
-      <p>Content coming soon.</p>
-    </main>
-  </body>
-</html>
+      
+      <section class="about-content">
+        <h2>Portfolio Overview</h2>
+        <p>
+          This portfolio showcases work in institutional policy analysis and governance research. The projects demonstrate methodological rigor, institutional insight, and the ability to communicate complex findings to diverse audiences.
+        </p>
+      </section>
+
+      <section class="about-content">
+        <h2>Approach</h2>
+        <p>
+          Work is grounded in systematic analysis, evidence synthesis, and institutional understanding. Projects integrate quantitative and qualitative methods, emphasizing clarity and actionable insight.
+        </p>
+        <ul>
+          <li>Institutional mapping and analysis</li>
+          <li>Policy framework development</li>
+          <li>Evidence-based assessment</li>
+          <li>Visual communication of findings</li>
+        </ul>
+      </section>
+
+      <section class="about-content">
+        <h2>Aesthetic</h2>
+        <p>
+          This portfolio uses a calm, dark-mode-first institutional design. The visual identity prioritizes:
+        </p>
+        <ul>
+          <li>Clarity and readability</li>
+          <li>Institutional credibility</li>
+          <li>Accessibility</li>
+          <li>Minimal but polished presentation</li>
+        </ul>
+      </section>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about-section {
+    padding: var(--space-3xl) 0;
+  }
+
+  .about-content {
+    margin-bottom: var(--space-3xl);
+  }
+
+  .about-content h2 {
+    margin-top: var(--space-2xl);
+    margin-bottom: var(--space-lg);
+  }
+
+  .about-content p {
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin-bottom: var(--space-lg);
+  }
+
+  .about-content ul {
+    margin: var(--space-lg) 0;
+    padding-left: var(--space-xl);
+  }
+
+  .about-content li {
+    margin-bottom: var(--space-md);
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 768px) {
+    .about-section {
+      padding: var(--space-2xl) 0;
+    }
+
+    .about-content {
+      margin-bottom: var(--space-2xl);
+    }
+  }
+</style>

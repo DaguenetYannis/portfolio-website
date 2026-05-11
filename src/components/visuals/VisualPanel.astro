@@ -1,0 +1,125 @@
+---
+// VisualPanel.astro - Container for charts, diagrams, and visualizations
+interface Props {
+  title: string;
+  caption?: string;
+  showAction?: boolean;
+}
+
+const { title, caption, showAction = false } = Astro.props;
+---
+
+<figure class="visual-panel">
+  <div class="visual-header">
+    <h3 class="visual-title">{title}</h3>
+    {showAction && (
+      <div class="visual-actions">
+        <button class="visual-action-btn" aria-label="Open visualization">
+          ↗
+        </button>
+      </div>
+    )}
+  </div>
+
+  <div class="visual-content">
+    <div class="visual-placeholder">
+      <p>Chart/Diagram Placeholder</p>
+    </div>
+    <slot />
+  </div>
+
+  {caption && <figcaption class="visual-caption">{caption}</figcaption>}
+</figure>
+
+<style>
+  .visual-panel {
+    background-color: var(--color-panel);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    margin: var(--space-xl) 0;
+  }
+
+  .visual-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg);
+  }
+
+  .visual-title {
+    margin: 0;
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .visual-actions {
+    display: flex;
+    gap: var(--space-sm);
+  }
+
+  .visual-action-btn {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+  }
+
+  .visual-action-btn:hover {
+    background-color: var(--color-surface-alt);
+    color: var(--color-accent-primary);
+    border-color: var(--color-accent-primary);
+  }
+
+  .visual-action-btn:focus-visible {
+    outline: 2px solid var(--color-accent-primary);
+    outline-offset: 2px;
+  }
+
+  .visual-content {
+    margin: var(--space-lg) 0;
+  }
+
+  .visual-placeholder {
+    background-color: var(--color-surface);
+    border: 2px dashed var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-3xl) var(--space-xl);
+    text-align: center;
+    color: var(--color-text-muted);
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .visual-placeholder p {
+    margin: 0;
+    font-size: var(--font-size-sm);
+  }
+
+  .visual-caption {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    margin-top: var(--space-md);
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 640px) {
+    .visual-panel {
+      padding: var(--space-lg);
+    }
+
+    .visual-placeholder {
+      min-height: 200px;
+      padding: var(--space-xl) var(--space-md);
+    }
+  }
+</style>

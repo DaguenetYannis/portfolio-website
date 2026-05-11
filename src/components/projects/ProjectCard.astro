@@ -1,0 +1,168 @@
+---
+// ProjectCard.astro - Reusable project card component
+interface Props {
+  title: string;
+  description: string;
+  tags: string[];
+  outputType?: 'analysis' | 'visualization' | 'simulation' | 'research';
+  status?: 'completed' | 'in-progress' | 'planned';
+  href?: string;
+}
+
+const {
+  title,
+  description,
+  tags,
+  outputType = 'analysis',
+  status = 'completed',
+  href = '#'
+} = Astro.props;
+
+const statusColors: Record<string, string> = {
+  'completed': 'var(--color-accent-secondary)',
+  'in-progress': 'var(--color-accent-tertiary)',
+  'planned': 'var(--color-text-muted)'
+};
+
+const outputTypeLabels: Record<string, string> = {
+  'analysis': 'Analysis',
+  'visualization': 'Visualization',
+  'simulation': 'Simulation',
+  'research': 'Research'
+};
+---
+
+<article class="project-card">
+  <div class="card-header">
+    <h3 class="card-title">
+      <a href={href}>{title}</a>
+    </h3>
+    <div class="card-meta">
+      <span class="output-type">{outputTypeLabels[outputType]}</span>
+      <span class="status" style={{ color: statusColors[status] }}>
+        {status}
+      </span>
+    </div>
+  </div>
+  
+  <p class="card-description">{description}</p>
+  
+  <div class="card-tags">
+    {tags.map((tag) => (
+      <span class="tag">{tag}</span>
+    ))}
+  </div>
+  
+  <a href={href} class="card-link">View Project →</a>
+</article>
+
+<style>
+  .project-card {
+    background-color: var(--color-panel);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    transition: all var(--transition-normal);
+  }
+
+  .project-card:hover {
+    background-color: var(--color-panel-elevated);
+    border-color: var(--color-accent-primary);
+    box-shadow: var(--shadow-md);
+  }
+
+  .card-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .card-title {
+    margin: 0;
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+  }
+
+  .card-title a {
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .card-title a:hover {
+    color: var(--color-accent-primary);
+  }
+
+  .card-meta {
+    display: flex;
+    gap: var(--space-md);
+    align-items: center;
+    font-size: var(--font-size-xs);
+  }
+
+  .output-type {
+    background-color: var(--color-surface);
+    color: var(--color-text-muted);
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+
+  .status {
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+
+  .card-description {
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .tag {
+    background-color: var(--color-surface);
+    color: var(--color-accent-primary);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    border: 1px solid var(--color-border);
+  }
+
+  .card-link {
+    align-self: flex-start;
+    color: var(--color-accent-primary);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    margin-top: var(--space-sm);
+  }
+
+  .card-link:hover {
+    color: var(--color-accent-primary-hover);
+  }
+
+  @media (max-width: 640px) {
+    .project-card {
+      padding: var(--space-lg);
+    }
+
+    .card-meta {
+      flex-wrap: wrap;
+    }
+  }
+</style>

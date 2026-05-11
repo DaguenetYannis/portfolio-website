@@ -1,61 +1,105 @@
 /* Typography */
 
 h1 {
-  font-size: 2.5rem;
+  font-size: var(--font-size-4xl);
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: var(--space-lg);
+  color: var(--color-text);
+  letter-spacing: -0.015em;
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: var(--font-size-3xl);
   font-weight: 700;
   line-height: 1.3;
   margin-bottom: var(--space-md);
   margin-top: var(--space-xl);
+  color: var(--color-text);
+  letter-spacing: -0.01em;
 }
 
 h3 {
-  font-size: 1.5rem;
+  font-size: var(--font-size-2xl);
   font-weight: 600;
   line-height: 1.4;
-  margin-bottom: var(--space-md);
-}
-
-p {
-  font-size: 1rem;
   margin-bottom: var(--space-md);
   color: var(--color-text);
 }
 
+h4 {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: var(--space-sm);
+  color: var(--color-text);
+}
+
+p {
+  font-size: var(--font-size-base);
+  margin-bottom: var(--space-md);
+  color: var(--color-text);
+  line-height: 1.7;
+}
+
 a {
-  color: var(--color-accent);
+  color: var(--color-accent-primary);
   text-decoration: none;
   transition: color var(--transition-fast);
 }
 
 a:hover {
-  color: var(--color-accent-hover);
+  color: var(--color-accent-primary-hover);
   text-decoration: underline;
+}
+
+a:visited {
+  color: var(--color-accent-primary);
 }
 
 code {
   font-family: var(--font-mono);
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
   background-color: var(--color-surface-alt);
+  color: var(--color-accent-secondary);
   padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
+  border-radius: var(--radius-sm);
 }
 
 pre {
   background-color: var(--color-surface-alt);
-  padding: var(--space-md);
-  border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
   overflow-x: auto;
-  margin-bottom: var(--space-md);
+  margin: var(--space-lg) 0;
+  font-size: var(--font-size-sm);
 }
 
 pre code {
   background-color: transparent;
   padding: 0;
+  color: var(--color-text);
+}
+
+/* Headings inside rich text */
+h1 + p,
+h2 + p,
+h3 + p {
+  margin-top: 0;
+}
+
+/* Better spacing for lists */
+ul, ol {
+  margin: var(--space-md) 0;
+  padding-left: var(--space-xl);
+}
+
+li {
+  margin-bottom: var(--space-sm);
+}
+
+/* Better contrast for muted text */
+.text-muted {
+  color: var(--color-text-muted);
 }

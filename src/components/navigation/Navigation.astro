@@ -1,0 +1,64 @@
+---
+// Navigation.astro - Main navigation menu
+---
+
+<nav class="main-nav">
+  <ul class="nav-list">
+    <li><a href="/" class="nav-link">Home</a></li>
+    <li><a href="/projects" class="nav-link">Projects</a></li>
+    <li><a href="/methods" class="nav-link">Methods</a></li>
+    <li><a href="/about" class="nav-link">About</a></li>
+  </ul>
+</nav>
+
+<style>
+  .main-nav {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .nav-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: var(--space-xl);
+  }
+
+  .nav-link {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    transition: color var(--transition-fast);
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-md);
+  }
+
+  .nav-link:hover {
+    color: var(--color-accent-primary);
+  }
+
+  /* Active state (can be enhanced with Astro's @astrojs/sitemap) */
+  .nav-link[href="/"] {
+    /* Home link */
+  }
+
+  @media (max-width: 768px) {
+    .nav-list {
+      gap: var(--space-md);
+    }
+
+    .nav-link {
+      font-size: var(--font-size-xs);
+      padding: 0.5rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .main-nav {
+      display: none;
+    }
+  }
+</style>

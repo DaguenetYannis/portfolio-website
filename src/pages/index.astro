@@ -1,17 +1,224 @@
 ---
-// Homepage
+// Homepage - Landing page
+import BaseLayout from '@/components/layout/BaseLayout.astro';
+import ProjectCard from '@/components/projects/ProjectCard.astro';
+import VisualPanel from '@/components/visuals/VisualPanel.astro';
+
+const selectedProjects = [
+  {
+    id: 'project-001',
+    title: 'Policy Analysis Framework',
+    description: 'Development and application of institutional policy analysis methodologies.',
+    tags: ['policy', 'institutional', 'analysis'],
+    outputType: 'analysis' as const,
+    status: 'completed' as const,
+    href: '/projects'
+  },
+  {
+    id: 'project-002',
+    title: 'Governance Mapping',
+    description: 'Systematic mapping of institutional governance structures and decision flows.',
+    tags: ['governance', 'mapping', 'institutional'],
+    outputType: 'visualization' as const,
+    status: 'completed' as const,
+    href: '/projects'
+  },
+  {
+    id: 'project-003',
+    title: 'Analytical Methods Survey',
+    description: 'Research into contemporary analytical methods for institutional assessment.',
+    tags: ['research', 'methodology', 'institutional'],
+    outputType: 'research' as const,
+    status: 'in-progress' as const,
+    href: '/projects'
+  }
+];
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Analytical Portfolio</title>
-  </head>
-  <body>
-    <main>
-      <h1>Welcome</h1>
-      <p>Portfolio coming soon.</p>
-    </main>
-  </body>
-</html>
+<BaseLayout title="Analytical Portfolio" description="Policy and institutional analytical portfolio">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Analytical Portfolio</h1>
+        <p class="hero-subtitle">
+          Policy and institutional analysis through rigorous methodology and clear visualization.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Institutional Profile -->
+  <section class="profile">
+    <div class="container-narrow">
+      <h2>About This Portfolio</h2>
+      <p>
+        This is a portfolio of analytical work focused on institutional policy research and governance analysis. Projects demonstrate methodological rigor, institutional insight, and the ability to communicate complex findings.
+      </p>
+      <p>
+        All work follows a calm, institutional aesthetic designed for clarity and credibility.
+      </p>
+    </div>
+  </section>
+
+  <!-- Selected Projects -->
+  <section class="projects">
+    <div class="container">
+      <h2>Recent Work</h2>
+      <div class="project-grid">
+        {selectedProjects.map((project) => (
+          <ProjectCard
+            title={project.title}
+            description={project.description}
+            tags={project.tags}
+            outputType={project.outputType}
+            status={project.status}
+            href={project.href}
+          />
+        ))}
+      </div>
+      <div class="section-cta">
+        <a href="/projects" class="cta-link">View all projects →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Methods Snapshot -->
+  <section class="methods">
+    <div class="container-narrow">
+      <h2>Methodology</h2>
+      <p>
+        This work emphasizes institutional analysis, policy frameworks, and evidence-based assessment. Projects integrate:
+      </p>
+      <ul class="methods-list">
+        <li>Systematic institutional mapping</li>
+        <li>Rigorous policy analysis</li>
+        <li>Evidence synthesis and synthesis</li>
+        <li>Clear visual communication</li>
+      </ul>
+      <p>
+        <a href="/methods">Learn more about methodology →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Visual Preview Section -->
+  <section class="visual-preview">
+    <div class="container">
+      <VisualPanel
+        title="Sample Visualization"
+        caption="Placeholder for institutional analysis visualization."
+        showAction={false}
+      />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: var(--space-3xl) 0;
+    background: linear-gradient(
+      135deg,
+      var(--color-bg) 0%,
+      var(--color-surface) 100%
+    );
+  }
+
+  .hero-content {
+    max-width: 900px;
+  }
+
+  .hero h1 {
+    font-size: var(--font-size-4xl);
+    margin-bottom: var(--space-lg);
+    letter-spacing: -0.02em;
+  }
+
+  .hero-subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    max-width: 600px;
+    line-height: 1.8;
+  }
+
+  .profile {
+    padding: var(--space-3xl) 0;
+  }
+
+  .profile p {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-base);
+    line-height: 1.8;
+  }
+
+  .projects {
+    padding: var(--space-3xl) 0;
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--space-xl);
+    margin: var(--space-2xl) 0;
+  }
+
+  .section-cta {
+    text-align: center;
+    margin-top: var(--space-2xl);
+  }
+
+  .cta-link {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    color: var(--color-accent-primary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .cta-link:hover {
+    color: var(--color-accent-primary-hover);
+  }
+
+  .methods {
+    padding: var(--space-3xl) 0;
+  }
+
+  .methods-list {
+    margin: var(--space-xl) 0;
+    padding-left: var(--space-xl);
+  }
+
+  .methods-list li {
+    margin-bottom: var(--space-md);
+    color: var(--color-text-secondary);
+  }
+
+  .visual-preview {
+    padding: var(--space-3xl) 0;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: var(--space-2xl) 0;
+    }
+
+    .hero h1 {
+      font-size: var(--font-size-3xl);
+    }
+
+    .hero-subtitle {
+      font-size: var(--font-size-base);
+    }
+
+    .project-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .profile,
+    .projects,
+    .methods,
+    .visual-preview {
+      padding: var(--space-2xl) 0;
+    }
+  }
+</style>
