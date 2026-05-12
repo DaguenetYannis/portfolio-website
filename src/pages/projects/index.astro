@@ -4,8 +4,10 @@ import ProjectCard from '@/components/projects/ProjectCard.astro';
 
 const projectCategories = [
   {
+    id: 'research-economic-modelling',
     title: 'Research & Economic Modelling',
     description: 'Projects focused on policy analysis, economic systems, transition dynamics, and empirical modelling.',
+    overviewDescription: 'Policy analysis, economic systems, transition dynamics, and empirical modelling.',
     projects: [
       {
         title: 'Adaptive Green Transition in Global Production Networks',
@@ -42,8 +44,10 @@ const projectCategories = [
     ]
   },
   {
+    id: 'data-analysis-machine-learning',
     title: 'Data Analysis & Machine Learning',
     description: 'Projects focused on predictive modelling, data engineering, machine learning workflows, and applied quantitative analysis.',
+    overviewDescription: 'Predictive modelling, data engineering, machine-learning workflows, and applied quantitative analysis.',
     projects: [
       {
         title: 'Predicting Socio-Economic Status from Administrative and Geographic Data',
@@ -65,8 +69,28 @@ const projectCategories = [
       <p class="intro-text">
         Selected analytical work in policy, institutional research, and network-based modelling.
       </p>
+      <div class="category-overview" aria-label="Project categories">
+        <div class="category-folder-grid">
+          {projectCategories.map((category) => (
+            <a class="category-folder-card" href={`#${category.id}`}>
+              <div class="category-folder-header">
+                <h2>{category.title}</h2>
+                <span class="category-folder-meta">
+                  {category.projects.length} {category.projects.length === 1 ? 'project' : 'projects'}
+                </span>
+              </div>
+              <p>{category.overviewDescription}</p>
+              <ul class="category-folder-list">
+                {category.projects.map((project) => (
+                  <li>{project.title}</li>
+                ))}
+              </ul>
+            </a>
+          ))}
+        </div>
+      </div>
       {projectCategories.map((category) => (
-        <section class="project-category">
+        <section id={category.id} class="project-category">
           <div class="category-heading">
             <h2>{category.title}</h2>
             <p>{category.description}</p>
@@ -102,10 +126,105 @@ const projectCategories = [
     color: var(--color-text-secondary);
     max-width: 760px;
     line-height: 1.8;
-    margin-bottom: var(--space-2xl);
+    margin-bottom: var(--space-xl);
+  }
+
+  .category-overview {
+    margin: var(--space-2xl) 0 var(--space-3xl);
+  }
+
+  .category-folder-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-xl);
+  }
+
+  .category-folder-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    background-color: var(--color-panel);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    color: var(--color-text);
+    text-decoration: none;
+    transition:
+      border-color var(--transition-fast),
+      background-color var(--transition-fast),
+      transform var(--transition-fast);
+  }
+
+  .category-folder-card:hover,
+  .category-folder-card:focus-visible {
+    background-color: var(--color-surface);
+    border-color: var(--color-accent-primary);
+    transform: translateY(-2px);
+  }
+
+  .category-folder-card:focus-visible {
+    outline: 2px solid var(--color-accent-primary);
+    outline-offset: 3px;
+  }
+
+  .category-folder-header {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-md);
+    align-items: flex-start;
+    margin-bottom: var(--space-md);
+  }
+
+  .category-folder-header h2 {
+    margin: 0;
+    font-size: var(--font-size-xl);
+    line-height: 1.25;
+  }
+
+  .category-folder-meta {
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 0.35rem 0.65rem;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+  }
+
+  .category-folder-card p {
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin: 0 0 var(--space-lg);
+  }
+
+  .category-folder-list {
+    display: grid;
+    gap: var(--space-sm);
+    margin: auto 0 0;
+    padding: 0;
+    list-style: none;
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+  }
+
+  .category-folder-list li {
+    border-left: 2px solid var(--color-border);
+    padding-left: var(--space-sm);
+    line-height: 1.45;
+    transition: border-color var(--transition-fast);
+  }
+
+  .category-folder-card:hover .category-folder-list li,
+  .category-folder-card:focus-visible .category-folder-list li {
+    border-color: var(--color-accent-primary);
   }
 
   .project-category {
+    scroll-margin-top: var(--space-2xl);
+    margin-top: var(--space-2xl);
+  }
+
+  .project-category + .project-category {
     margin-top: var(--space-3xl);
   }
 
@@ -133,6 +252,14 @@ const projectCategories = [
   @media (max-width: 640px) {
     .projects-page {
       padding: var(--space-2xl) 0;
+    }
+
+    .category-folder-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .category-folder-header {
+      flex-direction: column;
     }
   }
 </style>
