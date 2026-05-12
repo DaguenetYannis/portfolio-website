@@ -1,0 +1,320 @@
+---
+import BaseLayout from '@/components/layout/BaseLayout.astro';
+import VisualPanel from '@/components/visuals/VisualPanel.astro';
+
+const table1 = '/outputs/tables/Table%201%20-%20Regression%20Results%20of%20a%20PPML%20estimation%20for%20the%20recovery.png';
+const table2 = '/outputs/tables/Table%202%20-%20Regression%20Results%20of%20a%20PPML%20estimation%20for%20the%20effect%20of%20the%20shock.png';
+const table3 = '/outputs/tables/Table%203%20-%20Regression%20Results%20of%20an%20OLS%20estimation%20for%20the%20effect%20of%20the%20shock.png';
+const table4 = '/outputs/tables/Table%204%20-%20Regression%20Results%20of%20a%20PPML%20estimation%20for%20the%20effect%20of%20the%20shock%20with%20all%20countries.png';
+
+const badges = [
+  'International economics',
+  'Structural gravity',
+  'Difference-in-difference',
+  'PPML regression',
+  'Trade resilience',
+  'Eurozone',
+  'Financial crisis'
+];
+
+const skills = [
+  'Structural gravity modelling',
+  'Difference-in-difference estimation',
+  'PPML regression',
+  'Trade resilience analysis',
+  'International economics',
+  'Econometric interpretation',
+  'Research synthesis',
+  'Academic writing'
+];
+---
+
+<BaseLayout title="Did the Eurozone Protect Trade During the Great Trade Collapse?" description="A structural gravity and difference-in-difference analysis of whether Eurozone membership reduced the trade impact of the 2008 financial crisis.">
+  <section class="project-hero">
+    <div class="container-narrow">
+      <p class="eyebrow">Project</p>
+      <h1>Did the Eurozone Protect Trade During the Great Trade Collapse?</h1>
+      <p class="hero-subtitle">
+        A structural gravity and difference-in-difference analysis of whether Eurozone membership reduced the trade impact of the 2008 financial crisis.
+      </p>
+      <p class="hero-text">
+        The 2008 financial crisis triggered the sharpest contraction in global trade since the Great Depression. Yet the collapse was not uniform. Some economies experienced much steeper declines in exports than others, raising a central question in international economics: what makes trade systems more resilient to systemic shocks?
+      </p>
+      <p class="hero-text">
+        This project investigates whether membership in the Eurozone reduced the impact of the Great Trade Collapse on member countries' trade flows. Using structural gravity models, difference-in-difference estimation, and PPML regressions on bilateral trade data from 2000 to 2019, the analysis studies whether monetary integration acted as a stabilising mechanism during the crisis.
+      </p>
+      <div class="badge-list">
+        {badges.map((badge) => (
+          <span class="badge">{badge}</span>
+        ))}
+      </div>
+      <div class="project-links">
+        <a href="/projects" class="text-link">Back to projects</a>
+        <a href="/" class="text-link">Homepage</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="argument-section">
+    <div class="container-narrow">
+      <h2>Why trade collapsed unevenly</h2>
+      <p>
+        The collapse in trade following the 2008 crisis was not simply the result of lower global demand. The literature identifies multiple transmission mechanisms, including tighter trade finance conditions, disruptions in global supply chains, protectionist responses, inventory adjustments, and uncertainty shocks affecting investment and international transactions.
+      </p>
+      <p>
+        Trade contracted more sharply than GDP, especially for manufactured goods integrated into international production chains. This asymmetry became known as the Great Trade Collapse. However, while the crisis was global, countries experienced very different levels of export decline. This project focuses on one possible explanation for that heterogeneity: whether sharing a common currency reduced uncertainty and stabilised trade relations during the crisis period.
+      </p>
+    </div>
+  </section>
+
+  <section class="argument-section">
+    <div class="container-narrow">
+      <h2>The Eurozone as a resilience mechanism</h2>
+      <p>
+        The core hypothesis is that monetary integration may reduce trade vulnerability during systemic crises. Countries sharing a common currency face lower exchange-rate uncertainty, lower transaction costs, and stronger institutional integration. During periods of global instability, these mechanisms may help preserve trade relationships that would otherwise contract more sharply.
+      </p>
+      <p>
+        Rather than studying the long-run benefits of the Eurozone, the analysis focuses on a narrower question: whether Eurozone membership acted as a form of shock absorption during the 2008 financial crisis.
+      </p>
+    </div>
+  </section>
+
+  <section class="evidence-section">
+    <div class="container">
+      <div class="evidence-copy">
+        <h2>Empirical strategy</h2>
+        <p>
+          The analysis combines a structural gravity equation with a difference-in-difference framework. Bilateral trade flows between 2000 and 2019 are used to estimate whether Eurozone countries experienced a smaller trade decline in 2009 relative to comparable high-income economies outside the monetary union.
+        </p>
+        <p>
+          The specification controls for standard gravity variables including distance, common language, colonial ties, contiguity, and regional trade agreements. Exporter-year and importer-year fixed effects absorb broader macroeconomic variations affecting exporters and importers over time.
+        </p>
+        <p>
+          The project compares OLS and Poisson Pseudo Maximum Likelihood estimations. PPML is particularly important in trade modelling because it remains robust to heteroskedasticity and preserves zero trade flows that would otherwise be excluded in log-linear models.
+        </p>
+      </div>
+      <VisualPanel
+        title="PPML estimates indicate partial shock absorption for Eurozone members"
+        caption="The crisis-year coefficient is negative and statistically significant, while the interaction between crisis year and Eurozone membership is positive and statistically significant."
+        showAction={false}
+      >
+        <img class="table-image" src={table2} alt="Regression results of a PPML estimation for the effect of the shock" />
+      </VisualPanel>
+    </div>
+  </section>
+
+  <section class="evidence-section">
+    <div class="container">
+      <div class="evidence-copy">
+        <h2>Shock absorption, but weaker evidence on recovery</h2>
+        <p>
+          The main results suggest that Eurozone membership reduced the negative effect of the crisis on trade flows. The interaction coefficient between the crisis period and Eurozone membership is positive and statistically significant, indicating that member countries experienced a smaller contraction in bilateral trade relative to comparable economies outside the Eurozone.
+        </p>
+        <p>
+          The interpretation is not that the Eurozone prevented the crisis. The more cautious interpretation is that monetary integration may have reduced uncertainty surrounding cross-border transactions during the shock period. In that sense, the Eurozone appears to have functioned as a partial resilience mechanism for trade.
+        </p>
+        <p>
+          The evidence becomes less robust when analysing post-crisis recovery dynamics. While some specifications suggest a positive association between Eurozone membership and trade recovery, the significance of the result depends on the country sample retained in the estimation.
+        </p>
+      </div>
+      <VisualPanel
+        title="Recovery effects are less robust than shock-absorption effects"
+        caption="The recovery specification shows a positive Eurozone coefficient, but the interpretation remains cautious because significance depends on the sample and specification."
+        showAction={false}
+      >
+        <img class="table-image" src={table1} alt="Regression results of a PPML estimation for the recovery" />
+      </VisualPanel>
+    </div>
+  </section>
+
+  <section class="evidence-section">
+    <div class="container">
+      <div class="evidence-copy">
+        <h2>Robustness and comparison</h2>
+        <p>
+          The project also compares the PPML results with an OLS baseline and an expanded sample including all countries. The OLS specification is useful as a naive benchmark, but PPML is preferred because trade data are heteroskedastic and contain zero flows.
+        </p>
+        <p>
+          The expanded-country PPML specification confirms a positive and statistically significant interaction between the crisis year and Eurozone membership. This supports the shock-absorption interpretation, while also showing why the choice of comparison group matters.
+        </p>
+      </div>
+      <div class="visual-grid">
+        <VisualPanel
+          title="OLS provides a baseline, but PPML is more appropriate for trade flows"
+          caption="The OLS model is retained as a comparison point, while PPML is preferred for the main interpretation."
+          showAction={false}
+        >
+          <img class="table-image" src={table3} alt="Regression results of an OLS estimation for the effect of the shock" />
+        </VisualPanel>
+        <VisualPanel
+          title="The shock-absorption result remains positive in the expanded sample"
+          caption="The all-country PPML specification preserves a positive interaction between crisis year and Eurozone membership."
+          showAction={false}
+        >
+          <img class="table-image" src={table4} alt="Regression results of a PPML estimation for the effect of the shock with all countries" />
+        </VisualPanel>
+      </div>
+    </div>
+  </section>
+
+  <section class="argument-section">
+    <div class="container-narrow">
+      <h2>Limits and interpretation</h2>
+      <p>
+        The project does not treat the estimates as definitive causal proof. One important limitation concerns the construction of a truly homogeneous control group. Even among high-income economies, substantial structural differences remain between Eurozone and non-Eurozone countries.
+      </p>
+      <p>
+        The analysis also does not incorporate broader general equilibrium effects or dynamic feedback mechanisms between trade, finance, and macroeconomic adjustment. The results should therefore be interpreted as evidence of an association between monetary integration and trade resilience rather than a complete structural explanation of the crisis.
+      </p>
+      <p>
+        Nevertheless, the project illustrates how gravity models and quasi-experimental methods can be combined to study the resilience of international economic systems under systemic shocks. That question remains relevant for contemporary debates on supply chains, monetary integration, and economic security.
+      </p>
+    </div>
+  </section>
+
+  <section class="skills-demonstrated">
+    <div class="container">
+      <h2>Skills demonstrated</h2>
+      <div class="skill-grid">
+        {skills.map((skill) => (
+          <span>{skill}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .project-hero,
+  .argument-section,
+  .evidence-section,
+  .skills-demonstrated {
+    padding: var(--space-3xl) 0;
+  }
+
+  .eyebrow {
+    margin: 0 0 var(--space-md);
+    color: var(--color-text-muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-size: var(--font-size-xs);
+  }
+
+  h1 {
+    margin: 0 0 var(--space-lg);
+    font-size: var(--font-size-4xl);
+    line-height: 1.05;
+  }
+
+  .hero-subtitle {
+    color: var(--color-text);
+    font-size: var(--font-size-lg);
+    line-height: 1.8;
+    margin-bottom: var(--space-lg);
+    max-width: 860px;
+  }
+
+  .hero-text,
+  .argument-section p,
+  .evidence-copy p {
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin-bottom: var(--space-lg);
+  }
+
+  .badge-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin: var(--space-2xl) 0;
+  }
+
+  .badge {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    padding: 0.5rem 0.85rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+  }
+
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+    align-items: center;
+  }
+
+  .text-link {
+    color: var(--color-accent-primary);
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+  }
+
+  .text-link:hover {
+    color: var(--color-accent-primary-hover);
+  }
+
+  .evidence-copy {
+    max-width: 820px;
+  }
+
+  .table-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+  }
+
+  .visual-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .skill-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-xl);
+  }
+
+  .skill-grid span {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md) var(--space-lg);
+    display: inline-block;
+    color: var(--color-text);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+  }
+
+  @media (max-width: 1100px) {
+    .visual-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .skill-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    h1 {
+      font-size: var(--font-size-3xl);
+    }
+
+    .project-links {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .skill-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
