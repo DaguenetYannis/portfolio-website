@@ -5,4 +5,11 @@ dist/
 .vscode/
 .DS_Store
 to_share/
-plots/
+/plots/
+papers/
+.env.local
+.env.*.local
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
