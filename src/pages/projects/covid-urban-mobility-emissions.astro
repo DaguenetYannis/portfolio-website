@@ -1,0 +1,279 @@
+---
+import BaseLayout from '@/components/layout/BaseLayout.astro';
+import VisualPanel from '@/components/visuals/VisualPanel.astro';
+
+const figure1 = '/outputs/plots/Paris-Seoul-covid-study/Figure%201%20-%20Emissions%20of%20all%20available%20cities%20over%20time.png';
+const figure2 = '/outputs/plots/Paris-Seoul-covid-study/Figure%202%20-%20Emissions%20of%20Paris%20and%20Seoul%20over%20time.png';
+const table1 = '/outputs/tables/Paris-Seoul-covid-study/Table%201%20-%20Regression%20Results.png';
+
+const badges = [
+  'Urban economics',
+  'Covid-19',
+  'Mobility data',
+  'Difference-in-difference',
+  'GHG emissions',
+  'Regression analysis',
+  'Policy interpretation'
+];
+
+const skills = [
+  'Urban economics',
+  'Difference-in-difference',
+  'Mobility data',
+  'Emissions proxy design',
+  'Regression analysis',
+  'Covid-19 shock analysis',
+  'Data visualisation',
+  'Policy interpretation'
+];
+---
+
+<BaseLayout title="Did Lockdowns Reduce Urban Economic Activity, or Did They Reveal a More Global Shock?" description="A difference-in-difference analysis using daily mobility and city-level greenhouse gas emissions for Paris and Seoul during Covid-19.">
+  <section class="project-hero">
+    <div class="container-narrow">
+      <p class="eyebrow">Project</p>
+      <h1>Did Lockdowns Reduce Urban Economic Activity, or Did They Reveal a More Global Shock?</h1>
+      <p class="hero-subtitle">
+        A difference-in-difference analysis using daily mobility and city-level greenhouse gas emissions for Paris and Seoul during Covid-19.
+      </p>
+      <p class="hero-text">
+        This project studies whether the first Paris lockdown produced a measurable local economic shock using greenhouse gas emissions as a high-frequency proxy for urban economic activity. It compares Paris and Seoul during Covid-19, combining daily emissions data, Google mobility indicators, and a difference-in-difference regression design.
+      </p>
+      <p class="hero-text">
+        The central question is whether the fall in mobility caused by lockdown measures translated into a distinct local reduction in economic activity, or whether the observed emissions decline mostly reflected a broader global disruption affecting cities through trade, travel, logistics, and sectoral activity.
+      </p>
+      <div class="badge-list">
+        {badges.map((badge) => (
+          <span class="badge">{badge}</span>
+        ))}
+      </div>
+      <div class="project-links">
+        <a href="/projects" class="text-link">Back to projects</a>
+        <a href="/" class="text-link">Homepage</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="argument-section">
+    <div class="container-narrow">
+      <h2>Why mobility matters in urban economics</h2>
+      <p>
+        Urban economies depend on mobility because movement reduces the effective distance between workers, firms, consumers, and amenities. When mobility falls, access to labour markets, retail activity, services, and urban interactions can be disrupted. The Covid-19 pandemic created an unusually strong mobility shock, making it possible to study how urban activity reacts when movement inside a city is restricted.
+      </p>
+    </div>
+  </section>
+
+  <section class="evidence-section">
+    <div class="container">
+      <div class="evidence-copy">
+        <h2>Paris and Seoul as contrasting urban responses</h2>
+        <p>
+          The project compares Paris and Seoul because both are major metropolitan economies connected to international flows of people and goods, but they faced different pandemic responses. Paris experienced a strict lockdown in spring 2020, while Seoul avoided comparable internal lockdown measures. This contrast creates a natural experiment to study whether reduced internal mobility translated into lower urban economic activity.
+        </p>
+      </div>
+      <VisualPanel
+        title="Paris and Seoul show different sectoral emissions paths during the pandemic"
+        caption="Daily emissions by sector highlight the contrast between the Paris lockdown period and Seoul's looser internal mobility restrictions."
+        showAction={false}
+      >
+        <img class="visual-image" src={figure2} alt="Emissions of Paris and Seoul over time" />
+      </VisualPanel>
+    </div>
+  </section>
+
+  <section class="evidence-section">
+    <div class="container">
+      <div class="evidence-copy">
+        <h2>Using emissions as a high-frequency activity proxy</h2>
+        <p>
+          Daily urban GDP is not available, so the project uses high-resolution greenhouse gas emissions as a proxy for short-run economic activity. This choice reflects the close relationship between urban emissions, production, transport, residential activity, and economic intensity. The emissions data are combined with Google mobility indicators, giving both variables the same daily frequency.
+        </p>
+      </div>
+      <VisualPanel
+        title="City-level emissions reveal strong sectoral and temporal heterogeneity"
+        caption="Daily emissions across available cities show that the pandemic shock affected sectors differently, especially aviation, ground transport, power, industry, and residential activity."
+        showAction={false}
+      >
+        <img class="visual-image" src={figure1} alt="Emissions of all available cities over time" />
+      </VisualPanel>
+    </div>
+  </section>
+
+  <section class="evidence-section">
+    <div class="container">
+      <div class="evidence-copy">
+        <h2>Empirical strategy</h2>
+        <p>
+          The model estimates the relationship between mobility categories and greenhouse gas emissions, then interacts mobility changes with the lockdown period and the Paris treatment indicator. The objective is to test whether the first Paris lockdown generated a distinct emissions response compared with Seoul and the broader city sample.
+        </p>
+      </div>
+      <VisualPanel
+        title="Regression results test whether the Paris lockdown generated a distinct emissions response"
+        caption="The model estimates total emissions, domestic emissions, and industry emissions using mobility variables, lockdown interactions, and a Paris treatment indicator."
+        showAction={false}
+      >
+        <img class="visual-image" src={table1} alt="Regression results for lockdown mobility and emissions" />
+      </VisualPanel>
+    </div>
+  </section>
+
+  <section class="argument-section">
+    <div class="container-narrow">
+      <h2>Main result</h2>
+      <p>
+        The results do not support a strong localized Paris-specific lockdown effect on total or domestic emissions. The interaction between lockdown and the Paris dummy is not statistically significant or remains small in magnitude in the main specifications. This suggests that the observed reduction in emissions during the period may have reflected broader global disruptions rather than only the local internal mobility restrictions imposed in Paris.
+      </p>
+    </div>
+  </section>
+
+  <section class="argument-section">
+    <div class="container-narrow">
+      <h2>Interpretation</h2>
+      <p>
+        The project therefore shifts the interpretation from a simple lockdown-effect story to a more systemic urban-economics result. Even drastic local mobility restrictions may be difficult to isolate when cities are embedded in wider national and international production, travel, and supply-chain disruptions. The pandemic shock affected local movement, but also global demand, trade, logistics, and sectoral activity.
+      </p>
+    </div>
+  </section>
+
+  <section class="argument-section">
+    <div class="container-narrow">
+      <h2>Limits and next step</h2>
+      <p>
+        The analysis remains limited by proxy quality, heteroscedasticity, and the difficulty of constructing a clean counterfactual for a global shock. A stronger extension would treat cities as complex systems, where mobility changes may represent functional displacement rather than pure activity loss: working from home, delivery substitution, local consumption shifts, and changed residential activity patterns.
+      </p>
+    </div>
+  </section>
+
+  <section class="skills-demonstrated">
+    <div class="container">
+      <h2>Skills demonstrated</h2>
+      <div class="skill-grid">
+        {skills.map((skill) => (
+          <span>{skill}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .project-hero,
+  .argument-section,
+  .evidence-section,
+  .skills-demonstrated {
+    padding: var(--space-3xl) 0;
+  }
+
+  .eyebrow {
+    margin: 0 0 var(--space-md);
+    color: var(--color-text-muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-size: var(--font-size-xs);
+  }
+
+  h1 {
+    margin: 0 0 var(--space-lg);
+    font-size: var(--font-size-4xl);
+    line-height: 1.05;
+  }
+
+  .hero-subtitle {
+    color: var(--color-text);
+    font-size: var(--font-size-lg);
+    line-height: 1.8;
+    margin-bottom: var(--space-lg);
+    max-width: 860px;
+  }
+
+  .hero-text,
+  .argument-section p,
+  .evidence-copy p {
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin-bottom: var(--space-lg);
+  }
+
+  .badge-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin: var(--space-2xl) 0;
+  }
+
+  .badge {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    padding: 0.5rem 0.85rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+  }
+
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+    align-items: center;
+  }
+
+  .text-link {
+    color: var(--color-accent-primary);
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+  }
+
+  .text-link:hover {
+    color: var(--color-accent-primary-hover);
+  }
+
+  .evidence-copy {
+    max-width: 820px;
+  }
+
+  .visual-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+  }
+
+  .skill-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-xl);
+  }
+
+  .skill-grid span {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md) var(--space-lg);
+    display: inline-block;
+    color: var(--color-text);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+  }
+
+  @media (max-width: 900px) {
+    .skill-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    h1 {
+      font-size: var(--font-size-3xl);
+    }
+
+    .project-links {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .skill-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
