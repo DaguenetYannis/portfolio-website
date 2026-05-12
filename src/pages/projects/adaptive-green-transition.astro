@@ -16,17 +16,31 @@ const badges = [
   'Phase-space analysis',
   'Policy simulation'
 ];
+
+const skills = [
+  'Data pipeline design',
+  'Economic modelling',
+  'Input-output analysis',
+  'Network analysis',
+  'Agent-based modelling',
+  'Carbon transition analysis',
+  'Phase-space visualisation',
+  'Policy interpretation'
+];
 ---
 
-<BaseLayout title="Adaptive Green Transition in Global Production Networks" description="A complexity-economics and agent-based modelling framework exploring uneven green transition pathways across the global production system.">
+<BaseLayout title="Adaptive Green Transition in Global Production Networks" description="A modelling project on how country-sector production nodes move through uneven green transition pathways.">
   <section class="project-hero">
     <div class="container">
       <div class="hero-grid">
         <div class="hero-copy">
           <p class="eyebrow">Project</p>
           <h1>Adaptive Green Transition in Global Production Networks</h1>
+          <p class="hero-subtitle">
+            A modelling project on how country-sector production nodes move through uneven green transition pathways.
+          </p>
           <p class="hero-text">
-            A complexity-economics and agent-based modelling framework exploring uneven green transition pathways across the world production network.
+            This project develops an agent-based modelling framework for studying ecological transition as a transformation of the global productive system. It combines input-output production networks, economic complexity indicators, emissions intensity, and network-based measures of green production to analyse how country-sector production nodes move through uneven transition pathways over time.
           </p>
           <div class="badge-list">
             {badges.map((badge) => (
@@ -42,7 +56,7 @@ const badges = [
         <div class="hero-media">
           <VisualPanel
             title="Historical trajectory of green readiness"
-            caption="Historical trajectory of the global production system across green capability and local green-ness, 1995-2016."
+            caption="Global historical trajectory across green capability and local green-ness, 1995-2016."
             showAction={false}
           >
             <img class="hero-plot" src={heroImage} alt="Global green readiness trajectory, 1995-2016" />
@@ -52,111 +66,165 @@ const badges = [
     </div>
   </section>
 
-  <section class="project-framing">
+  <section class="executive-argument">
     <div class="container-narrow">
-      <h2>Project framing</h2>
+      <h2>Why model ecological transition as a production system?</h2>
       <p>
-        The framework represents the global economy as country-sector production nodes, each embedded in a structured input-output network. The project investigates how these nodes move through a green-readiness space that combines productive capability and local green-ness.
+        The project begins from a theoretical and policy problem developed in earlier research: ecological transition requires more than measuring emissions. Public decision-making also needs to understand how production systems can transform under ecological constraints without generating economic collapse.
       </p>
       <p>
-        The model is designed to explore transition as uneven, path-dependent, and capability-constrained. The visual evidence suggests historical movement is shaped by production scale, network exposure, and local green transition factors.
+        This distinction matters because reducing emissions is not the same thing as building a viable transition pathway. Emissions can fall because production becomes cleaner, but they can also fall because industries contract, relocate, or disappear. A transition model must therefore distinguish between genuine ecological transformation and simple reductions in economic activity.
       </p>
       <p>
-        This work is intended as a bridge from historical empirical structure toward agent-based policy simulation, with careful emphasis on what the model can investigate rather than what it proves.
+        The project approaches this problem through the concept of the productive ecosystem. In this framework, the economy is not treated as a collection of isolated sectors. It is treated as a structured system composed of countries, sectors, technologies, suppliers, consumers, infrastructures, and trade relationships that continuously interact with one another.
+      </p>
+      <p>
+        This leads to a second idea taken from Complexity Economics. Complexity Economics studies the economy as an adaptive system rather than a system that automatically moves toward equilibrium. Production structures evolve through interaction, feedback effects, constraints, and historical inheritance. This means that transition pathways are not expected to be smooth or uniform across all sectors and countries.
+      </p>
+      <p>
+        The project also draws from Economic Complexity. Economic Complexity studies how productive capabilities shape economic transformation. Productive capabilities refer to the technological know-how, institutional capacities, industrial skills, and coordination structures required to produce specific goods and services. Countries and sectors usually move more easily toward activities that are close to their existing productive structures than toward completely unrelated activities.
+      </p>
+      <p>
+        Ecological transition is therefore studied here as a capability-constrained transformation process. The question is not simply whether the system becomes greener in aggregate, but which productive structures are capable of adapting, which remain locked into carbon-intensive trajectories, and how transition dynamics propagate through international production networks.
+      </p>
+      <p>
+        The concrete modelling object is the global production network. Country-sector nodes are connected through input-output relationships, meaning that sectors purchase intermediate goods and services from one another across the world economy. A sector's environmental profile therefore depends not only on its own local emissions intensity, but also on the production network surrounding it.
+      </p>
+      <p>
+        The project refers to this relational dimension as network-embedded green-ness. A sector using carbon-intensive suppliers may remain indirectly dependent on high-emission production even if its own local production becomes cleaner. Green transition must therefore be studied both locally and relationally.
       </p>
     </div>
   </section>
 
-  <section class="core-question">
-    <div class="container-narrow">
-      <h2>Core question</h2>
-      <p class="question">
-        How do productive capabilities, network exposure, and production constraints shape uneven movement toward greener production states?
-      </p>
-    </div>
-  </section>
-
-  <section class="storyline">
+  <section class="evidence-section">
     <div class="container">
-      <h2>Analytical storyline</h2>
-      <div class="story-grid">
-        <article class="story-card">
-          <h3>Production nodes are heterogeneous</h3>
-          <p>
-            Country-sector nodes differ in capability, scale, and green readiness. The project studies these differences as core drivers of transition opportunity.
-          </p>
-        </article>
-        <article class="story-card">
-          <h3>Green transition is path-dependent</h3>
-          <p>
-            The framework investigates how historical position and capability shape future movement rather than implying a single uniform path.
-          </p>
-        </article>
-        <article class="story-card">
-          <h3>Network exposure changes transition possibilities</h3>
-          <p>
-            Input-output links determine how nodes are exposed to green inputs and external production pressures, affecting their transition landscape.
-          </p>
-        </article>
-        <article class="story-card">
-          <h3>Policy simulations must preserve production constraints</h3>
-          <p>
-            Scenario analysis is grounded in production realities, not abstract optimisation, and preserves economic structure while exploring policy effects.
-          </p>
-        </article>
+      <div class="evidence-copy">
+        <h2>Green capability and local green-ness move together, but not through smooth convergence</h2>
+        <p>
+          The aggregate trajectory shows the global production system moving over time toward higher green capability and higher local green-ness. Green capability refers to the ability of countries and sectors to participate in greener forms of production given their existing productive structures. Local green-ness refers to the environmental profile of production at the node itself, measured through indicators such as emissions intensity.
+        </p>
+        <p>
+          The trajectory is still irregular and uneven rather than smooth. This corresponds to one of the theoretical priors of ABM v3: transition should not generate automatic convergence toward a uniformly green system. Some parts of the network improve faster than others, while historically carbon-intensive structures may remain persistent for long periods.
+        </p>
       </div>
+      <VisualPanel
+        title="Green capability and local green-ness rise together, but not smoothly"
+        caption="Global historical trajectory across green capability and local green-ness, 1995-2016."
+        showAction={false}
+      >
+        <img src={visual1} alt="Global trajectory of green capability and local green-ness" />
+      </VisualPanel>
     </div>
   </section>
 
-  <section class="visual-evidence">
+  <section class="evidence-section">
     <div class="container">
-      <h2>Visual evidence</h2>
-      <div class="visual-grid">
-        <VisualPanel
-          title="Green capability and local green-ness rise together, but not smoothly"
-          caption="The global trajectory suggests that capability accumulation and local green-ness move together over time, but not as a smooth linear transition."
-          showAction={false}
-        >
-          <img src={visual1} alt="Global trajectory of green capability and local green-ness" />
-        </VisualPanel>
-
-        <VisualPanel
-          title="Historical movement fields show uneven motion across the green-readiness space"
-          caption="The movement field highlights directional asymmetries in the transition landscape, supporting a view of transition as path-dependent and structurally uneven."
-          showAction={false}
-        >
-          <img src={visual2} alt="Movement field across green readiness space" />
-        </VisualPanel>
-
-        <VisualPanel
-          title="Sector trajectories reveal distinct capability-constrained transition paths"
-          caption="Sector-level trajectories show that production activities do not share a single transition path. Their movement differs by capability position and network-embedded green-ness."
-          showAction={false}
-        >
-          <img src={visual3} alt="Sector trajectories in green readiness space" />
-        </VisualPanel>
-
-        <VisualPanel
-          title="Large production nodes do not share a single green transition path"
-          caption="The largest production nodes follow divergent movements across green capability, local green-ness, and incoming network green-ness."
-          showAction={false}
-        >
-          <img src={visual4} alt="Top production nodes transition trajectories" />
-        </VisualPanel>
+      <div class="evidence-copy">
+        <h2>Historical movement fields reveal asymmetric transition dynamics</h2>
+        <p>
+          The movement field changes the analysis from static position to historical motion. Instead of observing where production nodes are located at one point in time, the figure studies how they move through the transition space across historical periods.
+        </p>
+        <p>
+          Different regions of the space display different directional tendencies. Some positions show relatively stable movement toward greener configurations, while others display stagnation or unstable movement patterns. This supports the project's interpretation of transition as an adaptive and path-dependent process rather than a universal transition mechanism applying equally everywhere.
+        </p>
+        <p>
+          Path dependence here means that future transition possibilities depend partly on productive structures inherited from the past. Existing industrial capabilities, supplier networks, and technological specialisations constrain the set of feasible transition paths available to each node.
+        </p>
       </div>
+      <VisualPanel
+        title="Historical movement fields show uneven motion across the green-readiness space"
+        caption="Historical movement field across green capability and local green-ness."
+        showAction={false}
+      >
+        <img src={visual2} alt="Movement field across green readiness space" />
+      </VisualPanel>
     </div>
   </section>
 
-  <section class="modelling-logic">
+  <section class="evidence-section">
+    <div class="container">
+      <div class="evidence-copy">
+        <h2>Sector trajectories do not follow a single transition path</h2>
+        <p>
+          Sector trajectories show why the model cannot rely on the idea of a representative production sector. Each sector occupies a different position in the production network and inherits different productive capabilities, emissions structures, and supplier relationships.
+        </p>
+        <p>
+          The figure also introduces outgoing network green-ness. Outgoing network green-ness measures the environmental profile of the production relationships extending outward from a node toward the rest of the network. A sector may improve its own local production while still transmitting carbon-intensive dynamics through downstream relationships.
+        </p>
+        <p>
+          The historical trajectories therefore support a capability-constrained interpretation of ecological transition. Some sectors improve rapidly because their productive structures are already close to greener activities, while others remain locked into brown production configurations that are more difficult to transform.
+        </p>
+      </div>
+      <VisualPanel
+        title="Sector trajectories reveal distinct capability-constrained transition paths"
+        caption="Sector-level trajectories across green capability, local green-ness, and outgoing network green-ness."
+        showAction={false}
+      >
+        <img src={visual3} alt="Sector trajectories in green readiness space" />
+      </VisualPanel>
+    </div>
+  </section>
+
+  <section class="evidence-section">
+    <div class="container">
+      <div class="evidence-copy">
+        <h2>Large production nodes do not converge uniformly</h2>
+        <p>
+          The largest production nodes matter because they strongly influence aggregate system dynamics. If highly central production structures remain carbon-intensive, aggregate transition can remain slow even when smaller sectors improve.
+        </p>
+        <p>
+          This is why ABM v3 does not define successful transition simply as falling emissions. Emissions can decrease for undesirable reasons if production collapses or if industrial activity disappears rather than becoming cleaner.
+        </p>
+        <p>
+          The project instead studies transition together with production resilience. Production resilience refers to the ability of the productive system to maintain broad economic functionality while reducing emissions intensity or improving network green-ness. The distinction between transition and collapse becomes a central modelling requirement.
+        </p>
+      </div>
+      <VisualPanel
+        title="Large production nodes do not share a single green transition path"
+        caption="Top production nodes represented across green capability, local green-ness, and incoming network green-ness."
+        showAction={false}
+      >
+        <img src={visual4} alt="Top production nodes transition trajectories" />
+      </VisualPanel>
+    </div>
+  </section>
+
+  <section class="modelling-interpretation">
     <div class="container-narrow">
-      <h2>Modelling logic</h2>
-      <ol class="pipeline-list">
-        <li>Historical input-output data</li>
-        <li>Country-sector agents</li>
-        <li>Green capability and network green-ness state variables</li>
-        <li>Phase-space trajectories</li>
-        <li>Behavioural ABM and scenario exploration</li>
-      </ol>
+      <h2>What the ABM adds</h2>
+      <p>
+        The agent-based modelling layer transforms the production network into a dynamic system of interacting country-sector agents. Each agent inherits production scale, emissions intensity, productive capabilities, and network relationships, then adjusts under constraints over time.
+      </p>
+      <p>
+        Agent-based modelling is useful here because ecological transition does not occur through a single central optimisation process. Production decisions emerge from many decentralised interactions between sectors, suppliers, demand conditions, technological constraints, and environmental pressures.
+      </p>
+      <p>
+        ABM v3 was designed first as a historical validation framework before becoming a policy-simulation tool. The model must reproduce broad historical dynamics over 1995-2016 without overfitting, artificial collapse, or mechanically imposed decarbonisation before future scenario exploration can be interpreted credibly.
+      </p>
+      <p>
+        This validation discipline is important because transition models can otherwise generate misleading results. A model that automatically converges toward greener outcomes simply because time passes would provide little information about the real constraints shaping ecological transition.
+      </p>
+    </div>
+  </section>
+
+  <section class="modelling-frontier">
+    <div class="container-narrow">
+      <h2>Current modelling frontier: behaviouralized Leontief propagation</h2>
+      <p>
+        The latest modelling work identified an important limitation in scalar production dynamics. Even after correcting the input-feasibility rule, the model continued to underestimate realised output because production and demand interactions were still treated too locally.
+      </p>
+      <p>
+        This limitation matters because input-output production systems are fundamentally relational. Production in one sector depends on supplier relationships extending across many indirect layers of the production network. Local production therefore cannot be understood only through isolated node-level demand conditions.
+      </p>
+      <p>
+        The current modelling frontier is behaviouralized Leontief propagation. In traditional input-output economics, the Leontief inverse captures how final demand propagates through direct and indirect supplier requirements across the economy.
+      </p>
+      <p>
+        The objective of ABM v3 is not to abandon this logic, but to unfold it dynamically through adaptive agents. Final demand activates producers. Producers request inputs from suppliers through technical coefficients. Suppliers then propagate demand further through the network. Realised production emerges from bottlenecks, substitution possibilities, productive capacity constraints, and emissions-intensity dynamics.
+      </p>
+      <p>
+        The long-term objective is an on-the-fly Leontief engine embedded inside a dynamic agent-based system capable of studying ecological transition under production constraints.
+      </p>
     </div>
   </section>
 
@@ -164,35 +232,37 @@ const badges = [
     <div class="container">
       <h2>Skills demonstrated</h2>
       <div class="skill-grid">
-        <span>Data pipeline design</span>
-        <span>Economic modelling</span>
-        <span>Network analysis</span>
-        <span>Agent-based modelling</span>
-        <span>Carbon transition analysis</span>
-        <span>Visual communication</span>
-        <span>Policy interpretation</span>
+        {skills.map((skill) => (
+          <span>{skill}</span>
+        ))}
       </div>
     </div>
   </section>
 
   <section class="interpretation-limits">
     <div class="container-narrow">
-      <h2>Interpretation and limits</h2>
+      <h2>How to read the model</h2>
       <p>
-        This is a modelling framework, not a deterministic forecast. Phase-space trajectories support interpretation of historical movement.
+        This page presents a modelling framework and a historical diagnostic layer rather than a deterministic forecast. The figures should be read as evidence of uneven historical transition dynamics rather than as causal proof about the future.
       </p>
       <p>
-        Scenario simulations should be read as structured exploration, not prediction. The work is designed to help identify plausible transition dynamics while preserving production constraints.
+        The central analytical distinction of the project is the difference between genuine green transition and output collapse. Falling emissions alone are not sufficient evidence of successful transition. A useful transition pathway is one in which emissions intensity or network green-ness improves while the productive system remains broadly resilient.
       </p>
       <p>
-        Future extensions may improve behavioural calibration and policy scenario design with richer empirical grounding.
+        The framework should therefore be understood as a tool for studying constrained transformation pathways inside a complex production system rather than as a predictive machine generating optimal future states.
       </p>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .project-hero {
+  .project-hero,
+  .executive-argument,
+  .evidence-section,
+  .modelling-interpretation,
+  .modelling-frontier,
+  .skills-demonstrated,
+  .interpretation-limits {
     padding: var(--space-3xl) 0;
   }
 
@@ -204,7 +274,7 @@ const badges = [
   }
 
   .hero-copy {
-    max-width: 620px;
+    max-width: 640px;
   }
 
   .hero-plot {
@@ -227,18 +297,29 @@ const badges = [
     line-height: 1.05;
   }
 
-  .hero-text {
+  .hero-subtitle {
+    color: var(--color-text);
+    font-size: var(--font-size-lg);
+    line-height: 1.8;
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero-text,
+  .executive-argument p,
+  .evidence-copy p,
+  .modelling-interpretation p,
+  .modelling-frontier p,
+  .interpretation-limits p {
     color: var(--color-text-secondary);
     line-height: 1.8;
-    margin-bottom: var(--space-2xl);
-    max-width: 680px;
+    margin-bottom: var(--space-lg);
   }
 
   .badge-list {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-sm);
-    margin-bottom: var(--space-2xl);
+    margin: var(--space-2xl) 0;
   }
 
   .badge {
@@ -268,92 +349,21 @@ const badges = [
     color: var(--color-accent-primary-hover);
   }
 
-  .project-framing,
-  .core-question,
-  .storyline,
-  .visual-evidence,
-  .modelling-logic,
-  .skills-demonstrated,
-  .interpretation-limits {
-    padding: var(--space-3xl) 0;
+  .evidence-copy {
+    max-width: 820px;
   }
 
-  .project-framing p,
-  .interpretation-limits p {
-    color: var(--color-text-secondary);
-    line-height: 1.8;
-    margin-bottom: var(--space-lg);
-  }
-
-  .question {
-    background-color: var(--color-panel);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: var(--space-xl);
-    color: var(--color-text);
-    font-size: var(--font-size-lg);
-    line-height: 1.8;
-  }
-
-  .story-grid,
-  .visual-grid,
-  .skill-grid {
-    display: grid;
-    gap: var(--space-xl);
-  }
-
-  .story-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .story-card {
-    background-color: var(--color-panel);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: var(--space-xl);
-  }
-
-  .story-card h3 {
-    margin-top: 0;
-    margin-bottom: var(--space-md);
-    font-size: var(--font-size-xl);
-    color: var(--color-text);
-  }
-
-  .story-card p {
-    margin: 0;
-    color: var(--color-text-secondary);
-    line-height: 1.75;
-  }
-
-  .visual-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .visual-grid img {
+  .evidence-section img {
     display: block;
     width: 100%;
     height: auto;
     border-radius: var(--radius-md);
   }
 
-  .pipeline-list {
-    margin: var(--space-xl) 0 0;
-    padding-left: var(--space-xl);
-    color: var(--color-text-secondary);
-  }
-
-  .pipeline-list li {
-    margin-bottom: var(--space-md);
-    line-height: 1.8;
-  }
-
-  .skills-demonstrated h2 {
-    margin-bottom: var(--space-xl);
-  }
-
   .skill-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-xl);
   }
 
   .skill-grid span {
@@ -367,35 +377,19 @@ const badges = [
     font-size: var(--font-size-sm);
   }
 
-  .interpretation-limits h2 {
-    margin-bottom: var(--space-lg);
-  }
-
   @media (max-width: 900px) {
     .hero-grid {
       grid-template-columns: 1fr;
     }
 
-    .story-grid {
-      grid-template-columns: 1fr;
-    }
-
     .skill-grid {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
   @media (max-width: 640px) {
     h1 {
       font-size: var(--font-size-3xl);
-    }
-
-    .hero-text {
-      margin-bottom: var(--space-xl);
-    }
-
-    .badge-list {
-      gap: var(--space-xs);
     }
 
     .project-links {

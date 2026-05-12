@@ -1,0 +1,316 @@
+---
+import BaseLayout from '@/components/layout/BaseLayout.astro';
+import VisualPanel from '@/components/visuals/VisualPanel.astro';
+
+const visual1 = '/outputs/plots/dge-cbam-note/R%C3%A9partition%20g%C3%A9ographique%20et%20sectorielle%20des%20%C3%A9missions%20dans%20le%20syst%C3%A8me%20ETS.jpg';
+const visual2 = '/outputs/plots/dge-cbam-note/Recette%20Anuelle%20du%20syst%C3%A8me%20ETS%20%C3%A0%20prix%20du%20carbone%20constant.jpg';
+const visual3 = '/outputs/plots/dge-cbam-note/Gain%20de%20recettes%20li%C3%A9%20%C3%A0%20la%20disparition%20des%20quotas%20gratuits.jpg';
+const visual4 = '/outputs/plots/dge-cbam-note/R%C3%A9partition%20g%C3%A9ographique%20et%20sectorielle%20des%20gains%20de%20recettes%20ETS%20li%C3%A9s%20au%20CBAM.png';
+
+const badges = [
+  'Climate policy',
+  'Carbon pricing',
+  'EU ETS',
+  'CBAM',
+  'Industrial competitiveness',
+  'Policy note',
+  'Data visualisation'
+];
+
+const skills = [
+  'Climate policy analysis',
+  'Carbon pricing',
+  'ETS and CBAM interpretation',
+  'Quantitative visualisation',
+  'Policy note writing',
+  'Economic reasoning',
+  'Institutional synthesis',
+  'Strategic briefing'
+];
+---
+
+<BaseLayout title="CBAM, ETS Revenues, and Industrial Competitiveness" description="An applied policy-analysis sample on the 2025 CBAM revision, the phase-out of ETS free allowances, and the competitiveness of European industry.">
+  <section class="project-hero">
+    <div class="container-narrow">
+      <p class="eyebrow">Project</p>
+      <h1>CBAM, ETS Revenues, and Industrial Competitiveness</h1>
+      <p class="hero-subtitle">
+        An applied policy-analysis sample on the 2025 CBAM revision, the phase-out of ETS free allowances, and the competitiveness of European industry.
+      </p>
+      <p class="hero-text">
+        Prepared as part of a recruitment process for the Direction générale des Entreprises, this project analyses the 2025 revision of the EU Carbon Border Adjustment Mechanism, known in French as the MACF, and its interaction with the EU Emissions Trading System. The note examines how CBAM can support the phase-out of free allowances while leaving open structural questions on exports, downstream industries, and circumvention risks.
+      </p>
+      <div class="badge-list">
+        {badges.map((badge) => (
+          <span class="badge">{badge}</span>
+        ))}
+      </div>
+      <div class="project-links">
+        <a href="/projects" class="text-link">Back to projects</a>
+        <a href="/" class="text-link">Homepage</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="executive-note">
+    <div class="container-narrow">
+      <h2>Executive note</h2>
+      <p>
+        CBAM is designed to reconcile decarbonisation and competitiveness in a global economy where carbon prices remain uneven. By aligning the carbon cost of selected imports with the EU ETS, it reduces the risk that European climate policy shifts emissions or production outside the Union. It also accompanies the gradual disappearance of free allowances, which had protected exposed industries but weakened the carbon-price signal.
+      </p>
+      <p>
+        The 2025 revision strengthens CBAM's operational credibility through administrative simplification, adjusted reporting obligations, and stronger control mechanisms. Yet the central policy conclusion remains unchanged: CBAM is necessary but not sufficient. Its effectiveness depends on complementary industrial and trade policies able to address downstream exposure, export competitiveness, and circumvention risks.
+      </p>
+    </div>
+  </section>
+
+  <section class="evidence-section">
+    <div class="container">
+      <div class="evidence-copy">
+        <h2>The ETS exposure base is concentrated in a few industrial countries and sectors</h2>
+        <p>
+          The effects of CBAM and free allowance phase-out depend first on the structure of ETS emissions. Emissions are concentrated in a limited number of Member States and carbon-intensive activities, especially combustion, steel, cement, and refining-related sectors. This concentration means that the reform does not affect European industry uniformly.
+        </p>
+      </div>
+      <VisualPanel
+        title="ETS emissions are concentrated in a small number of countries and heavy industrial sectors"
+        caption="Historical ETS emissions are unevenly distributed across Member States and sectors, shaping exposure to free allowance phase-out and CBAM-related adjustments."
+        showAction={false}
+      >
+        <img src={visual1} alt="Geographic and sectoral distribution of emissions in the ETS system" />
+      </VisualPanel>
+    </div>
+  </section>
+
+  <section class="evidence-section">
+    <div class="container">
+      <div class="evidence-copy">
+        <h2>Free allowances are the policy bridge between ETS revenues and CBAM</h2>
+        <p>
+          Until now, free allowances limited the competitiveness impact of the ETS for exposed industries. This protection preserved industrial margins but reduced the full incentive effect of the carbon price. CBAM is meant to replace this protection progressively by applying a comparable carbon cost to selected imports, allowing the EU to phase out free allowances without fully reopening the carbon-leakage risk on the internal market.
+        </p>
+      </div>
+      <VisualPanel
+        title="At a constant carbon price, ETS revenues depend on paid allowance volumes"
+        caption="Holding the carbon price constant isolates the role of allowance volumes in annual ETS revenue variation."
+        showAction={false}
+      >
+        <img src={visual2} alt="Annual ETS revenue at a constant carbon price" />
+      </VisualPanel>
+    </div>
+  </section>
+
+  <section class="evidence-section">
+    <div class="container">
+      <div class="evidence-copy">
+        <h2>The phase-out of free allowances creates a large revenue channel</h2>
+        <p>
+          The disappearance of free allowances in CBAM sectors creates a substantial revenue effect over 2026-2035 under simplified assumptions. This revenue gain is not separate from competitiveness policy. It comes from the same reform that exposes industrial firms more directly to the carbon-price signal.
+        </p>
+      </div>
+      <VisualPanel
+        title="The phase-out of free allowances creates a significant revenue channel"
+        caption="Estimated additional ETS revenues from free allowance phase-out in CBAM sectors, 2026-2035, under simplified assumptions."
+        showAction={false}
+      >
+        <img src={visual3} alt="Revenue gain linked to the disappearance of free allowances" />
+      </VisualPanel>
+    </div>
+  </section>
+
+  <section class="evidence-section">
+    <div class="container">
+      <div class="evidence-copy">
+        <h2>Revenue gains are geographically and sectorally uneven</h2>
+        <p>
+          The expected gains are concentrated in large industrial Member States because exposure depends on both emissions levels and sectoral composition. France appears strongly affected not only because of its total emissions, but because its emissions structure includes activities still covered by free allowances. This reinforces the note's broader point: CBAM effects must be read through both a geographic and sectoral lens.
+        </p>
+      </div>
+      <VisualPanel
+        title="Revenue gains are concentrated in large industrial Member States"
+        caption="Potential revenue gains linked to free allowance phase-out are concentrated in countries and sectors with large historical emissions and strong exposure to CBAM-covered activities."
+        showAction={false}
+      >
+        <img src={visual4} alt="Geographic and sectoral distribution of ETS revenue gains linked to CBAM" />
+      </VisualPanel>
+    </div>
+  </section>
+
+  <section class="competitiveness-problem">
+    <div class="container-narrow">
+      <h2>The remaining competitiveness problem</h2>
+      <p>
+        The 2025 revision improves implementation, but it does not remove CBAM's structural limits. The mechanism covers only selected carbon-intensive sectors and does not fully capture downstream value chains. Firms using covered inputs, such as steel or aluminium, may still face competitive pressure from imported transformed products not subject to equivalent carbon costs.
+      </p>
+      <p>
+        The export issue is also unresolved. CBAM protects firms competing on the EU market, but it does not neutralise the carbon-cost differential faced by European exporters selling into markets without comparable carbon pricing. This creates a persistent tension between the EU's internal carbon-pricing architecture and the international competitiveness of exposed industries.
+      </p>
+      <p>
+        Finally, the credibility of CBAM depends on limiting circumvention and ensuring reliable emissions data. Stronger reporting obligations, independent verification, default values, and sectoral benchmarks can reduce these risks, but they cannot eliminate the structural difficulty of measuring embedded emissions across complex international value chains.
+      </p>
+    </div>
+  </section>
+
+  <section class="policy-interpretation">
+    <div class="container-narrow">
+      <h2>Policy interpretation</h2>
+      <p>
+        The note's policy implication is that CBAM should be treated as one instrument within a broader industrial decarbonisation strategy. It can support the phase-out of free allowances and reinforce the ETS carbon-price signal, but it cannot alone address export exposure, downstream competitiveness, or the technical complexity of carbon accounting.
+      </p>
+      <p>
+        For CBAM to become a durable competitiveness lever, it must be combined with investment support for low-carbon technologies, demand-side policies such as public procurement or standards, stronger cooperation with third countries, and progressive harmonisation of emissions-accounting methods.
+      </p>
+    </div>
+  </section>
+
+  <section class="skills-demonstrated">
+    <div class="container">
+      <h2>Skills demonstrated</h2>
+      <div class="skill-grid">
+        {skills.map((skill) => (
+          <span>{skill}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="interpretation-limits">
+    <div class="container-narrow">
+      <h2>Interpretation and limits</h2>
+      <p>
+        This page presents a recruitment exercise and policy-analysis sample, not an official publication. The visuals support interpretation and communication, but they do not constitute a full econometric evaluation.
+      </p>
+      <p>
+        Revenue estimates depend on simplifying assumptions, including constant carbon prices and reference emissions levels. Their purpose is to clarify mechanisms and orders of magnitude rather than produce a definitive fiscal forecast.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .project-hero,
+  .executive-note,
+  .evidence-section,
+  .competitiveness-problem,
+  .policy-interpretation,
+  .skills-demonstrated,
+  .interpretation-limits {
+    padding: var(--space-3xl) 0;
+  }
+
+  .eyebrow {
+    margin: 0 0 var(--space-md);
+    color: var(--color-text-muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-size: var(--font-size-xs);
+  }
+
+  h1 {
+    margin: 0 0 var(--space-lg);
+    font-size: var(--font-size-4xl);
+    line-height: 1.05;
+  }
+
+  .hero-subtitle {
+    color: var(--color-text);
+    font-size: var(--font-size-lg);
+    line-height: 1.8;
+    margin-bottom: var(--space-lg);
+    max-width: 860px;
+  }
+
+  .hero-text,
+  .executive-note p,
+  .evidence-copy p,
+  .competitiveness-problem p,
+  .policy-interpretation p,
+  .interpretation-limits p {
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin-bottom: var(--space-lg);
+  }
+
+  .badge-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin: var(--space-2xl) 0;
+  }
+
+  .badge {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    padding: 0.5rem 0.85rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+  }
+
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+    align-items: center;
+  }
+
+  .text-link {
+    color: var(--color-accent-primary);
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+  }
+
+  .text-link:hover {
+    color: var(--color-accent-primary-hover);
+  }
+
+  .evidence-copy {
+    max-width: 820px;
+  }
+
+  .evidence-section img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+  }
+
+  .skill-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-xl);
+  }
+
+  .skill-grid span {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md) var(--space-lg);
+    display: inline-block;
+    color: var(--color-text);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+  }
+
+  @media (max-width: 900px) {
+    .skill-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    h1 {
+      font-size: var(--font-size-3xl);
+    }
+
+    .project-links {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .skill-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
