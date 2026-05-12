@@ -4,6 +4,8 @@ import BaseLayout from '@/components/layout/BaseLayout.astro';
 import ProjectCard from '@/components/projects/ProjectCard.astro';
 import VisualPanel from '@/components/visuals/VisualPanel.astro';
 
+const sampleVisualization = '/outputs/plots/adaptive-green-transition/phase_space_sector_green_readiness_outgoing_3d_1995_2016_portfolio.png';
+
 const selectedProjects = [
   {
     id: 'project-005',
@@ -98,9 +100,11 @@ const selectedProjects = [
     <div class="container">
       <VisualPanel
         title="Sample Visualization"
-        caption="Placeholder for institutional analysis visualization."
+        caption="Sector trajectories in green readiness space."
         showAction={false}
-      />
+      >
+        <img class="sample-visualization" src={sampleVisualization} alt="Sector trajectories in green readiness space" />
+      </VisualPanel>
     </div>
   </section>
 </BaseLayout>
@@ -186,6 +190,13 @@ const selectedProjects = [
 
   .visual-preview {
     padding: var(--space-3xl) 0;
+  }
+
+  .sample-visualization {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
   }
 
   @media (max-width: 768px) {
