@@ -1,0 +1,276 @@
+---
+import BaseLayout from '@/components/layout/BaseLayout.astro';
+import VisualPanel from '@/components/visuals/VisualPanel.astro';
+
+const franceMap = '/outputs/plots/machine-learning-dauphine/FRANCE_MAP.png';
+
+const badges = [
+  'Machine learning',
+  'Predictive modelling',
+  'Data cleaning',
+  'Feature engineering',
+  'Missing-value imputation',
+  'Geospatial features',
+  'R'
+];
+
+const skills = [
+  'Data cleaning',
+  'Feature engineering',
+  'Missing-value imputation',
+  'High-cardinality category reduction',
+  'Geospatial feature design',
+  'Gradient boosting',
+  'Random forest',
+  'Linear benchmark',
+  'Cross-validation',
+  'Predictive modelling in R'
+];
+---
+
+<BaseLayout title="Predicting Socio-Economic Status from Administrative and Geographic Data" description="A machine-learning project combining data cleaning, feature engineering, imputation, and model benchmarking on nearly 100,000 observations in mainland France.">
+  <section class="project-hero">
+    <div class="container-narrow">
+      <p class="eyebrow">Project</p>
+      <h1>Predicting Socio-Economic Status from Administrative and Geographic Data</h1>
+      <p class="hero-subtitle">
+        A machine-learning project combining data cleaning, feature engineering, imputation, and model benchmarking on nearly 100,000 observations in mainland France.
+      </p>
+      <p class="hero-text">
+        This project predicts an anonymised socio-economic target variable for individuals in mainland France. The technical challenge was not only to choose a model, but to build a usable modelling dataset from heterogeneous sources containing individual attributes, professional status, sports-association participation, and geographic information.
+      </p>
+      <p class="hero-text">
+        The dataset contained 99,992 individuals split into learning and test sets. Several variables had tens of thousands of missing values, while others contained too many categories to be used directly. The project therefore focused on feature engineering, category reduction, missing-value imputation, and model comparison before generating final predictions.
+      </p>
+      <div class="badge-list">
+        {badges.map((badge) => (
+          <span class="badge">{badge}</span>
+        ))}
+      </div>
+      <div class="project-links">
+        <a href="/projects" class="text-link">Back to projects</a>
+        <a href="/" class="text-link">Homepage</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="argument-section">
+    <div class="container-narrow">
+      <h2>Why the technical problem mattered</h2>
+      <p>
+        The target variable was continuous, ranging roughly from 0 to 5.35, which made the task a regression problem rather than a classification problem. The difficulty came from the structure of the data. The modelling table had to combine multiple sources, preserve useful information, and reduce noise from missing values and very granular categorical variables.
+      </p>
+      <p>
+        The central trade-off was between precision and computational feasibility. Keeping every raw category would preserve detail, but it would also make the models harder to train and less reliable. The project therefore aimed to keep meaningful granularity while simplifying variables that were too fragmented.
+      </p>
+    </div>
+  </section>
+
+  <section class="argument-section">
+    <div class="container-narrow">
+      <h2>Building a usable modelling dataset</h2>
+      <p>
+        The first stage was data engineering. Work-description categories were reduced from several hundred raw labels into broader parent categories. Sports-club codes were mapped into broader sport categories, with a separate value for individuals who did not belong to a sports club.
+      </p>
+      <p>
+        Employment variables required specific cleaning rules. Inactive individuals were assigned explicit "No Job" categories, while employed but non-salaried individuals were assigned "No salary" categories. Job-location gaps were repaired using residential department information where appropriate.
+      </p>
+    </div>
+  </section>
+
+  <section class="evidence-section">
+    <div class="container">
+      <div class="evidence-copy">
+        <h2>Geography carried useful predictive information</h2>
+        <p>
+          The map of the target variable suggested that the socio-economic outcome was not randomly distributed across mainland France. Spatial clusters appeared across regions, making geography a potentially useful predictive signal.
+        </p>
+        <p>
+          This motivated the use of latitude and longitude as continuous variables. Commune and department identifiers were too granular and risked adding noise or computational burden, so departments were also aggregated to the regional level for modelling.
+        </p>
+      </div>
+      <VisualPanel
+        title="The target variable shows a non-random geographic structure"
+        caption="Mapping the anonymised target variable suggested spatial clustering, which motivated the inclusion of latitude, longitude, and regional variables in the modelling dataset."
+        showAction={false}
+      >
+        <img class="map-image" src={franceMap} alt="Map of mainland France showing the anonymised socio-economic target variable" />
+      </VisualPanel>
+    </div>
+  </section>
+
+  <section class="argument-section">
+    <div class="container-narrow">
+      <h2>Missing values were handled before model comparison</h2>
+      <p>
+        Several employment-related variables initially had more than 30,000 missing values. After applying rule-based cleaning for inactive and non-salaried individuals, the number of missing values fell sharply, leaving around 2,000 missing values for most remaining problematic variables.
+      </p>
+      <p>
+        The remaining gaps were imputed with missRanger, a non-parametric imputation method based on random forests. This choice was appropriate because the dataset combined categorical, geographic, and socio-economic variables with potentially complex interactions.
+      </p>
+    </div>
+  </section>
+
+  <section class="argument-section">
+    <div class="container-narrow">
+      <h2>Model comparison</h2>
+      <p>
+        Three models were compared: gradient boosting, linear regression, and random forest. The linear model was used as an interpretable benchmark, while the tree-based models were better suited to non-linear relationships and interactions between variables.
+      </p>
+      <p>
+        The gradient boosting model achieved the best performance, with an average cross-validated RMSE of about 0.138 and an R-squared of about 0.901. The linear model reached an RMSE of about 0.193 and an R-squared of about 0.805, while the random forest achieved an RMSE of about 0.267 and an R-squared of about 0.693.
+      </p>
+    </div>
+  </section>
+
+  <section class="argument-section">
+    <div class="container-narrow">
+      <h2>Interpretation</h2>
+      <p>
+        The main lesson of the project is that predictive performance came from the full modelling pipeline, not only from the final algorithm. Category engineering, missing-value handling, geographic feature design, and model benchmarking all contributed to making the final gradient boosting model effective.
+      </p>
+      <p>
+        The project demonstrates a practical machine-learning workflow for messy socio-economic data: diagnose the structure of the data, simplify high-cardinality variables, preserve useful spatial signal, impute missing values, compare models, and select the best-performing specification for prediction.
+      </p>
+    </div>
+  </section>
+
+  <section class="skills-demonstrated">
+    <div class="container">
+      <h2>Skills demonstrated</h2>
+      <div class="skill-grid">
+        {skills.map((skill) => (
+          <span>{skill}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .project-hero,
+  .argument-section,
+  .evidence-section,
+  .skills-demonstrated {
+    padding: var(--space-3xl) 0;
+  }
+
+  .eyebrow {
+    margin: 0 0 var(--space-md);
+    color: var(--color-text-muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-size: var(--font-size-xs);
+  }
+
+  h1 {
+    margin: 0 0 var(--space-lg);
+    font-size: var(--font-size-4xl);
+    line-height: 1.05;
+  }
+
+  .hero-subtitle {
+    color: var(--color-text);
+    font-size: var(--font-size-lg);
+    line-height: 1.8;
+    margin-bottom: var(--space-lg);
+    max-width: 860px;
+  }
+
+  .hero-text,
+  .argument-section p,
+  .evidence-copy p {
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin-bottom: var(--space-lg);
+  }
+
+  .badge-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin: var(--space-2xl) 0;
+  }
+
+  .badge {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    padding: 0.5rem 0.85rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+  }
+
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+    align-items: center;
+  }
+
+  .text-link {
+    color: var(--color-accent-primary);
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+  }
+
+  .text-link:hover {
+    color: var(--color-accent-primary-hover);
+  }
+
+  .evidence-copy {
+    max-width: 820px;
+  }
+
+  .map-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+  }
+
+  .skill-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: var(--space-xl);
+  }
+
+  .skill-grid span {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md) var(--space-lg);
+    display: inline-block;
+    color: var(--color-text);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+  }
+
+  @media (max-width: 1100px) {
+    .skill-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 900px) {
+    .skill-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    h1 {
+      font-size: var(--font-size-3xl);
+    }
+
+    .project-links {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .skill-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

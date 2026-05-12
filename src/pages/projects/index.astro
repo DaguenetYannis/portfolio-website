@@ -2,38 +2,58 @@
 import BaseLayout from '@/components/layout/BaseLayout.astro';
 import ProjectCard from '@/components/projects/ProjectCard.astro';
 
-const projects = [
+const projectCategories = [
   {
-    title: 'Did Lockdowns Reduce Urban Economic Activity?',
-    description: 'An urban economics project using daily mobility and greenhouse gas emissions data to study whether the Paris lockdown produced a distinct local economic shock.',
-    tags: ['urban economics', 'Covid-19', 'difference-in-difference', 'emissions proxy'],
-    outputType: 'research' as const,
-    status: 'completed' as const,
-    href: '/projects/covid-urban-mobility-emissions'
+    title: 'Research & Economic Modelling',
+    description: 'Projects focused on policy analysis, economic systems, transition dynamics, and empirical modelling.',
+    projects: [
+      {
+        title: 'Adaptive Green Transition in Global Production Networks',
+        description: 'A framework for studying green transition pathways as heterogeneous, path-dependent movements in a networked production system.',
+        tags: ['agent-based modelling', 'economic complexity', 'network analysis'],
+        outputType: 'research' as const,
+        status: 'completed' as const,
+        href: '/projects/adaptive-green-transition'
+      },
+      {
+        title: 'CBAM, ETS Revenues, and Industrial Competitiveness',
+        description: 'An applied climate-policy analysis of CBAM, ETS free allowance phase-out, revenue effects, and industrial competitiveness.',
+        tags: ['climate policy', 'carbon pricing', 'industrial strategy'],
+        outputType: 'analysis' as const,
+        status: 'completed' as const,
+        href: '/projects/cbam-ets-industrial-competitiveness'
+      },
+      {
+        title: 'Did the Eurozone Protect Trade During the Great Trade Collapse?',
+        description: 'A structural gravity and difference-in-difference project analysing whether Eurozone membership reduced the trade impact of the 2008 financial crisis.',
+        tags: ['international economics', 'structural gravity', 'PPML', 'trade resilience'],
+        outputType: 'research' as const,
+        status: 'completed' as const,
+        href: '/projects/eurozone-trade-resilience'
+      },
+      {
+        title: 'Did Lockdowns Reduce Urban Economic Activity?',
+        description: 'An urban economics project using daily mobility and greenhouse gas emissions data to study whether the Paris lockdown produced a distinct local economic shock.',
+        tags: ['urban economics', 'Covid-19', 'difference-in-difference', 'emissions proxy'],
+        outputType: 'research' as const,
+        status: 'completed' as const,
+        href: '/projects/covid-urban-mobility-emissions'
+      }
+    ]
   },
   {
-    title: 'Did the Eurozone Protect Trade During the Great Trade Collapse?',
-    description: 'A structural gravity and difference-in-difference project analysing whether Eurozone membership reduced the trade impact of the 2008 financial crisis.',
-    tags: ['international economics', 'structural gravity', 'PPML', 'trade resilience'],
-    outputType: 'research' as const,
-    status: 'completed' as const,
-    href: '/projects/eurozone-trade-resilience'
-  },
-  {
-    title: 'CBAM, ETS Revenues, and Industrial Competitiveness',
-    description: 'An applied climate-policy analysis of CBAM, ETS free allowance phase-out, revenue effects, and industrial competitiveness.',
-    tags: ['climate policy', 'carbon pricing', 'industrial strategy'],
-    outputType: 'analysis' as const,
-    status: 'completed' as const,
-    href: '/projects/cbam-ets-industrial-competitiveness'
-  },
-  {
-    title: 'Adaptive Green Transition in Global Production Networks',
-    description: 'A framework for studying green transition pathways as heterogeneous, path-dependent movements in a networked production system.',
-    tags: ['agent-based modelling', 'economic complexity', 'network analysis'],
-    outputType: 'research' as const,
-    status: 'completed' as const,
-    href: '/projects/adaptive-green-transition'
+    title: 'Data Analysis & Machine Learning',
+    description: 'Projects focused on predictive modelling, data engineering, machine learning workflows, and applied quantitative analysis.',
+    projects: [
+      {
+        title: 'Predicting Socio-Economic Status from Administrative and Geographic Data',
+        description: 'A machine-learning project turning heterogeneous socio-economic, employment, sports-association, and geographic data into a predictive model for an anonymised target variable.',
+        tags: ['machine learning', 'feature engineering', 'imputation', 'geospatial data'],
+        outputType: 'analysis' as const,
+        status: 'completed' as const,
+        href: '/projects/socioeconomic-status-prediction'
+      }
+    ]
   }
 ];
 ---
@@ -45,18 +65,26 @@ const projects = [
       <p class="intro-text">
         Selected analytical work in policy, institutional research, and network-based modelling.
       </p>
-      <div class="project-grid">
-        {projects.map((project) => (
-          <ProjectCard
-            title={project.title}
-            description={project.description}
-            tags={project.tags}
-            outputType={project.outputType}
-            status={project.status}
-            href={project.href}
-          />
-        ))}
-      </div>
+      {projectCategories.map((category) => (
+        <section class="project-category">
+          <div class="category-heading">
+            <h2>{category.title}</h2>
+            <p>{category.description}</p>
+          </div>
+          <div class="project-grid">
+            {category.projects.map((project) => (
+              <ProjectCard
+                title={project.title}
+                description={project.description}
+                tags={project.tags}
+                outputType={project.outputType}
+                status={project.status}
+                href={project.href}
+              />
+            ))}
+          </div>
+        </section>
+      ))}
     </div>
   </section>
 </BaseLayout>
@@ -75,6 +103,25 @@ const projects = [
     max-width: 760px;
     line-height: 1.8;
     margin-bottom: var(--space-2xl);
+  }
+
+  .project-category {
+    margin-top: var(--space-3xl);
+  }
+
+  .category-heading {
+    max-width: 820px;
+    margin-bottom: var(--space-xl);
+  }
+
+  .category-heading h2 {
+    margin-bottom: var(--space-sm);
+  }
+
+  .category-heading p {
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin: 0;
   }
 
   .project-grid {
