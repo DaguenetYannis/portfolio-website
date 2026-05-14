@@ -10,37 +10,93 @@ const visual4 = '/outputs/plots/adaptive-green-transition/phase_space_nodes_top1
 
 const badges = [
   'Agent-based modelling',
-  'Economic complexity',
   'Input-output networks',
-  'Green transition',
-  'Phase-space analysis',
-  'Policy simulation'
+  'Economic complexity',
+  'Capability measurement',
+  'Supplier rewiring',
+  'Emissions transition',
+  'Historical validation',
+  'Python modelling pipeline'
 ];
 
 const skills = [
-  'Data pipeline design',
-  'Economic modelling',
-  'Input-output analysis',
-  'Network analysis',
   'Agent-based modelling',
-  'Carbon transition analysis',
-  'Phase-space visualisation',
-  'Policy interpretation'
+  'Input-output analysis',
+  'Economic complexity',
+  'Network analysis',
+  'Carbon transition diagnostics',
+  'Historical calibration',
+  'Data pipeline design',
+  'Model validation',
+  'Python testing',
+  'Large-scale Parquet workflows',
+  'Policy-oriented modelling',
+  'Technical documentation'
+];
+
+const implementationStats = [
+  { label: 'Country-sector agents', value: '4,915' },
+  { label: 'Historical years', value: '1995-2016' },
+  { label: 'State-panel rows', value: '108,130' },
+  { label: 'Supplier opportunity rows', value: '308,920' },
+  { label: 'ABM v4 tests passed', value: '164' },
+  { label: 'Current status', value: 'Integrated, not scenario-ready' }
+];
+
+const phaseCards = [
+  {
+    title: 'State and ecosystem layer',
+    text: 'ABM v4 builds a country-sector-year state panel from Eora-based production, emissions, network, and capability variables, then assigns each node to a productive ecosystem used to structure feasible transition and supplier substitution.'
+  },
+  {
+    title: 'Supplier adaptation layer',
+    text: 'The model constructs compact supplier candidate pools, opportunity sets, rewiring probabilities, and updated supplier weights. Supplier substitution is constrained by historical ties, sector proximity, productive ecosystems, friction, reliability, and green advantage.'
+  },
+  {
+    title: 'Capability layer',
+    text: 'Capabilities are source-aware. Atlas capabilities are used where observed, while structurally missing sectors receive IO-derived capability proxies when upstream and downstream coverage is sufficient. Unavailable capability remains explicitly flagged.'
+  },
+  {
+    title: 'Production and emissions layer',
+    text: 'Production feasibility is checked through input requirements and supplier weights. Emissions are decomposed into production-scale, emissions-intensity, and interaction effects to distinguish genuine decarbonisation from output collapse.'
+  }
+];
+
+const validationFindings = [
+  {
+    title: 'Dynamic accounting is valid',
+    text: 'The multi-year integration harness preserves emissions identities and supplier-weight normalization across the 1995-2016 historical run.'
+  },
+  {
+    title: 'Historical calibration is not finished',
+    text: 'The current emissions-transition rule is dynamically coherent, but the historical calibration diagnostics show that sector background still dominates one-year emissions-intensity movements.'
+  },
+  {
+    title: 'Capabilities are now measured more defensibly',
+    text: 'The source-aware capability model reduced the capability fill problem substantially by replacing broad median filling with Atlas-observed and IO-imputed capability sources.'
+  },
+  {
+    title: 'Scenarios remain premature',
+    text: 'The project is not yet presented as a policy scenario engine. The next modelling step is a theory-structured comparison of emissions-transition rules.'
+  }
 ];
 ---
 
-<BaseLayout title="Adaptive Green Transition in Global Production Networks" description="A modelling project on how country-sector production nodes move through uneven green transition pathways.">
+<BaseLayout title="Adaptive Green Transition in Global Production Networks" description="A modelling project on green transition, production networks, capabilities, and emissions-intensity dynamics across country-sector agents.">
   <section class="project-hero">
     <div class="container">
       <div class="hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">Project</p>
+          <p class="eyebrow">Research and modelling project</p>
           <h1>Adaptive Green Transition in Global Production Networks</h1>
           <p class="hero-subtitle">
-            A modelling project on how country-sector production nodes move through uneven green transition pathways.
+            An agent-based modelling project studying how the global production network reorganizes under green transition pressures.
           </p>
           <p class="hero-text">
-            This project develops an agent-based modelling framework for studying ecological transition as a transformation of the global productive system. It combines input-output production networks, economic complexity indicators, emissions intensity, and network-based measures of green production to analyse how country-sector production nodes move through uneven transition pathways over time.
+            This project builds a country-sector agent-based model from input-output data, emissions accounts, economic complexity indicators, supplier networks, and historical validation diagnostics. It studies green transition as a constrained transformation of production systems rather than as a smooth aggregate trend or a simple fall in emissions.
+          </p>
+          <p class="hero-text">
+            The current ABM v4 implementation connects productive ecosystems, source-aware capability measurement, supplier rewiring, production feasibility, and frontier-gap emissions-intensity transition into a multi-year historical integration harness. It is a research model under calibration, not a final forecasting tool.
           </p>
           <div class="badge-list">
             {badges.map((badge) => (
@@ -55,61 +111,92 @@ const skills = [
 
         <div class="hero-media">
           <VisualPanel
-            title="Historical trajectory of green readiness"
-            caption="Global historical trajectory across green capability and local green-ness, 1995-2016."
+            title="Historical transition space"
+            caption="Historical phase-space diagnostic for green capability and local green-ness, 1995-2016."
             showAction={false}
           >
-            <img class="hero-plot" src={heroImage} alt="Global green readiness trajectory, 1995-2016" />
+            <img class="hero-plot" src={heroImage} alt="Historical green transition phase-space trajectory, 1995-2016" />
           </VisualPanel>
         </div>
       </div>
     </div>
   </section>
 
+  <section class="project-status">
+    <div class="container">
+      <div class="section-heading">
+        <p class="eyebrow">Current implementation</p>
+        <h2>ABM v4 is now an integrated historical modelling pipeline</h2>
+        <p>
+          The model has moved beyond exploratory plots. It now includes a tested ABM v4 codebase with state construction, productive ecosystems, supplier adaptation, capability measurement, production feasibility, emissions transition, multi-year integration, and historical validation diagnostics.
+        </p>
+      </div>
+
+      <div class="stat-grid">
+        {implementationStats.map((stat) => (
+          <div class="stat-card">
+            <span class="stat-value">{stat.value}</span>
+            <span class="stat-label">{stat.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <section class="executive-argument">
     <div class="container-narrow">
-      <h2>Why model ecological transition as a production system?</h2>
+      <h2>Why model green transition as a production-system problem?</h2>
       <p>
-        The project begins from a theoretical and policy problem developed in earlier research: ecological transition requires more than measuring emissions. Public decision-making also needs to understand how production systems can transform under ecological constraints without generating economic collapse.
+        The project begins from a policy and modelling problem: emissions can fall for different reasons. They may fall because production becomes cleaner, but they may also fall because production collapses, relocates, or disappears. A credible transition model must therefore separate genuine emissions-intensity improvement from a reduction in economic activity.
       </p>
       <p>
-        This distinction matters because reducing emissions is not the same thing as building a viable transition pathway. Emissions can fall because production becomes cleaner, but they can also fall because industries contract, relocate, or disappear. A transition model must therefore distinguish between genuine ecological transformation and simple reductions in economic activity.
+        The model treats the economy as a structured production system. Country-sector nodes buy inputs, supply other sectors, generate emissions, accumulate capabilities, and occupy positions in a global input-output network. Their transition possibilities are shaped by their own emissions intensity, their productive capabilities, their suppliers, their buyers, and their ecosystem position.
       </p>
       <p>
-        The project approaches this problem through the concept of the productive ecosystem. In this framework, the economy is not treated as a collection of isolated sectors. It is treated as a structured system composed of countries, sectors, technologies, suppliers, consumers, infrastructures, and trade relationships that continuously interact with one another.
+        This is why the project combines input-output economics, complexity economics, and economic complexity. Input-output data define the production network. Complexity economics motivates adaptive, heterogeneous, non-equilibrium dynamics. Economic complexity provides the capability logic: productive transformation is easier when new activities are close to existing knowledge and industrial structures.
       </p>
       <p>
-        This leads to a second idea taken from Complexity Economics. Complexity Economics studies the economy as an adaptive system rather than a system that automatically moves toward equilibrium. Production structures evolve through interaction, feedback effects, constraints, and historical inheritance. This means that transition pathways are not expected to be smooth or uniform across all sectors and countries.
+        The project therefore studies green transition as a path-dependent reorganization process. The question is not only whether the system becomes greener in aggregate, but which country-sector nodes can adapt, which remain locked into brown production positions, and how transition pressures propagate through supplier and buyer relationships.
       </p>
-      <p>
-        The project also draws from Economic Complexity. Economic Complexity studies how productive capabilities shape economic transformation. Productive capabilities refer to the technological know-how, institutional capacities, industrial skills, and coordination structures required to produce specific goods and services. Countries and sectors usually move more easily toward activities that are close to their existing productive structures than toward completely unrelated activities.
-      </p>
-      <p>
-        Ecological transition is therefore studied here as a capability-constrained transformation process. The question is not simply whether the system becomes greener in aggregate, but which productive structures are capable of adapting, which remain locked into carbon-intensive trajectories, and how transition dynamics propagate through international production networks.
-      </p>
-      <p>
-        The concrete modelling object is the global production network. Country-sector nodes are connected through input-output relationships, meaning that sectors purchase intermediate goods and services from one another across the world economy. A sector's environmental profile therefore depends not only on its own local emissions intensity, but also on the production network surrounding it.
-      </p>
-      <p>
-        The project refers to this relational dimension as network-embedded green-ness. A sector using carbon-intensive suppliers may remain indirectly dependent on high-emission production even if its own local production becomes cleaner. Green transition must therefore be studied both locally and relationally.
-      </p>
+    </div>
+  </section>
+
+  <section class="architecture-section">
+    <div class="container">
+      <div class="section-heading">
+        <p class="eyebrow">Model architecture</p>
+        <h2>From descriptive network analysis to an adaptive ABM</h2>
+        <p>
+          ABM v4 represents country-sector nodes as adaptive agents embedded in production, capability, and emissions networks. The current model is not an optimizer. It is a constraint-based simulation framework that tests how local adjustments can generate system-level patterns.
+        </p>
+      </div>
+
+      <div class="phase-grid">
+        {phaseCards.map((phase) => (
+          <article class="phase-card">
+            <h3>{phase.title}</h3>
+            <p>{phase.text}</p>
+          </article>
+        ))}
+      </div>
     </div>
   </section>
 
   <section class="evidence-section">
     <div class="container">
       <div class="evidence-copy">
+        <p class="eyebrow">Historical diagnostics</p>
         <h2>Green capability and local green-ness move together, but not through smooth convergence</h2>
         <p>
-          The aggregate trajectory shows the global production system moving over time toward higher green capability and higher local green-ness. Green capability refers to the ability of countries and sectors to participate in greener forms of production given their existing productive structures. Local green-ness refers to the environmental profile of production at the node itself, measured through indicators such as emissions intensity.
+          The historical phase-space view shows that the global production system does not follow a simple, universal green transition path. Some areas of the system move toward greener positions, while others remain stagnant, volatile, or locked into carbon-intensive configurations.
         </p>
         <p>
-          The trajectory is still irregular and uneven rather than smooth. This corresponds to one of the theoretical priors of ABM v3: transition should not generate automatic convergence toward a uniformly green system. Some parts of the network improve faster than others, while historically carbon-intensive structures may remain persistent for long periods.
+          These figures are best read as historical diagnostics. They motivated the ABM design by showing why a transition model needs heterogeneity, path dependence, and explicit production-network structure.
         </p>
       </div>
       <VisualPanel
-        title="Green capability and local green-ness rise together, but not smoothly"
-        caption="Global historical trajectory across green capability and local green-ness, 1995-2016."
+        title="Green capability and local green-ness rise together, but unevenly"
+        caption="Historical trajectory across green capability and local green-ness, 1995-2016."
         showAction={false}
       >
         <img src={visual1} alt="Global trajectory of green capability and local green-ness" />
@@ -120,23 +207,21 @@ const skills = [
   <section class="evidence-section">
     <div class="container">
       <div class="evidence-copy">
-        <h2>Historical movement fields reveal asymmetric transition dynamics</h2>
+        <p class="eyebrow">Adaptive movement</p>
+        <h2>Movement fields reveal asymmetric transition dynamics</h2>
         <p>
-          The movement field changes the analysis from static position to historical motion. Instead of observing where production nodes are located at one point in time, the figure studies how they move through the transition space across historical periods.
+          The movement-field analysis shifts the project from static classification to historical motion. It asks how country-sector positions move over time in a transition space, rather than only whether they are green or brown at a single point.
         </p>
         <p>
-          Different regions of the space display different directional tendencies. Some positions show relatively stable movement toward greener configurations, while others display stagnation or unstable movement patterns. This supports the project's interpretation of transition as an adaptive and path-dependent process rather than a universal transition mechanism applying equally everywhere.
-        </p>
-        <p>
-          Path dependence here means that future transition possibilities depend partly on productive structures inherited from the past. Existing industrial capabilities, supplier networks, and technological specialisations constrain the set of feasible transition paths available to each node.
+          This supports the model's central assumption: transition is adaptive and path-dependent. Future movement depends on inherited production structures, supplier relationships, capabilities, and network exposure.
         </p>
       </div>
       <VisualPanel
-        title="Historical movement fields show uneven motion across the green-readiness space"
-        caption="Historical movement field across green capability and local green-ness."
+        title="Historical movement fields show uneven motion across the transition space"
+        caption="Movement field across green capability and local green-ness."
         showAction={false}
       >
-        <img src={visual2} alt="Movement field across green readiness space" />
+        <img src={visual2} alt="Movement field across green transition space" />
       </VisualPanel>
     </div>
   </section>
@@ -144,23 +229,21 @@ const skills = [
   <section class="evidence-section">
     <div class="container">
       <div class="evidence-copy">
+        <p class="eyebrow">Sector heterogeneity</p>
         <h2>Sector trajectories do not follow a single transition path</h2>
         <p>
-          Sector trajectories show why the model cannot rely on the idea of a representative production sector. Each sector occupies a different position in the production network and inherits different productive capabilities, emissions structures, and supplier relationships.
+          Sector trajectories show why the model cannot rely on a representative production sector. Agriculture, extractive activities, manufacturing, utilities, services, and public-sector activities do not share the same emissions structure, technical frontier, or transition pathway.
         </p>
         <p>
-          The figure also introduces outgoing network green-ness. Outgoing network green-ness measures the environmental profile of the production relationships extending outward from a node toward the rest of the network. A sector may improve its own local production while still transmitting carbon-intensive dynamics through downstream relationships.
-        </p>
-        <p>
-          The historical trajectories therefore support a capability-constrained interpretation of ecological transition. Some sectors improve rapidly because their productive structures are already close to greener activities, while others remain locked into brown production configurations that are more difficult to transform.
+          This result became central in the latest ABM v4 diagnostics. The emissions-transition calibration showed that sector background dominates annual emissions-intensity change, which means the next modelling step is to compare global, sector-family-specific, and gated readiness rules.
         </p>
       </div>
       <VisualPanel
-        title="Sector trajectories reveal distinct capability-constrained transition paths"
-        caption="Sector-level trajectories across green capability, local green-ness, and outgoing network green-ness."
+        title="Sector trajectories reveal distinct transition paths"
+        caption="Sector-level trajectories across green capability, local green-ness, and network green-ness."
         showAction={false}
       >
-        <img src={visual3} alt="Sector trajectories in green readiness space" />
+        <img src={visual3} alt="Sector trajectories in green transition space" />
       </VisualPanel>
     </div>
   </section>
@@ -168,20 +251,18 @@ const skills = [
   <section class="evidence-section">
     <div class="container">
       <div class="evidence-copy">
+        <p class="eyebrow">Large nodes and lock-in</p>
         <h2>Large production nodes do not converge uniformly</h2>
         <p>
-          The largest production nodes matter because they strongly influence aggregate system dynamics. If highly central production structures remain carbon-intensive, aggregate transition can remain slow even when smaller sectors improve.
+          Large production nodes matter because they shape aggregate system dynamics. If large or central country-sector nodes remain carbon-intensive, aggregate transition can remain slow even when smaller or peripheral sectors improve.
         </p>
         <p>
-          This is why ABM v3 does not define successful transition simply as falling emissions. Emissions can decrease for undesirable reasons if production collapses or if industrial activity disappears rather than becoming cleaner.
-        </p>
-        <p>
-          The project instead studies transition together with production resilience. Production resilience refers to the ability of the productive system to maintain broad economic functionality while reducing emissions intensity or improving network green-ness. The distinction between transition and collapse becomes a central modelling requirement.
+          This is why the model separates production scale from emissions intensity. A fall in emissions is not automatically a successful transition. The model decomposes emissions change into production-scale, emissions-intensity, and interaction effects to avoid confusing green transition with output contraction.
         </p>
       </div>
       <VisualPanel
-        title="Large production nodes do not share a single green transition path"
-        caption="Top production nodes represented across green capability, local green-ness, and incoming network green-ness."
+        title="Large production nodes remain heterogeneous"
+        caption="Top production nodes across green capability, local green-ness, and incoming network green-ness."
         showAction={false}
       >
         <img src={visual4} alt="Top production nodes transition trajectories" />
@@ -189,41 +270,71 @@ const skills = [
     </div>
   </section>
 
-  <section class="modelling-interpretation">
+  <section class="technical-layer">
     <div class="container-narrow">
-      <h2>What the ABM adds</h2>
+      <p class="eyebrow">Capability measurement</p>
+      <h2>From Atlas capability gaps to source-aware capability modelling</h2>
       <p>
-        The agent-based modelling layer transforms the production network into a dynamic system of interacting country-sector agents. Each agent inherits production scale, emissions intensity, productive capabilities, and network relationships, then adjusts under constraints over time.
+        A major ABM v4 improvement was the redesign of capability measurement. Atlas data measure product and export capabilities, but Eora includes many service, public, household, and residual sectors where product-space capability is structurally unavailable or not meaningful.
       </p>
       <p>
-        Agent-based modelling is useful here because ecological transition does not occur through a single central optimisation process. Production decisions emerge from many decentralised interactions between sectors, suppliers, demand conditions, technological constraints, and environmental pressures.
+        The model therefore no longer treats missing Atlas values as a simple missing-data problem. It uses a source-aware capability model: Atlas-observed capability where available, IO-imputed capability where upstream and downstream production-network coverage is sufficient, and explicit unavailability where neither source is defensible.
       </p>
       <p>
-        ABM v3 was designed first as a historical validation framework before becoming a policy-simulation tool. The model must reproduce broad historical dynamics over 1995-2016 without overfitting, artificial collapse, or mechanically imposed decarbonisation before future scenario exploration can be interpreted credibly.
+        This reduced the broad median-fill problem substantially. General capability now combines Atlas-observed and IO-imputed values, while still flagging remaining unavailable nodes. Green capability follows the same principle, with caution because the calibration suggests stronger downstream dependence.
+      </p>
+    </div>
+  </section>
+
+  <section class="technical-layer alternate">
+    <div class="container-narrow">
+      <p class="eyebrow">Emissions transition</p>
+      <h2>The model now uses frontier-gap readiness rather than raw emissions intensity</h2>
+      <p>
+        The emissions-transition rule was redesigned after an early diagnostic showed that using raw log emissions intensity as a direct behavioural pressure was theoretically fragile. High emissions intensity should not mechanically cause decarbonisation. It should indicate distance from a feasible lower-carbon frontier.
       </p>
       <p>
-        This validation discipline is important because transition models can otherwise generate misleading results. A model that automatically converges toward greener outcomes simply because time passes would provide little information about the real constraints shaping ecological transition.
+        ABM v4 now frames emissions-intensity reduction as readiness-gated closure of a sectoral frontier gap. A country-sector reduces emissions intensity faster when it is far from a feasible benchmark and has the capabilities, network exposure, and ecosystem conditions needed to close that gap.
       </p>
+      <p>
+        The latest diagnostics show that the global readiness equation is not yet empirically strong enough. Sector background dominates, the p25 frontier may be too strict, and readiness only improves a small share of sectors. The next modelling step is a theory-structured comparison of global, sector-family-specific, and gated transition rules.
+      </p>
+    </div>
+  </section>
+
+  <section class="validation-section">
+    <div class="container">
+      <div class="section-heading">
+        <p class="eyebrow">Validation status</p>
+        <h2>What the current model can and cannot claim</h2>
+        <p>
+          The current implementation is a working multi-year integration harness. It verifies that the ABM components can interact consistently over time, but it is not yet a calibrated scenario engine.
+        </p>
+      </div>
+
+      <div class="validation-grid">
+        {validationFindings.map((finding) => (
+          <article class="validation-card">
+            <h3>{finding.title}</h3>
+            <p>{finding.text}</p>
+          </article>
+        ))}
+      </div>
     </div>
   </section>
 
   <section class="modelling-frontier">
     <div class="container-narrow">
-      <h2>Current modelling frontier: behaviouralized Leontief propagation</h2>
+      <p class="eyebrow">Current modelling frontier</p>
+      <h2>From integrated ABM to empirically disciplined transition rules</h2>
       <p>
-        The latest modelling work identified an important limitation in scalar production dynamics. Even after correcting the input-feasibility rule, the model continued to underestimate realised output because production and demand interactions were still treated too locally.
+        The current modelling frontier is no longer basic architecture. The ABM v4 pipeline is now integrated and tested. The open question is which emissions-transition rule is empirically defensible enough to use before policy scenarios.
       </p>
       <p>
-        This limitation matters because input-output production systems are fundamentally relational. Production in one sector depends on supplier relationships extending across many indirect layers of the production network. Local production therefore cannot be understood only through isolated node-level demand conditions.
+        The latest calibration diagnostics show that a simple sector-background model currently outperforms the full global readiness equation. This does not necessarily reject the theory. It suggests that transition mechanisms may be sector-family-specific, gated by historical signal, or dependent on a more conservative frontier definition.
       </p>
       <p>
-        The current modelling frontier is behaviouralized Leontief propagation. In traditional input-output economics, the Leontief inverse captures how final demand propagates through direct and indirect supplier requirements across the economy.
-      </p>
-      <p>
-        The objective of ABM v3 is not to abandon this logic, but to unfold it dynamically through adaptive agents. Final demand activates producers. Producers request inputs from suppliers through technical coefficients. Suppliers then propagate demand further through the network. Realised production emerges from bottlenecks, substitution possibilities, productive capacity constraints, and emissions-intensity dynamics.
-      </p>
-      <p>
-        The long-term objective is an on-the-fly Leontief engine embedded inside a dynamic agent-based system capable of studying ecological transition under production constraints.
+        The next modelling phase compares these structures directly. The purpose is to decide whether emissions-intensity transition should be modelled as a global readiness process, a sector-family-specific process, a gated readiness process, a frontier-gap process, or a sector-background-dominant process with readiness deferred to selected sectors and scenarios.
       </p>
     </div>
   </section>
@@ -241,15 +352,15 @@ const skills = [
 
   <section class="interpretation-limits">
     <div class="container-narrow">
-      <h2>How to read the model</h2>
+      <h2>How to read this project</h2>
       <p>
-        This page presents a modelling framework and a historical diagnostic layer rather than a deterministic forecast. The figures should be read as evidence of uneven historical transition dynamics rather than as causal proof about the future.
+        This project should be read as a research and modelling pipeline. It demonstrates the ability to turn a theoretical question into a data architecture, model contract, tested Python codebase, validation workflow, and methodological diagnostics.
       </p>
       <p>
-        The central analytical distinction of the project is the difference between genuine green transition and output collapse. Falling emissions alone are not sufficient evidence of successful transition. A useful transition pathway is one in which emissions intensity or network green-ness improves while the productive system remains broadly resilient.
+        It should not yet be read as a final policy simulator. The model is currently strong as an integrated historical ABM framework and as a diagnostic platform for studying production, emissions intensity, capabilities, and network constraints. It is still being calibrated before scenario interpretation.
       </p>
       <p>
-        The framework should therefore be understood as a tool for studying constrained transformation pathways inside a complex production system rather than as a predictive machine generating optimal future states.
+        The central analytical distinction remains the difference between genuine green transition and output collapse. A useful transition pathway is one where emissions intensity and network green-ness improve while the productive system remains broadly resilient.
       </p>
     </div>
   </section>
@@ -257,13 +368,20 @@ const skills = [
 
 <style>
   .project-hero,
+  .project-status,
   .executive-argument,
+  .architecture-section,
   .evidence-section,
-  .modelling-interpretation,
+  .technical-layer,
+  .validation-section,
   .modelling-frontier,
   .skills-demonstrated,
   .interpretation-limits {
     padding: var(--space-3xl) 0;
+  }
+
+  .alternate {
+    background: color-mix(in srgb, var(--color-surface) 45%, transparent);
   }
 
   .hero-grid {
@@ -274,13 +392,23 @@ const skills = [
   }
 
   .hero-copy {
-    max-width: 640px;
+    max-width: 680px;
   }
 
   .hero-plot {
     width: 100%;
     max-height: 520px;
     object-fit: contain;
+  }
+
+  .section-heading {
+    max-width: 860px;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .section-heading p {
+    color: var(--color-text-secondary);
+    line-height: 1.8;
   }
 
   .eyebrow {
@@ -297,6 +425,15 @@ const skills = [
     line-height: 1.05;
   }
 
+  h2 {
+    margin: 0 0 var(--space-lg);
+  }
+
+  h3 {
+    margin: 0 0 var(--space-md);
+    color: var(--color-text);
+  }
+
   .hero-subtitle {
     color: var(--color-text);
     font-size: var(--font-size-lg);
@@ -307,7 +444,7 @@ const skills = [
   .hero-text,
   .executive-argument p,
   .evidence-copy p,
-  .modelling-interpretation p,
+  .technical-layer p,
   .modelling-frontier p,
   .interpretation-limits p {
     color: var(--color-text-secondary);
@@ -349,6 +486,50 @@ const skills = [
     color: var(--color-accent-primary-hover);
   }
 
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: var(--space-lg);
+  }
+
+  .stat-card,
+  .phase-card,
+  .validation-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+  }
+
+  .stat-value {
+    display: block;
+    color: var(--color-accent-primary);
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    margin-bottom: var(--space-xs);
+  }
+
+  .stat-label {
+    display: block;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+  }
+
+  .phase-grid,
+  .validation-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-xl);
+  }
+
+  .phase-card p,
+  .validation-card p {
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin: 0;
+  }
+
   .evidence-copy {
     max-width: 820px;
   }
@@ -377,6 +558,14 @@ const skills = [
     font-size: var(--font-size-sm);
   }
 
+  @media (max-width: 1100px) {
+    .stat-grid,
+    .phase-grid,
+    .validation-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
   @media (max-width: 900px) {
     .hero-grid {
       grid-template-columns: 1fr;
@@ -397,6 +586,9 @@ const skills = [
       align-items: flex-start;
     }
 
+    .stat-grid,
+    .phase-grid,
+    .validation-grid,
     .skill-grid {
       grid-template-columns: 1fr;
     }
