@@ -33,24 +33,42 @@ const implementationStats = [
 
 const storySteps = [
   {
-    title: 'The economic question',
+    title: 'The policy problem',
     skills: 'Policy modelling, economic reasoning',
-    text: 'How does the global production network reorganize under green transition pressures? How do capability accumulation, network embeddedness, supplier dependence, production feasibility, and emissions-transition pressure jointly shape green reorganization in the global country-sector production network?'
+    text: 'Green transition scenarios can hide whether the productive system is actually becoming able to decarbonize, or whether emissions only appear to fall because output contracts, activities relocate, or carbon-intensive nodes disappear from the observed system.'
   },
   {
-    title: 'The modelling choice',
+    title: 'The theoretical move',
+    skills: 'Complexity economics, ecological transition',
+    text: 'The project treats ecological transition as productive-system transformation: a complex adaptive process shaped by interdependence, lock-in, feedback, emergence and the historical structure of productive ecosystems.'
+  },
+  {
+    title: 'The modelling translation',
     skills: 'Agent-based modelling, input-output analysis',
-    text: 'The model treats each country-sector as an adaptive agent embedded in suppliers, buyers, capabilities, emissions intensity, and productive ecosystems.'
+    text: 'ABM v4 operationalizes this theory through country-sector agents embedded in input-output networks, supplier opportunities, productive capabilities, emissions-intensity frontiers and historical constraints.'
   },
   {
-    title: 'The validation discipline',
-    skills: 'Historical validation, model diagnostics',
-    text: 'Instead of moving directly to scenarios, ABM v4 tests whether proposed transition mechanisms survive historical evidence from 1995 to 2016.'
+    title: 'The validation boundary',
+    skills: 'Historical validation, model governance',
+    text: 'Instead of moving directly to scenarios, the model tests which mechanisms survive historical evidence, which fail, and which missing structures must be added before credible transition-scenario modelling.'
+  }
+];
+
+const contributionCards = [
+  {
+    title: 'Theoretical contribution',
+    skills: 'Ecological transition, complexity economics',
+    text: 'The project reframes green transition as a transformation of productive ecosystems, not only as decoupling, technology diffusion or aggregate emissions decline.'
   },
   {
-    title: 'The boundary found',
-    skills: 'Critical model assessment, research design',
-    text: 'The model is useful as a historical diagnostic framework, but not yet as a forecasting engine. The failures identify what ABM v5 must add: energy structure, policy regimes, capital-stock inertia, and richer agent types.'
+    title: 'Methodological contribution',
+    skills: 'ABM design, input-output networks',
+    text: 'It translates this framing into a country-sector ABM where agents are constrained by suppliers, buyers, capabilities, production feasibility and emissions-intensity frontiers.'
+  },
+  {
+    title: 'Validation contribution',
+    skills: 'Model testing, scenario-readiness assessment',
+    text: 'It treats failed mechanisms as useful evidence, turning historical validation into a way to define the minimum conditions for future scenario work.'
   }
 ];
 
@@ -132,15 +150,15 @@ const skills = [
           <h1>Adaptive Green Transition in Global Production Networks</h1>
 
           <p class="hero-subtitle">
-            I built a historical agent-based modelling pipeline to study how green transition pressures move through global production networks.
+            I built a historical agent-based modelling pipeline to test how emissions, capabilities, suppliers and production constraints interact during green transition.
           </p>
 
           <p class="hero-text">
-            The project turns a broad policy question into a tested modelling system: how can country-sector production nodes reduce emissions intensity without simply shrinking output? It combines input-output economics, economic complexity, emissions accounting, supplier-network analysis, and historical validation.
+            The project turns a broad policy question into a tested modelling system: can country-sector production nodes reduce emissions intensity without the apparent transition being driven by output decline? It combines input-output economics, economic complexity, emissions accounting, supplier-network analysis, and historical validation.
           </p>
 
           <p class="hero-text">
-            The final ABM v4 is not presented as a forecasting tool. Its value is methodological: it shows how to build, test, reject, and retain transition mechanisms in a disciplined way before making scenario claims.
+            ABM v4, the fourth version of the model, is not presented as a forecasting tool. Its value is methodological: it shows how to build, test, reject, and retain transition mechanisms in a disciplined way before making scenario claims.
           </p>
 
           <div class="badge-list">
@@ -172,9 +190,9 @@ const skills = [
     <div class="container">
       <div class="section-heading">
         <p class="eyebrow">Project outcome</p>
-        <h2>A complete historical diagnostic model, that ambitions to turn into a simulator</h2>
+        <h2>A tested historical diagnostic model, built to prepare a future transition simulator</h2>
         <p>
-          ABM v4 reached a useful endpoint: a tested historical modelling pipeline that identifies which transition mechanisms are defensible, which fail validation, and which missing economic structures must be added before policy scenarios.
+          ABM v4 reached a useful endpoint: a tested historical modelling pipeline that identifies which transition mechanisms are defensible, which fail validation, and which missing economic structures must be added before policy scenarios. It does not hide uncertainty. It turns uncertainty into modelling requirements.
         </p>
       </div>
 
@@ -189,13 +207,40 @@ const skills = [
     </div>
   </section>
 
-  <section class="story-section">
+  <section class="executive-argument">
+    <div class="container-narrow">
+      <p class="eyebrow">Economic theory and policy modelling</p>
+      <h2>Why green transition has to be modelled as a production-system problem</h2>
+
+      <p>
+        The starting point of this project is the policy problem of ecological transition: how can economic development continue while the environmental footprint of production falls fast enough to remain within planetary limits? This is often discussed through decoupling, meaning the separation of economic activity from environmental pressure. But the important question is not only whether GDP and emissions move apart in observed data. The harder question is transformative: what productive mechanisms can make such a separation possible, and what kind of model can help decision-makers understand where action is feasible?
+      </p>
+
+      <p>
+        That is why the transition is treated here as a modification of the productive system. Ecological transition does not only mean setting an emissions objective. It means changing the way the economy extracts resources, transforms materials, uses energy, organizes technologies, and connects production across countries and sectors. This is the idea behind the project’s use of “productive ecosystem”: the economy is not a list of sectors reacting separately to policy incentives, but a system of interdependent activities whose structure determines what can change, how fast, and with what side effects.
+      </p>
+
+      <p>
+        This framing matters because standard equilibrium approaches, including many CGE-style transition models, are not always well suited to this kind of transformation. The green transition is not a marginal adjustment around a stable equilibrium. It is a structural shift in a system where heterogeneous agents interact, adapt, create feedback loops, and modify the structure that then constrains future behaviour. A small change can remain local, but it can also trigger wider reorganization if it crosses a threshold or affects a central node. Complexity economics is useful here because it studies precisely this kind of process: emergence, path dependence, lock-in, non-linear change, and the possibility of multiple transition trajectories rather than one smooth optimal path.
+      </p>
+
+      <p>
+        Economic complexity then gives a concrete meaning to productive transformation. Countries and sectors cannot move into any cleaner activity simply because it becomes desirable. They move through what they already know how to do: their productive knowledge, technologies, routines, supplier base, infrastructure and adjacent capabilities. A green productive sector is therefore not only a sector with low emissions. It is an activity that can emerge from an existing productive ecosystem, or fail to emerge because the required capabilities are missing or too distant.
+      </p>
+
+      <p>
+        ABM v4 turns this theoretical argument into an empirical modelling architecture. It represents the global economy as country-sector agents embedded in input-output networks, then tests whether green reorganization can be understood through emissions-intensity frontiers, capability constraints, supplier structures and historical validation. Its purpose is not to claim a ready-made scenario result. Its purpose is to identify which mechanisms are historically defensible, which ones fail, and what must be added before a credible transition-scenario model can be built.
+      </p>
+    </div>
+  </section>
+
+  <section class="story-section alternate">
     <div class="container">
       <div class="section-heading">
         <p class="eyebrow">Story of the project</p>
         <h2>From a policy intuition to a validated modelling boundary</h2>
         <p>
-          A model should reveal when its own assumptions are not strong enough in order to build a stronger foundation.
+          A useful model should not only produce results. It should also reveal when its assumptions are too weak to support stronger claims.
         </p>
       </div>
 
@@ -212,30 +257,25 @@ const skills = [
     </div>
   </section>
 
-  <section class="executive-argument">
-    <div class="container-narrow">
-      <p class="eyebrow">Economic theory and policy modelling</p>
-      <h2>Why green transition has to be modelled as a production-system problem</h2>
+  <section class="contribution-section">
+    <div class="container">
+      <div class="section-heading">
+        <p class="eyebrow">What the project contributes</p>
+        <h2>Three levels of contribution: theory, method and validation</h2>
+        <p>
+          The project is not only a modelling exercise. It is a theory-to-method-to-validation pipeline: a way to turn an ecological-transition argument into an empirical modelling architecture with explicit limits.
+        </p>
+      </div>
 
-      <p>
-        The starting point of this project is the policy problem of ecological transition: how can economic development continue while the environmental footprint of production falls fast enough to remain within planetary limits? This is often discussed through decoupling, meaning the separation of economic activity from environmental pressure. But the important question is not only whether GDP and emissions move apart in observed data. The harder question is transformative: what economic mechanisms can make such a separation possible, and what kind of model can help decision-makers understand where action is feasible?
-      </p>
-
-      <p>
-        That is why the transition is treated here as a modification of the productive system. Ecological transition does not only mean setting an emissions objective. It means changing the way the economy extracts resources, transforms materials, uses energy, organizes technologies, and connects production across countries and sectors. This is the idea behind the project’s use of “productive ecosystem”: the economy is not a list of sectors reacting separately to policy incentives, but a system of interdependent activities whose structure determines what can change, how fast, and with what side effects.
-      </p>
-
-      <p>
-        This framing matters because standard equilibrium reasoning is not well suited to this kind of transformation. The green transition is not a marginal adjustment around a stable equilibrium. It is a structural shift in a system where heterogeneous agents interact, adapt, create feedback loops, and modify the structure that then constrains future behaviour. A small change can remain local, but it can also trigger wider reorganization if it crosses a threshold or affects a central node. Complexity economics is useful here because it studies precisely this kind of process: emergence, path dependence, lock-in, non-linear change, and the possibility of multiple transition trajectories rather than one smooth optimal path.
-      </p>
-
-      <p>
-        Economic complexity then gives a concrete meaning to productive transformation. Countries and sectors cannot move into any cleaner activity simply because it becomes desirable. They move through what they already know how to do: their productive knowledge, technologies, routines, supplier base, infrastructure and adjacent capabilities. A green productive sector is therefore not only a sector with low emissions. It is an activity that can emerge from an existing productive ecosystem, or fail to emerge because the required capabilities are missing or too distant.
-      </p>
-
-      <p>
-        ABM v4 turns this theoretical argument into an empirical modelling architecture. It represents the global economy as country-sector agents embedded in input-output networks, then tests whether green reorganization can be understood through emissions-intensity frontiers, capability constraints, supplier structures and historical validation. Its purpose is not to claim a ready-made scenario result. Its purpose is to identify which mechanisms are historically defensible, which ones fail, and what must be added before a credible transition-scenario model can be built.
-      </p>
+      <div class="contribution-grid">
+        {contributionCards.map((card) => (
+          <article class="contribution-card">
+            <h3>{card.title}</h3>
+            <p>{card.text}</p>
+            <span class="skill-line">{card.skills}</span>
+          </article>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -266,9 +306,9 @@ const skills = [
     <div class="container">
       <div class="section-heading">
         <p class="eyebrow">Model architecture</p>
-        <h2>What was built</h2>
+        <h2>What was built technically</h2>
         <p>
-          ABM v4 is a Python modelling pipeline built around country-sector agents, Eora input-output data, emissions intensity, capability measurement, supplier opportunities, and historical validation.
+          I implemented the pipeline as a tested Python codebase with modular ABM components, CLI execution, Parquet-based data handling, automated diagnostics, and 398 passing tests.
         </p>
       </div>
 
@@ -311,7 +351,7 @@ const skills = [
     <div class="container">
       <div class="section-heading">
         <p class="eyebrow">Historical validation</p>
-        <h2>What the model learned by trying to fail</h2>
+        <h2>What the model learned from failed mechanisms</h2>
         <p>
           The most important part of ABM v4 is not that a model was implemented. It is that mechanisms were tested, rejected, retained, or downgraded based on historical evidence.
         </p>
@@ -358,7 +398,7 @@ const skills = [
         <p class="eyebrow">Energy-system boundary</p>
         <h2>China electricity exposed what the model still cannot represent</h2>
         <p>
-          Electricity is not just another sector. It is infrastructure-heavy, politically regulated, fuel-mix dependent, and essential to the rest of the economy. The China electricity case showed that ABM v4 lacks the energy-system and policy variables needed to explain such nodes as ordinary country-sector agents.
+          Electricity is not just another sector. It is infrastructure-heavy, politically regulated, fuel-mix dependent, and essential to the rest of the economy. The China electricity case showed that ABM v4 lacks the energy-system and policy variables needed to model such nodes as ordinary country-sector agents.
         </p>
         <p class="skills-note">
           Skills used: energy-system diagnosis, anomaly interpretation, historical data audit, model-boundary analysis.
@@ -401,7 +441,7 @@ const skills = [
   <section class="scenario-boundary">
     <div class="container-narrow">
       <p class="eyebrow">Scenario readiness</p>
-      <h2>The honest conclusion: ABM v4 is not a policy-scenario engine yet</h2>
+      <h2>ABM v4 identifies the minimum conditions for credible scenario modelling</h2>
 
       <p>
         ABM v4 is strong as a historical diagnostic framework. It has a tested codebase, explicit model logic, validated accounting, and a clear mechanism register. But it should not yet be used to make future scenario claims.
@@ -412,7 +452,7 @@ const skills = [
       </p>
 
       <p>
-        This is a positive modelling result. The project does not hide uncertainty. It converts failed mechanisms into a concrete ABM v5 research agenda.
+        This is a positive modelling result. The project converts failed mechanisms into a concrete ABM v5 research agenda. It shows what a scenario model would need before its projections could be treated as credible.
       </p>
     </div>
   </section>
@@ -478,6 +518,7 @@ const skills = [
   .project-hero,
   .project-status,
   .story-section,
+  .contribution-section,
   .executive-argument,
   .architecture-section,
   .visual-section,
@@ -601,6 +642,7 @@ const skills = [
 
   .stat-card,
   .story-card,
+  .contribution-card,
   .phase-card,
   .validation-card {
     background-color: var(--color-surface);
@@ -632,7 +674,14 @@ const skills = [
     gap: var(--space-xl);
   }
 
+  .contribution-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-xl);
+  }
+
   .story-card p,
+  .contribution-card p,
   .phase-card p,
   .validation-card p {
     color: var(--color-text-secondary);
@@ -706,6 +755,10 @@ const skills = [
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .contribution-grid {
+      grid-template-columns: 1fr;
+    }
+
     .visual-section .container {
       grid-template-columns: 1fr;
     }
@@ -733,6 +786,7 @@ const skills = [
 
     .stat-grid,
     .story-grid,
+    .contribution-grid,
     .phase-grid,
     .validation-grid,
     .skill-grid {
