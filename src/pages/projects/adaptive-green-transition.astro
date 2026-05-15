@@ -1,25 +1,35 @@
 ---
+import Equation from '@/components/visuals/Equation.astro';
 import BaseLayout from '@/components/layout/BaseLayout.astro';
 import VisualPanel from '@/components/visuals/VisualPanel.astro';
 
 const plotBase = '/outputs/plots/adaptive-green-transition';
 
-const heroImage = `${plotBase}/abm_v4_architecture_layers_polished.png`;
+const hdiFootprintPlot = `${plotBase}/carbon_footprint_hdi_transition_space.png`;
+
+const globalPhasePlot = `${plotBase}/phase_space_global_green_readiness_incoming_xy_1995_2016_portfolio.png`;
+const vectorFieldPlot = `${plotBase}/phase_space_vector_field_green_readiness_incoming_xy_1995_2016_portfolio.png`;
+const sectorTrajectoryPlot = `${plotBase}/phase_space_sector_green_readiness_outgoing_3d_1995_2016_portfolio.png`;
+const largeNodesPlot = `${plotBase}/phase_space_nodes_top10_output_green_readiness_incoming_3d_1995_2016_portfolio.png`;
+
+const architecturePlot = `${plotBase}/abm_v4_architecture_layers_polished.png`;
 const decompositionPlot = `${plotBase}/abm_v4_emissions_decomposition_logic_polished.png`;
+const capabilityPlot = `${plotBase}/abm_v4_capability_source_coverage_polished.png`;
 const twoRulePlot = `${plotBase}/abm_v4_two_rule_scorecard.png`;
 const chinaElectricityPlot = `${plotBase}/abm_v4_china_electricity_boundary_case_polished.png`;
 const qEnergyPlot = `${plotBase}/abm_v4_q_energy_mix_quality_boundary_web.png`;
+const scenarioReadinessPlot = `${plotBase}/abm_v4_scenario_readiness_checklist_polished.png`;
 const roadmapPlot = `${plotBase}/abm_v4_to_v5_roadmap_polished.png`;
 
 const badges = [
+  'Ecological transition',
+  'Complexity economics',
+  'Economic complexity',
   'Agent-based modelling',
   'Input-output networks',
-  'Economic complexity',
   'Historical validation',
-  'Emissions diagnostics',
-  'Python pipeline',
-  'Large-scale data',
-  'Model governance'
+  'Carbon-transition diagnostics',
+  'Python modelling pipeline'
 ];
 
 const implementationStats = [
@@ -31,44 +41,26 @@ const implementationStats = [
   { label: 'Model status', value: 'Diagnostic, not scenario-ready' }
 ];
 
-const storySteps = [
+const theoryCards = [
   {
-    title: 'The policy problem',
-    skills: 'Policy modelling, economic reasoning',
-    text: 'Green transition scenarios can hide whether the productive system is actually becoming able to decarbonize, or whether emissions only appear to fall because output contracts, activities relocate, or carbon-intensive nodes disappear from the observed system.'
+    title: 'Policy problem',
+    skills: 'Ecological transition, policy modelling',
+    text: 'The project starts from a practical question: how can economic development continue while the environmental footprint of production falls fast enough to remain within planetary limits?'
   },
   {
-    title: 'The theoretical move',
-    skills: 'Complexity economics, ecological transition',
-    text: 'The project treats ecological transition as productive-system transformation: a complex adaptive process shaped by interdependence, lock-in, feedback, emergence and the historical structure of productive ecosystems.'
+    title: 'Production-system view',
+    skills: 'Productive ecosystems, structural analysis',
+    text: 'The transition is treated as a transformation of how economies extract resources, use energy, organize technologies, combine capabilities, and connect production across countries and sectors.'
   },
   {
-    title: 'The modelling translation',
-    skills: 'Agent-based modelling, input-output analysis',
-    text: 'ABM v4 operationalizes this theory through country-sector agents embedded in input-output networks, supplier opportunities, productive capabilities, emissions-intensity frontiers and historical constraints.'
+    title: 'Complexity economics',
+    skills: 'Non-equilibrium modelling, systems thinking',
+    text: 'The project uses complexity economics to focus on heterogeneous agents, feedback loops, emergence, path dependence, lock-in, and multiple possible transition trajectories.'
   },
   {
-    title: 'The validation boundary',
-    skills: 'Historical validation, model governance',
-    text: 'Instead of moving directly to scenarios, the model tests which mechanisms survive historical evidence, which fail, and which missing structures must be added before credible transition-scenario modelling.'
-  }
-];
-
-const contributionCards = [
-  {
-    title: 'Theoretical contribution',
-    skills: 'Ecological transition, complexity economics',
-    text: 'The project reframes green transition as a transformation of productive ecosystems, not only as decoupling, technology diffusion or aggregate emissions decline.'
-  },
-  {
-    title: 'Methodological contribution',
-    skills: 'ABM design, input-output networks',
-    text: 'It translates this framing into a country-sector ABM where agents are constrained by suppliers, buyers, capabilities, production feasibility and emissions-intensity frontiers.'
-  },
-  {
-    title: 'Validation contribution',
-    skills: 'Model testing, scenario-readiness assessment',
-    text: 'It treats failed mechanisms as useful evidence, turning historical validation into a way to define the minimum conditions for future scenario work.'
+    title: 'Capability constraint',
+    skills: 'Economic complexity, capability measurement',
+    text: 'Economic complexity gives the transition a concrete productive constraint: countries and sectors move through what they already know how to do, not through any activity that becomes desirable.'
   }
 ];
 
@@ -76,12 +68,12 @@ const architectureCards = [
   {
     title: 'Country-sector agents',
     skills: 'Panel data modelling, data architecture',
-    text: 'The model represents 4,915 country-sector nodes observed across 22 years, combining output, emissions intensity, network position, capabilities, and ecosystem fields.'
+    text: 'The model represents 4,915 country-sector nodes observed across 22 years, combining output, emissions intensity, network position, capabilities and ecosystem fields.'
   },
   {
     title: 'Production network constraints',
     skills: 'Input-output networks, supplier analysis',
-    text: 'Supplier opportunities are not random. They are built from raw Eora transaction data, historical ties, sector proximity, and ecosystem feasibility.'
+    text: 'Supplier opportunities are not random. They are built from raw Eora transaction data, historical ties, sector proximity and ecosystem feasibility.'
   },
   {
     title: 'Capability measurement',
@@ -91,7 +83,7 @@ const architectureCards = [
   {
     title: 'Emissions decomposition',
     skills: 'Carbon accounting, transition diagnostics',
-    text: 'Emissions changes are separated into scale, intensity, and interaction effects, avoiding the mistake of treating output decline as green transition.'
+    text: 'Emissions changes are separated into scale, intensity and interaction effects, avoiding the mistake of treating output decline as green transition.'
   }
 ];
 
@@ -104,7 +96,7 @@ const validationCards = [
   {
     title: 'Two historical rules were retained',
     skills: 'Model comparison, calibration diagnostics',
-    text: 'One rule performs better as an aggregate-safe baseline. The other gives a cleaner transition-mechanism benchmark. Neither is strong enough for policy scenarios.'
+    text: 'One rule performs better as an aggregate-safe baseline. The other gives a cleaner transition-mechanism interpretation. Neither is strong enough for policy scenarios.'
   },
   {
     title: 'Energy data became a boundary case',
@@ -114,17 +106,19 @@ const validationCards = [
   {
     title: 'ABM v5 now has a clearer agenda',
     skills: 'Research roadmap design, model governance',
-    text: 'The validation failures are productive: they define the next model, with explicit energy/fuel structure, policy and investment regimes, capital-stock inertia, and richer agent ontologies.'
+    text: 'The validation failures define the next model: energy/fuel structure, policy and investment regimes, capital-stock inertia, and richer agent ontologies.'
   }
 ];
 
 const skills = [
+  'Ecological transition modelling',
+  'Complexity economics',
+  'Economic complexity',
   'Agent-based modelling',
   'Input-output economics',
-  'Economic complexity',
-  'Historical validation',
-  'Carbon-transition diagnostics',
   'Network analysis',
+  'Carbon-transition diagnostics',
+  'Historical validation',
   'Large-scale Parquet workflows',
   'Python package design',
   'CLI workflow design',
@@ -132,15 +126,13 @@ const skills = [
   'Data quality auditing',
   'Model boundary definition',
   'Scenario-readiness assessment',
-  'Technical documentation',
-  'Policy-oriented modelling',
-  'Research communication'
+  'Policy-oriented research communication'
 ];
 ---
 
 <BaseLayout
   title="Adaptive Green Transition in Global Production Networks"
-  description="A portfolio case study on agent-based modelling, input-output networks, economic complexity, and historical validation for green transition analysis."
+  description="A portfolio case study on ecological transition, complexity economics, agent-based modelling, input-output networks and historical validation."
 >
   <section class="project-hero">
     <div class="container">
@@ -150,15 +142,15 @@ const skills = [
           <h1>Adaptive Green Transition in Global Production Networks</h1>
 
           <p class="hero-subtitle">
-            I built a historical agent-based modelling pipeline to test how emissions, capabilities, suppliers and production constraints interact during green transition.
+            A modelling project on ecological transition as productive transformation: how can economies keep developing while reducing the environmental footprint of production fast enough to remain within planetary limits?
           </p>
 
           <p class="hero-text">
-            The project turns a broad policy question into a tested modelling system: can country-sector production nodes reduce emissions intensity without the apparent transition being driven by output decline? It combines input-output economics, economic complexity, emissions accounting, supplier-network analysis, and historical validation.
+            The policy problem is visible in the data. Countries with high human development often remain far above climate-compatible carbon footprints, while countries within ecological limits often have lower levels of development. The transition challenge is therefore not only to reduce emissions. It is to understand what productive mechanisms could move economies into the space where human development and environmental constraints are compatible.
           </p>
 
           <p class="hero-text">
-            ABM v4, the fourth version of the model, is not presented as a forecasting tool. Its value is methodological: it shows how to build, test, reject, and retain transition mechanisms in a disciplined way before making scenario claims.
+            This project approaches that question through complexity economics, economic complexity and agent-based modelling. It treats green transition as a transformation of productive ecosystems: interdependent country-sector systems shaped by capabilities, supplier networks, energy use, lock-in and historical trajectories.
           </p>
 
           <div class="badge-list">
@@ -175,11 +167,11 @@ const skills = [
 
         <div class="hero-media">
           <VisualPanel
-            title="ABM v4 historical diagnostic stack"
-            caption="The project moves from historical data inputs to model validation and a clearly defined ABM v5 agenda."
+            title="Development inside planetary limits"
+            caption="The transition challenge is to move toward high human development while remaining within climate-compatible carbon footprints."
             showAction={false}
           >
-            <img class="hero-plot" src={heroImage} alt="ABM v4 architecture as a historical diagnostic stack" />
+            <img class="hero-plot" src={hdiFootprintPlot} alt="Carbon footprint and Human Development Index by country" />
           </VisualPanel>
         </div>
       </div>
@@ -190,9 +182,9 @@ const skills = [
     <div class="container">
       <div class="section-heading">
         <p class="eyebrow">Project outcome</p>
-        <h2>A tested historical diagnostic model, built to prepare a future transition simulator</h2>
+        <h2>A historical diagnostic model designed to become a transition simulator</h2>
         <p>
-          ABM v4 reached a useful endpoint: a tested historical modelling pipeline that identifies which transition mechanisms are defensible, which fail validation, and which missing economic structures must be added before policy scenarios. It does not hide uncertainty. It turns uncertainty into modelling requirements.
+          The project produced a tested modelling pipeline that turns a theoretical question into data architecture, historical diagnostics, agent-based model components, validation checks and a concrete research roadmap.
         </p>
       </div>
 
@@ -227,49 +219,276 @@ const skills = [
       <p>
         Economic complexity then gives a concrete meaning to productive transformation. Countries and sectors cannot move into any cleaner activity simply because it becomes desirable. They move through what they already know how to do: their productive knowledge, technologies, routines, supplier base, infrastructure and adjacent capabilities. A green productive sector is therefore not only a sector with low emissions. It is an activity that can emerge from an existing productive ecosystem, or fail to emerge because the required capabilities are missing or too distant.
       </p>
-
-      <p>
-        ABM v4 turns this theoretical argument into an empirical modelling architecture. It represents the global economy as country-sector agents embedded in input-output networks, then tests whether green reorganization can be understood through emissions-intensity frontiers, capability constraints, supplier structures and historical validation. Its purpose is not to claim a ready-made scenario result. Its purpose is to identify which mechanisms are historically defensible, which ones fail, and what must be added before a credible transition-scenario model can be built.
-      </p>
     </div>
   </section>
 
-  <section class="story-section alternate">
+  <section class="theory-cards-section alternate">
     <div class="container">
       <div class="section-heading">
-        <p class="eyebrow">Story of the project</p>
-        <h2>From a policy intuition to a validated modelling boundary</h2>
+        <p class="eyebrow">Conceptual toolkit</p>
+        <h2>The theoretical tools used in practice</h2>
         <p>
-          A useful model should not only produce results. It should also reveal when its assumptions are too weak to support stronger claims.
+          The model is built from a sequence of theoretical commitments: ecological transition as a policy problem, productive ecosystems as the object of transformation, complexity economics as the dynamics, and economic complexity as the capability constraint.
         </p>
       </div>
 
-      <div class="story-grid">
-        {storySteps.map((step, index) => (
-          <article class="story-card">
-            <span class="step-number">{String(index + 1).padStart(2, '0')}</span>
-            <h3>{step.title}</h3>
-            <p>{step.text}</p>
-            <span class="skill-line">{step.skills}</span>
+      <div class="card-grid four">
+        {theoryCards.map((card) => (
+          <article class="info-card">
+            <h3>{card.title}</h3>
+            <p>{card.text}</p>
+            <span class="skill-line">{card.skills}</span>
           </article>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="contribution-section">
+  <section class="bridge-section">
+    <div class="container-narrow">
+      <p class="eyebrow">From theory to empirical modelling</p>
+      <h2>The ABM was built from historical complexity diagnostics</h2>
+
+      <p>
+        The model was not built directly from equations. It grew from a sequence of historical diagnostics: mapping green capability, observing movement in transition space, comparing sector trajectories, and identifying large production nodes that do not follow the same path.
+      </p>
+
+      <p>
+        These diagnostics made the theoretical argument operational. If transition is path-dependent, capability-constrained and networked, then the model needs agents, histories, suppliers, production constraints and validation checks.
+      </p>
+    </div>
+  </section>
+
+  <section class="phase-space-section alternate">
+    <div class="container-narrow">
+      <p class="eyebrow">Phase-space diagnostics</p>
+      <h2>Before simulating transition, the project first had to observe movement</h2>
+
+      <p>
+        The phase-space work is the bridge between the policy theory and the ABM. Instead of only measuring whether a country-sector is green or brown at one date, it asks where each node is located in a productive transition space and how it moves historically.
+      </p>
+
+      <p>
+        This matters because a complex adaptive system is not understood only through levels. It is understood through trajectories, direction, speed, clustering and divergence. A country-sector can improve its local emissions profile, remain dependent on brown suppliers, accumulate green capability without immediate emissions gains, or occupy a central position that makes its adjustment more important for the wider system.
+      </p>
+
+      <p>
+        The phase-space diagnostics therefore prepared the ABM architecture. They showed why the model needed heterogeneous agents, historical states, network-embedded green-ness, sector-specific trajectories and explicit validation against observed movement.
+      </p>
+    </div>
+  </section>
+
+  <section class="visual-section">
     <div class="container">
-      <div class="section-heading">
-        <p class="eyebrow">What the project contributes</p>
-        <h2>Three levels of contribution: theory, method and validation</h2>
+      <div class="visual-copy">
+        <p class="eyebrow">Historical phase space</p>
+        <h2>Green capability and local green-ness rise together, but not smoothly</h2>
         <p>
-          The project is not only a modelling exercise. It is a theory-to-method-to-validation pipeline: a way to turn an ecological-transition argument into an empirical modelling architecture with explicit limits.
+          The historical trajectory suggests a broad association between green capability and local green-ness, but not a smooth convergence path. This supports the use of a dynamic transition space rather than a static classification of green and brown sectors.
+        </p>
+        <p class="skills-note">
+          Skills used: historical phase-space analysis, economic complexity, transition diagnostics.
         </p>
       </div>
 
-      <div class="contribution-grid">
-        {contributionCards.map((card) => (
-          <article class="contribution-card">
+      <VisualPanel
+        title="Global transition trajectory"
+        caption="Historical movement across green capability and local green-ness, 1995-2016."
+        showAction={false}
+      >
+        <img src={globalPhasePlot} alt="Historical global phase-space trajectory of green capability and local green-ness" />
+      </VisualPanel>
+    </div>
+  </section>
+
+  <section class="visual-section alternate">
+    <div class="container">
+      <div class="visual-copy">
+        <p class="eyebrow">Complex dynamics</p>
+        <h2>Movement fields show uneven motion across the green-readiness space</h2>
+        <p>
+          The movement-field diagnostic asks how positions move over time, not only where they are located. It shows why a transition model needs path dependence, local interactions and non-linear movement rather than a single average adjustment rule.
+        </p>
+        <p class="skills-note">
+          Skills used: vector-field diagnostics, non-linear dynamics, visual modelling.
+        </p>
+      </div>
+
+      <VisualPanel
+        title="Historical movement field"
+        caption="Observed movement across the green-readiness space."
+        showAction={false}
+      >
+        <img src={vectorFieldPlot} alt="Movement field across green capability and local green-ness" />
+      </VisualPanel>
+    </div>
+  </section>
+
+  <section class="visual-section">
+    <div class="container">
+      <div class="visual-copy">
+        <p class="eyebrow">Sector heterogeneity</p>
+        <h2>Sector trajectories reveal distinct capability-constrained transition paths</h2>
+        <p>
+          Sectors do not share a single transition trajectory. This matters because ecological transition is not just an aggregate emissions problem. It depends on the productive structure of each sector family, its capabilities, its network position and its feasible adjacent transformations.
+        </p>
+        <p class="skills-note">
+          Skills used: sectoral analysis, economic interpretation, capability-constrained modelling.
+        </p>
+      </div>
+
+      <VisualPanel
+        title="Sector transition trajectories"
+        caption="Sector-level trajectories across green capability, local green-ness and outgoing network green-ness."
+        showAction={false}
+      >
+        <img src={sectorTrajectoryPlot} alt="Sector trajectories in green transition space" />
+      </VisualPanel>
+    </div>
+  </section>
+
+  <section class="visual-section alternate">
+    <div class="container">
+      <div class="visual-copy">
+        <p class="eyebrow">Large nodes and lock-in</p>
+        <h2>Large production nodes do not share a single green transition path</h2>
+        <p>
+          Large country-sector nodes matter because they shape aggregate system dynamics. If central or high-output nodes remain locked into carbon-intensive configurations, aggregate transition can remain slow even when smaller nodes improve.
+        </p>
+        <p class="skills-note">
+          Skills used: production-network interpretation, node-level diagnostics, aggregate-system reasoning.
+        </p>
+      </div>
+
+      <VisualPanel
+        title="Large production nodes"
+        caption="Top production nodes across green capability, local green-ness and incoming network green-ness."
+        showAction={false}
+      >
+        <img src={largeNodesPlot} alt="Large production node trajectories in green transition space" />
+      </VisualPanel>
+    </div>
+  </section>
+
+  <section class="abm-transition-section">
+    <div class="container-narrow">
+      <p class="eyebrow">Agent-based modelling</p>
+      <h2>Why this becomes an ABM</h2>
+
+      <p>
+        The ABM is the modelling translation of the theoretical argument. A production system with heterogeneous agents, network constraints, path dependence, capability limits and local interactions cannot be reduced to a single representative trajectory without losing the mechanisms of interest.
+      </p>
+
+      <p>
+        ABM v4 therefore represents the global economy as country-sector agents embedded in input-output networks, then tests whether green reorganization can be understood through productive ecosystems, capability constraints, supplier structures, production feasibility and emissions-intensity dynamics. Its purpose is not to claim a ready-made scenario result. Its purpose is to identify which mechanisms are historically defensible, which ones fail, and what must be added before a credible transition-scenario model can be built.
+      </p>
+    </div>
+  </section>
+
+  <section class="behavioural-leontief-section alternate">
+    <div class="container-narrow">
+      <p class="eyebrow">Input-output economics and ABM design</p>
+      <h2>From Leontief accounting to behaviouralized production dynamics</h2>
+
+      <p>
+        Input-output economics is the starting point because it represents the economy as an interdependent production system. Each sector produces output, buys intermediate inputs from other sectors, and sells to downstream users. In a multi-country input-output table, this becomes a global production network: each country-sector node is embedded in supplier and buyer relations that shape what it can produce and how shocks can propagate.
+      </p>
+
+      <p>
+        The basic input-output object is the transaction matrix <strong>T</strong>, where <strong>T</strong><sub>ij</sub> is the value of intermediate inputs sold by supplier sector <strong>i</strong> to buyer sector <strong>j</strong>. From this, the technical-coefficient matrix is defined as:
+      </p>
+
+      <div class="equation-grid three">
+        <Equation
+          label="Technical coefficient"
+          tex={String.raw`a_{ij} = \frac{T_{ij}}{X_j}`}
+          note="Input from supplier i required per unit of output produced by buyer j."
+        />
+
+        <Equation
+          label="Static Leontief identity"
+          accent={true}
+          tex={String.raw`X = AX + Y`}
+          note="Gross output equals intermediate production requirements plus final demand."
+        />
+
+        <Equation
+          label="Classic solution"
+          tex={String.raw`X = (I - A)^{-1}Y`}
+          note="Output is solved as an equilibrium requirement for a given technical structure and final demand."
+        />
+      </div>
+
+      <p>
+        This is powerful because it makes production interdependence explicit. A change in final demand does not only affect one sector directly. It propagates through the production network via indirect input requirements. This is why input-output economics is central to the project: it provides a rigorous way to represent the productive structure of the economy.
+      </p>
+
+      <p>
+        But the standard Leontief framework is mostly static. It tells us what level of gross output is required for a given final demand vector and a given technical structure. It does not explain how heterogeneous producers adapt when the structure itself is under transition pressure: when suppliers become constrained, when new capabilities are needed, when energy systems change, or when emissions-intensity reduction requires a different productive configuration.
+      </p>
+
+      <p>
+        This limitation matters for ecological transition. A green transition is not only a new final-demand vector or a new emissions coefficient. It can require new suppliers, new capabilities, different energy mixes, substitution under friction, investment lags, policy constraints, and the reorganization of production across countries and sectors. A static input-output model can represent interdependence, but it cannot by itself explain adaptive behaviour, lock-in, learning, threshold effects, or the emergence of new productive configurations.
+      </p>
+
+      <p>
+        The project therefore keeps the Leontief insight but moves it into an agent-based framework. Input-output data define the production environment: technical requirements, supplier-buyer links, production scale and emissions accounting. But country-sector nodes are treated as adaptive agents inside that environment.
+      </p>
+
+      <div class="equation-grid two">
+        <Equation
+          label="ABM input requirement"
+          tex={String.raw`R_{ij,t} = a_{ij,t} X^{d}_{j,t}`}
+          note="Buyer j requires supplier-specific inputs from i to support desired production."
+        />
+
+        <Equation
+          label="Behaviouralized production logic"
+          accent={true}
+          tex={String.raw`X^{r}_{j,t+1} = f(X^{d}_{j,t}, R_{ij,t}, \Omega_{j,t})`}
+          note="Realized output emerges from constrained adaptation inside the production network."
+        />
+      </div>
+
+      <div class="equation-grid one equation-grid-secondary">
+        <Equation
+          label="Constraint set"
+          tex={String.raw`\Omega_{j,t} = \{w_{ij,t}, Cap_{j,t}, GCap_{j,t}, Feas_{j,t}\}`}
+          note="The constraint set summarizes supplier weights, capabilities, green capabilities and production feasibility."
+        />
+      </div>
+
+      <p>
+        The model asks whether input requirements can be met through feasible supplier relationships, rather than assuming that the whole system instantly clears through the Leontief inverse. Supplier adjustment is constrained by historical ties, sector proximity, productive ecosystems, supplier reliability, green advantage and substitution friction.
+      </p>
+
+      <p>
+        This is what I call behaviouralized Leontief logic. The input-output table provides the structural discipline. Complexity economics motivates the adaptive dynamics. Economic complexity defines the capability constraint. The ABM combines them by asking how country-sector nodes adjust locally, and whether those local adjustments produce historically defensible system-level patterns.
+      </p>
+    </div>
+  </section>
+
+  <section class="architecture-section">
+    <div class="container">
+      <div class="section-heading">
+        <p class="eyebrow">ABM v4 implementation</p>
+        <h2>What was built</h2>
+        <p>
+          ABM v4 is a Python modelling pipeline built around country-sector agents, Eora input-output data, emissions intensity, capability measurement, supplier opportunities and historical validation.
+        </p>
+      </div>
+
+      <VisualPanel
+        title="ABM v4 historical diagnostic stack"
+        caption="The project moves from historical data inputs to country-sector agents, production networks, behavioural diagnostic layers, validation and model boundaries."
+        showAction={false}
+      >
+        <img src={architecturePlot} alt="ABM v4 architecture as a historical diagnostic stack" />
+      </VisualPanel>
+
+      <div class="card-grid four architecture-cards">
+        {architectureCards.map((card) => (
+          <article class="info-card">
             <h3>{card.title}</h3>
             <p>{card.text}</p>
             <span class="skill-line">{card.skills}</span>
@@ -285,7 +504,7 @@ const skills = [
         <p class="eyebrow">Core accounting logic</p>
         <h2>Falling emissions is not automatically green transition</h2>
         <p>
-          The model separates emissions change into scale effects, intensity effects, and interaction effects. This distinction is central. A decline in emissions caused by lower output is not treated as evidence of productive decarbonisation.
+          The model separates emissions change into scale effects, intensity effects and interaction effects. This distinction is central. A decline in emissions caused by lower output is not treated as evidence of productive decarbonisation.
         </p>
         <p class="skills-note">
           Skills used: carbon accounting, decomposition logic, transition diagnostics, model interpretation.
@@ -299,28 +518,6 @@ const skills = [
       >
         <img src={decompositionPlot} alt="ABM v4 emissions decomposition logic" />
       </VisualPanel>
-    </div>
-  </section>
-
-  <section class="architecture-section">
-    <div class="container">
-      <div class="section-heading">
-        <p class="eyebrow">Model architecture</p>
-        <h2>What was built technically</h2>
-        <p>
-          I implemented the pipeline as a tested Python codebase with modular ABM components, CLI execution, Parquet-based data handling, automated diagnostics, and 398 passing tests.
-        </p>
-      </div>
-
-      <div class="phase-grid">
-        {architectureCards.map((phase) => (
-          <article class="phase-card">
-            <h3>{phase.title}</h3>
-            <p>{phase.text}</p>
-            <span class="skill-line">{phase.skills}</span>
-          </article>
-        ))}
-      </div>
     </div>
   </section>
 
@@ -342,7 +539,7 @@ const skills = [
         caption="Capability coverage after combining Atlas-observed and IO-imputed information."
         showAction={false}
       >
-        <img src={`${plotBase}/abm_v4_capability_source_coverage_polished.png`} alt="Capability source coverage after IO imputation" />
+        <img src={capabilityPlot} alt="Capability source coverage after IO imputation" />
       </VisualPanel>
     </div>
   </section>
@@ -351,18 +548,18 @@ const skills = [
     <div class="container">
       <div class="section-heading">
         <p class="eyebrow">Historical validation</p>
-        <h2>What the model learned from failed mechanisms</h2>
+        <h2>What the model learned by trying to fail</h2>
         <p>
-          The most important part of ABM v4 is not that a model was implemented. It is that mechanisms were tested, rejected, retained, or downgraded based on historical evidence.
+          The most important part of ABM v4 is not only that a model was implemented. It is that mechanisms were tested, rejected, retained or downgraded based on historical evidence.
         </p>
       </div>
 
-      <div class="validation-grid">
-        {validationCards.map((finding) => (
-          <article class="validation-card">
-            <h3>{finding.title}</h3>
-            <p>{finding.text}</p>
-            <span class="skill-line">{finding.skills}</span>
+      <div class="card-grid four">
+        {validationCards.map((card) => (
+          <article class="info-card">
+            <h3>{card.title}</h3>
+            <p>{card.text}</p>
+            <span class="skill-line">{card.skills}</span>
           </article>
         ))}
       </div>
@@ -398,7 +595,7 @@ const skills = [
         <p class="eyebrow">Energy-system boundary</p>
         <h2>China electricity exposed what the model still cannot represent</h2>
         <p>
-          Electricity is not just another sector. It is infrastructure-heavy, politically regulated, fuel-mix dependent, and essential to the rest of the economy. The China electricity case showed that ABM v4 lacks the energy-system and policy variables needed to model such nodes as ordinary country-sector agents.
+          Electricity is not just another sector. It is infrastructure-heavy, politically regulated, fuel-mix dependent, and essential to the rest of the economy. The China electricity case showed that ABM v4 lacks the energy-system and policy variables needed to explain such nodes as ordinary country-sector agents.
         </p>
         <p class="skills-note">
           Skills used: energy-system diagnosis, anomaly interpretation, historical data audit, model-boundary analysis.
@@ -438,32 +635,39 @@ const skills = [
     </div>
   </section>
 
-  <section class="scenario-boundary">
-    <div class="container-narrow">
-      <p class="eyebrow">Scenario readiness</p>
-      <h2>ABM v4 identifies the minimum conditions for credible scenario modelling</h2>
+  <section class="visual-section alternate">
+    <div class="container">
+      <div class="visual-copy">
+        <p class="eyebrow">Scenario readiness</p>
+        <h2>The honest conclusion: ABM v4 is not a policy-scenario engine yet</h2>
+        <p>
+          ABM v4 is strong as a historical diagnostic framework. It has a tested codebase, explicit model logic, validated accounting and a clear mechanism register. But it should not yet be used to make future scenario claims.
+        </p>
+        <p>
+          The reason is precise: no single emissions-transition rule is strong enough for scenarios; production dynamics are still historically forced; energy and fuel structures are not modelled at sufficient quality; and policy and institutional variables are absent.
+        </p>
+        <p class="skills-note">
+          Skills used: scenario-readiness assessment, model governance, validation discipline.
+        </p>
+      </div>
 
-      <p>
-        ABM v4 is strong as a historical diagnostic framework. It has a tested codebase, explicit model logic, validated accounting, and a clear mechanism register. But it should not yet be used to make future scenario claims.
-      </p>
-
-      <p>
-        The reason is precise: no single emissions-transition rule is strong enough for scenarios; production dynamics are still historically forced; energy and fuel structures are not modelled at sufficient quality; and policy/institutional variables are absent.
-      </p>
-
-      <p>
-        This is a positive modelling result. The project converts failed mechanisms into a concrete ABM v5 research agenda. It shows what a scenario model would need before its projections could be treated as credible.
-      </p>
+      <VisualPanel
+        title="Scenario readiness checklist"
+        caption="ABM v4 is historically diagnostic, not yet a forecasting model."
+        showAction={false}
+      >
+        <img src={scenarioReadinessPlot} alt="Scenario readiness checklist for ABM v4" />
+      </VisualPanel>
     </div>
   </section>
 
-  <section class="visual-section alternate">
+  <section class="visual-section">
     <div class="container">
       <div class="visual-copy">
         <p class="eyebrow">Research roadmap</p>
         <h2>ABM v4 validation failures define the ABM v5 design</h2>
         <p>
-          The final output is not only a model. It is a research roadmap. ABM v5 should move from a country-sector diagnostic model toward a richer agent system with energy/fuel structure, policy and investment regimes, endogenous production dynamics, and capital-stock inertia.
+          This is a positive modelling result. The project does not hide uncertainty. It converts failed mechanisms into a concrete ABM v5 research agenda: cleaner energy and fuel data, policy and investment regimes, structural agent types, endogenous production dynamics and capital-stock inertia.
         </p>
         <p class="skills-note">
           Skills used: model governance, research design, technical roadmap, policy-oriented systems thinking.
@@ -480,13 +684,13 @@ const skills = [
     </div>
   </section>
 
-  <section class="skills-demonstrated">
+  <section class="skills-demonstrated alternate">
     <div class="container">
       <div class="section-heading">
         <p class="eyebrow">Skills demonstrated</p>
         <h2>What this project demonstrates</h2>
         <p>
-          The project combines economic modelling, data engineering, validation discipline, and policy-oriented communication. The technical work matters, but the central skill is turning an ambitious research question into a controlled modelling pipeline with clear limits.
+          The project combines economic modelling, data engineering, validation discipline and policy-oriented communication. The technical work matters, but the central skill is turning an ambitious research question into a controlled modelling pipeline with clear limits.
         </p>
       </div>
 
@@ -504,11 +708,11 @@ const skills = [
       <h2>A portfolio piece about rigorous modelling, not overconfident prediction</h2>
 
       <p>
-        This project should be read as evidence of modelling judgement. It shows the ability to build a large historical simulation pipeline, test mechanisms against data, reject attractive but weak rules, and communicate the boundary between diagnosis and forecasting.
+        This project should be read as evidence of modelling judgement. It shows the ability to move from a policy question to theory, from theory to empirical diagnostics, from diagnostics to an ABM architecture, and from implementation to historical validation.
       </p>
 
       <p>
-        The central contribution is methodological: ABM v4 makes green transition more precise by separating emissions-intensity improvement from output decline, by embedding agents in a production network, and by turning validation failures into a stronger ABM v5 agenda.
+        The central contribution is methodological: the project makes ecological transition more precise by treating it as productive transformation, by embedding agents in production networks, by modelling capability constraints, and by turning validation failures into a stronger ABM v5 agenda.
       </p>
     </div>
   </section>
@@ -517,13 +721,15 @@ const skills = [
 <style>
   .project-hero,
   .project-status,
-  .story-section,
-  .contribution-section,
   .executive-argument,
-  .architecture-section,
+  .theory-cards-section,
+  .bridge-section,
+  .phase-space-section,
   .visual-section,
+  .abm-transition-section,
+  .behavioural-leontief-section,
+  .architecture-section,
   .validation-section,
-  .scenario-boundary,
   .skills-demonstrated,
   .interpretation-limits {
     padding: var(--space-3xl) 0;
@@ -535,23 +741,23 @@ const skills = [
 
   .hero-grid {
     display: grid;
-    grid-template-columns: 1.05fr 1fr;
+    grid-template-columns: 0.95fr 1.05fr;
     gap: var(--space-3xl);
     align-items: start;
   }
 
   .hero-copy {
-    max-width: 720px;
+    max-width: 740px;
   }
 
   .hero-plot {
     width: 100%;
-    max-height: 560px;
+    max-height: 620px;
     object-fit: contain;
   }
 
   .section-heading {
-    max-width: 900px;
+    max-width: 920px;
     margin-bottom: var(--space-2xl);
   }
 
@@ -592,8 +798,11 @@ const skills = [
 
   .hero-text,
   .executive-argument p,
+  .bridge-section p,
+  .phase-space-section p,
   .visual-copy p,
-  .scenario-boundary p,
+  .abm-transition-section p,
+  .behavioural-leontief-section p,
   .interpretation-limits p {
     color: var(--color-text-secondary);
     line-height: 1.8;
@@ -641,10 +850,7 @@ const skills = [
   }
 
   .stat-card,
-  .story-card,
-  .contribution-card,
-  .phase-card,
-  .validation-card {
+  .info-card {
     background-color: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
@@ -666,35 +872,23 @@ const skills = [
     line-height: 1.5;
   }
 
-  .story-grid,
-  .phase-grid,
-  .validation-grid {
+  .card-grid {
     display: grid;
+    gap: var(--space-xl);
+  }
+
+  .card-grid.four {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: var(--space-xl);
   }
 
-  .contribution-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: var(--space-xl);
+  .architecture-cards {
+    margin-top: var(--space-2xl);
   }
 
-  .story-card p,
-  .contribution-card p,
-  .phase-card p,
-  .validation-card p {
+  .info-card p {
     color: var(--color-text-secondary);
     line-height: 1.7;
     margin-bottom: var(--space-lg);
-  }
-
-  .step-number {
-    display: inline-block;
-    color: var(--color-accent-primary);
-    font-size: var(--font-size-sm);
-    font-weight: 700;
-    margin-bottom: var(--space-md);
   }
 
   .skill-line {
@@ -714,20 +908,73 @@ const skills = [
 
   .visual-section .container {
     display: grid;
-    grid-template-columns: 0.8fr 1.2fr;
+    grid-template-columns: 0.82fr 1.18fr;
     gap: var(--space-3xl);
     align-items: center;
   }
 
   .visual-copy {
-    max-width: 620px;
+    max-width: 640px;
   }
 
-  .visual-section img {
+  .visual-section img,
+  .architecture-section img {
     display: block;
     width: 100%;
     height: auto;
     border-radius: var(--radius-md);
+  }
+
+  .equation-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-lg);
+    margin: var(--space-xl) 0;
+  }
+
+  .equation-grid.two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .equation-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+  }
+
+  .equation-card.accent {
+    border-color: color-mix(in srgb, var(--color-accent-primary) 45%, var(--color-border));
+  }
+
+  .equation-label {
+    display: block;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-sm);
+  }
+
+  .equation-line {
+    color: var(--color-text);
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+    margin-bottom: var(--space-md);
+  }
+
+  .equation-line.small {
+    font-size: var(--font-size-md);
+  }
+
+  .equation-card p {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+    margin: 0;
   }
 
   .skill-grid {
@@ -749,14 +996,10 @@ const skills = [
 
   @media (max-width: 1100px) {
     .stat-grid,
-    .story-grid,
-    .phase-grid,
-    .validation-grid {
+    .card-grid.four,
+    .equation-grid,
+    .equation-grid.two {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .contribution-grid {
-      grid-template-columns: 1fr;
     }
 
     .visual-section .container {
@@ -772,6 +1015,11 @@ const skills = [
     .skill-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
+    .equation-grid,
+    .equation-grid.two {
+      grid-template-columns: 1fr;
+    }
   }
 
   @media (max-width: 640px) {
@@ -785,10 +1033,7 @@ const skills = [
     }
 
     .stat-grid,
-    .story-grid,
-    .contribution-grid,
-    .phase-grid,
-    .validation-grid,
+    .card-grid.four,
     .skill-grid {
       grid-template-columns: 1fr;
     }

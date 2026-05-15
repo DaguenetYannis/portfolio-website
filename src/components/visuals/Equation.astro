@@ -1,0 +1,128 @@
+---
+import katex from 'katex';
+import 'katex/dist/katex.min.css';
+
+interface Props {
+  tex: string;
+  label?: string;
+  note?: string;
+  block?: boolean;
+  accent?: boolean;
+  compact?: boolean;
+}
+
+const { tex, label, note, block = true, accent = false, compact = false } = Astro.props;
+
+const html = katex.renderToString(tex, {
+  throwOnError: false,
+  displayMode: block,
+  strict: 'warn'
+});
+---
+
+<div class:list={['equation-chip-card', { accent, compact }]}>
+  {label && <span class="equation-chip-label">{label}</span>}
+
+  <div class="equation-chip-formula" set:html={html} />
+
+  {note && <p class="equation-chip-note">{note}</p>}
+</div>
+
+<style>
+  .equation-chip-card {
+    background:
+      linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--color-surface) 88%, var(--color-accent-primary) 12%),
+        var(--color-surface)
+      );
+    border: 1px solid color-mix(in srgb, var(--color-border) 78%, var(--color-accent-primary) 22%);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    min-height: 180px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .equation-chip-card.accent {
+    background:
+      linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--color-surface) 72%, var(--color-accent-primary) 28%),
+        color-mix(in srgb, var(--color-surface) 90%, var(--color-accent-primary) 10%)
+      );
+    border-color: color-mix(in srgb, var(--color-accent-primary) 58%, var(--color-border));
+  }
+
+  .equation-chip-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    max-width: 100%;
+    padding: 0.42rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--color-border) 70%, var(--color-accent-primary) 30%);
+    background-color: color-mix(in srgb, var(--color-surface) 82%, var(--color-accent-primary) 18%);
+    color: var(--color-text);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+
+  .equation-chip-formula {
+    width: 100%;
+    max-width: 100%;
+    color: var(--color-text);
+    font-size: clamp(1rem, 1.6vw, 1.35rem);
+    line-height: 1.5;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    padding: 0.15rem 0;
+  }
+
+  .equation-chip-card.compact .equation-chip-formula {
+    font-size: clamp(0.72rem, 1vw, 0.95rem);
+  }
+
+  .equation-chip-formula :global(.katex-display) {
+    margin: 0;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .equation-chip-formula :global(.katex) {
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  .equation-chip-formula :global(.base) {
+    max-width: 100%;
+  }
+
+  .equation-chip-note {
+    max-width: 32rem;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  @media (max-width: 900px) {
+    .equation-chip-formula {
+      font-size: clamp(0.9rem, 3.4vw, 1.2rem);
+    }
+
+    .equation-chip-card.compact .equation-chip-formula {
+      font-size: clamp(0.7rem, 2.8vw, 0.9rem);
+    }
+  }
+</style>
