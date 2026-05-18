@@ -1,87 +1,377 @@
 ---
-// About page
 import BaseLayout from '@/components/layout/BaseLayout.astro';
+
+const profileCards = [
+  {
+    title: 'Data analysis',
+    text: 'I build structured datasets, indicators and analytical outputs from messy sources, with attention to reproducibility, validation and interpretation.'
+  },
+  {
+    title: 'Economic reasoning',
+    text: 'My economics background helps me define what should be measured before choosing the method, whether the object is fiscal capacity, trade exposure, carbon flows or vulnerability.'
+  },
+  {
+    title: 'Policy interpretation',
+    text: 'I care about making technical results understandable for decision-making, especially when working on public policy, ESG, climate, territorial or economic questions.'
+  }
+];
+
+const recommendations = [
+  {
+    name: 'Saloua Ben Jellid',
+    role: 'Greenly',
+    relationship: 'Worked with me at Greenly',
+    text: `Anyone looking for a top-tier analyst with a strong command of carbon accounting principles and an excellent team mindset would be lucky to have Yannis on board.
+
+I had the pleasure of working with him during his internship in our Climate Expert team, and I can’t recommend him highly enough. He supported us on data analysis for some of our most complex, high-emitting clients, specifically focusing on product purchase and freight, which are two of the most significant scopes of emissions in sectors like these.
+
+Yannis is incredibly sharp and precise in his work. He quickly grasped the nuances of our methodologies and showed an impressive ability to handle very large volumes of data with speed and accuracy.
+
+Beyond his technical skills, Yannis is adaptable, efficient, and an absolute pleasure to work with. He integrated seamlessly into the team, and brought a kind, calm presence to our workspace every day!`
+  },
+  {
+    name: 'Jeremy De Jaeger',
+    role: 'Solutions Engineer & Partnership Delivery Coordinator at Greenly',
+    relationship: 'Worked with me at Greenly',
+    text: `I had the pleasure of working with Yannis at Greenly. Yannis designed robust carbon analysis templates, solving complex edge cases and improving both the quality and efficiency of our partners’ work. Beyond technical expertise, he created clear training materials to help teams and partners upskill quickly.
+
+Autonomous, collaborative, and always focused on impact, Yannis was a valuable asset to our team, bringing significant improvements to our analyses. I highly recommend him for any role requiring analytical rigor, clear communication, and teamwork. It was a real pleasure working with him.`
+  },
+  {
+    name: 'Benjamin Keltjens',
+    role: 'Sustainability Software Engineer',
+    relationship: 'Worked with me at Greenly',
+    text: `To whom it may concern,
+
+I had the pleasure of working with Yannis Daguenet during his internship at Greenly, where he joined the team as a Data Analyst Intern focused on freight analysis. Initially supporting me on the project, Yannis quickly became autonomous, taking ownership of the freight delivery process and managing it from end to end.
+
+Throughout his time at Greenly, Yannis demonstrated a strong eagerness to learn and took initiative beyond his initial responsibilities. He worked with large and complex datasets, applying Python-based tools to perform analyses that directly contributed to our carbon accounting deliverables. He not only mastered the analytical workflow but also became a reliable point of contact for freight-related questions within the team.
+
+Yannis’s ability to adapt quickly, his attention to detail, and his proactive approach made him an invaluable team member during his internship.
+
+I’m confident he would be an asset to any data-driven or policy-focused organization.
+
+Sincerely,
+Benjamin Keltjens`
+  },
+  {
+    name: 'Antoine Vinault',
+    role: 'Team Lead Expert Climat at Greenly',
+    relationship: 'Managed me directly at Greenly',
+    text: `J’ai eu la chance d’être le manager de Yannis sur ses premiers mois de stage à Greenly. Yannis est devenu très rapidement autonome et proactif dans son travail. Il a rapidement été en charge de 2 modules d’analyse pour le calcul des émissions carbones de nos clients, réalisant ces analyses en s’adaptant aux contraintes de temps et de qualité de la donnée. Il a également amélioré les processus d’analyses en créant des templates sous Gsheet/Excel et en utilisant du code. J’ai aussi pu l’observer au contact de nos clients et Yannis a démontré une bonne préparation et une bonne maitrise méthodologique. Yannis est une personne très positive et souriante au travail et qui s’adapte rapidement à son environnement. Je le recommande fortement.`
+  },
+];
 ---
 
-<BaseLayout title="About | Analytical Portfolio">
+<BaseLayout title="About | Yannis Daguenet">
+  <section class="about-hero">
+    <div class="container-narrow">
+      <p class="eyebrow">About</p>
+      <h1>Data analysis shaped by economics, public policy and quantitative methods.</h1>
+
+      <p class="hero-text">
+        I am a junior Data Analyst with a background in economics, European affairs and development economics. My work focuses on turning broad policy or economic questions into measurable objects, structured datasets, indicators and readable analytical outputs.
+      </p>
+
+      <p class="hero-text">
+        I am currently looking for Data Analyst roles, especially where data work supports decision-making in climate, ESG, public policy, economic analysis or territorial questions. I am comfortable working between technical implementation and analytical interpretation.
+      </p>
+    </div>
+  </section>
+
   <section class="about-section">
     <div class="container-narrow">
-      <h1>About</h1>
-      
-      <section class="about-content">
-        <h2>Portfolio Overview</h2>
-        <p>
-          This portfolio showcases work in institutional policy analysis and governance research. The projects demonstrate methodological rigor, institutional insight, and the ability to communicate complex findings to diverse audiences.
-        </p>
-      </section>
+      <h2>Background</h2>
+      <p>
+        My academic path moved from economics and social sciences to European affairs, then to international and development economics. Along the way, I trained in econometrics, quantitative methods, sustainability, machine learning and applied economic analysis.
+      </p>
+      <p>
+        I became interested in data analysis through economic modelling, climate data and policy evaluation. The projects in this portfolio reflect that trajectory: some are close to technical data work, others to economic modelling or policy analysis, but each starts from a question that needs to be made measurable.
+      </p>
+    </div>
+  </section>
 
-      <section class="about-content">
-        <h2>Approach</h2>
+  <section class="recommendations-section">
+    <div class="container">
+      <div class="container-narrow recommendations-header">
+        <h2>Recommendations from Greenly supervisors</h2>
         <p>
-          Work is grounded in systematic analysis, evidence synthesis, and institutional understanding. Projects integrate quantitative and qualitative methods, emphasizing clarity and actionable insight.
+          These LinkedIn recommendations reflect my work during my Greenly internship, especially on carbon-data analysis, freight, product purchases, templates, methodological documentation and team support.
         </p>
-        <ul>
-          <li>Institutional mapping and analysis</li>
-          <li>Policy framework development</li>
-          <li>Evidence-based assessment</li>
-          <li>Visual communication of findings</li>
-        </ul>
-      </section>
+      </div>
 
-      <section class="about-content">
-        <h2>Aesthetic</h2>
-        <p>
-          This portfolio uses a calm, dark-mode-first institutional design. The visual identity prioritizes:
-        </p>
-        <ul>
-          <li>Clarity and readability</li>
-          <li>Institutional credibility</li>
-          <li>Accessibility</li>
-          <li>Minimal but polished presentation</li>
-        </ul>
-      </section>
+      <div class="recommendations-grid">
+        {recommendations.map((recommendation, index) => (
+          <details class="recommendation-card" open={index === 0}>
+            <summary class="recommendation-summary">
+              <div class="recommendation-meta">
+                <span class="recommendation-name">{recommendation.name}</span>
+                <span class="recommendation-role">{recommendation.role}</span>
+                <span class="recommendation-relationship">{recommendation.relationship}</span>
+              </div>
+              <span class="recommendation-toggle">Read recommendation</span>
+            </summary>
+
+            <blockquote class="recommendation-quote">
+              {recommendation.text.split('\n').map((paragraph) => (
+                paragraph.trim() && <p>{paragraph}</p>
+              ))}
+            </blockquote>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="about-section">
+    <div class="container-narrow">
+      <h2>International and learning profile</h2>
+      <p>
+        I have studied and worked across international environments, including an exchange semester at Sogang University in Seoul in 2019 and two years of my master's in Maastricht, NL. Learning languages has also shaped how I approach unfamiliar contexts: patiently, with attention to detail and with interest in how people make sense of different systems.
+      </p>
+      <p>
+        This translates into my analytical work as well. I like projects where understanding the structure of the problem matters as much as applying the tool.
+      </p>
+    </div>
+  </section>
+
+    <section class="about-section">
+    <div class="container">
+      <div class="profile-grid">
+        {profileCards.map((card) => (
+          <article class="profile-card">
+            <h2>{card.title}</h2>
+            <p>{card.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section">
+    <div class="container-narrow contact-card">
+      <h2>Contact</h2>
+      <p>
+        You can explore the project pages for concrete examples of my work. You can also reach me through the links below.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:yannisdaguenet@gmail.com">Email</a>
+        <a href="https://linkedin.com/in/yannis-daguenet">LinkedIn</a>
+        <a href="https://github.com/DaguenetYannis">GitHub</a>
+        <!-- Add CV link later if a public PDF is added:
+        <a href="/cv-yannis-daguenet.pdf">CV</a>
+        -->
+      </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .about-section {
+  .about-hero,
+  .about-section,
+  .recommendations-section,
+  .contact-section {
     padding: var(--space-3xl) 0;
   }
 
-  .about-content {
-    margin-bottom: var(--space-3xl);
+  .eyebrow {
+    margin: 0 0 var(--space-md);
+    color: var(--color-text-muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-size: var(--font-size-xs);
   }
 
-  .about-content h2 {
-    margin-top: var(--space-2xl);
-    margin-bottom: var(--space-lg);
+  h1 {
+    margin: 0 0 var(--space-lg);
+    font-size: var(--font-size-4xl);
+    line-height: 1.05;
   }
 
-  .about-content p {
+  .hero-text,
+  .about-section p,
+  .recommendations-header p,
+  .contact-card p {
     color: var(--color-text-secondary);
     line-height: 1.8;
     margin-bottom: var(--space-lg);
   }
 
-  .about-content ul {
-    margin: var(--space-lg) 0;
-    padding-left: var(--space-xl);
+  .profile-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-xl);
   }
 
-  .about-content li {
+  .profile-card,
+  .contact-card {
+    background-color: var(--color-panel);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+  }
+
+  .profile-card h2,
+  .contact-card h2 {
+    margin-top: 0;
     margin-bottom: var(--space-md);
-    color: var(--color-text-secondary);
-    line-height: 1.7;
+    color: var(--color-text);
   }
 
-  @media (max-width: 768px) {
-    .about-section {
+  .profile-card p {
+    margin: 0;
+    color: var(--color-text-secondary);
+    line-height: 1.75;
+  }
+
+  .recommendations-header {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .recommendations-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-xl);
+  }
+
+  .recommendation-card {
+    background-color: var(--color-panel);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .recommendation-summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-lg);
+    padding: var(--space-xl);
+  }
+
+  .recommendation-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .recommendation-meta {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .recommendation-name {
+    color: var(--color-text);
+    font-weight: 700;
+    font-size: var(--font-size-lg);
+  }
+
+  .recommendation-role {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+  }
+
+  .recommendation-relationship {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 0.25rem;
+  }
+
+  .recommendation-toggle {
+    flex: 0 0 auto;
+    color: var(--color-accent-primary);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 0.4rem 0.75rem;
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .recommendation-card[open] .recommendation-toggle {
+    color: var(--color-text);
+    background-color: var(--color-surface);
+  }
+
+  .recommendation-card[open] .recommendation-toggle {
+    font-size: 0;
+  }
+
+  .recommendation-card[open] .recommendation-toggle::before {
+    content: "Close recommendation";
+    font-size: var(--font-size-xs);
+  }
+
+  .recommendation-quote {
+    margin: 0;
+    padding: 0 var(--space-xl) var(--space-xl);
+  }
+
+  .recommendation-quote::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: var(--color-border);
+    margin-bottom: var(--space-lg);
+  }
+
+  .recommendation-quote p {
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin-bottom: var(--space-md);
+  }
+
+  .contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+  }
+
+  .contact-links a {
+    color: var(--color-accent-primary);
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+  }
+
+  .contact-links a:hover {
+    color: var(--color-accent-primary-hover);
+  }
+
+  @media (max-width: 900px) {
+    .profile-grid,
+    .recommendations-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .about-hero,
+    .about-section,
+    .recommendations-section,
+    .contact-section {
       padding: var(--space-2xl) 0;
     }
 
-    .about-content {
-      margin-bottom: var(--space-2xl);
+    h1 {
+      font-size: var(--font-size-3xl);
+    }
+
+    .recommendation-summary {
+      flex-direction: column;
+    }
+
+    .recommendation-toggle {
+      white-space: normal;
+    }
+
+    .contact-links {
+      flex-direction: column;
+      gap: var(--space-sm);
     }
   }
 </style>

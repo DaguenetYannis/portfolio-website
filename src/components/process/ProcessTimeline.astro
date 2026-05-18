@@ -1,0 +1,140 @@
+---
+interface Step {
+  number: string;
+  title: string;
+  body: string;
+}
+
+interface Props {
+  steps: Step[];
+}
+
+const { steps } = Astro.props;
+---
+
+<div class="process-timeline">
+  <svg class="process-thread" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M 22 20 H 78 V 72 H 22" />
+  </svg>
+
+  {steps.map((step, index) => (
+    <article class={`process-step step-${index + 1}`}>
+      <div class="step-marker">{step.number}</div>
+      <div class="step-content">
+        <h3>{step.title}</h3>
+        <p>{step.body}</p>
+      </div>
+    </article>
+  ))}
+</div>
+
+<style>
+  .process-timeline {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-2xl);
+    margin-top: var(--space-2xl);
+  }
+
+  .process-thread {
+    position: absolute;
+    inset: 12%;
+    width: 76%;
+    height: 76%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .process-thread path {
+    fill: none;
+    stroke: var(--color-border);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .process-step {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    gap: var(--space-md);
+    background-color: var(--color-panel);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+  }
+
+  .step-marker {
+    display: grid;
+    place-items: center;
+    flex: 0 0 2.25rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 999px;
+    background-color: var(--color-accent-primary);
+    color: var(--color-bg);
+    font-weight: 700;
+  }
+
+  .step-content h3 {
+    margin-top: 0;
+    margin-bottom: var(--space-sm);
+  }
+
+  .step-content p {
+    margin: 0;
+    color: var(--color-text-secondary);
+    line-height: 1.75;
+  }
+
+  .step-1 {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .step-2 {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .step-3 {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .step-4 {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  @media (max-width: 760px) {
+    .process-timeline {
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+    }
+
+    .process-thread {
+      display: none;
+    }
+
+    .process-step {
+      grid-column: auto;
+      grid-row: auto;
+    }
+
+    .process-step::before {
+      content: "";
+      position: absolute;
+      left: calc(var(--space-xl) + 1.1rem);
+      top: 3.5rem;
+      bottom: calc(-1 * var(--space-xl));
+      width: 1px;
+      background-color: var(--color-border);
+    }
+
+    .process-step:last-child::before {
+      display: none;
+    }
+  }
+</style>

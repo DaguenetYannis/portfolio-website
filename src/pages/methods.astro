@@ -1,150 +1,288 @@
 ---
-// Methods and Methodology page
 import BaseLayout from '@/components/layout/BaseLayout.astro';
-import VisualPanel from '@/components/visuals/VisualPanel.astro';
+import ProcessTimeline from '@/components/process/ProcessTimeline.astro';
+
+const analyticalSteps = [
+  {
+    number: '1',
+    title: 'Define the analytical object',
+    body: 'Clarify what the analysis is supposed to measure before choosing a method. In the fiscal vulnerability project, the object is not local revenue but the combination of fiscal potential and fiscal effort.'
+  },
+  {
+    number: '2',
+    title: 'Build reliable data before modelling',
+    body: 'Prepare the data layer through ingestion, schema normalization, variable mapping, missing-value handling and validation checks, especially when public datasets change over time.'
+  },
+  {
+    number: '3',
+    title: 'Choose methods that match the question',
+    body: 'Use regression, machine learning, scoring, network analysis, input-output modelling or visual exploration depending on whether the question is causal, predictive, structural, territorial or systemic.'
+  },
+  {
+    number: '4',
+    title: 'Make results auditable and communicable',
+    body: 'Keep source data, transformations, indicators, diagnostics, outputs and interpretation separable so results can be checked, reused and explained clearly.'
+  }
+];
+
+const toolGroups = [
+  {
+    title: 'Programming and notebooks',
+    tools: ['Python', 'R', 'Marimo', 'Jupyter', 'Google Apps Script']
+  },
+  {
+    title: 'Data manipulation',
+    tools: ['pandas', 'NumPy', 'pyarrow', 'DuckDB', 'Excel', 'Power Query']
+  },
+  {
+    title: 'Databases and SQL',
+    tools: ['SQL', 'PostgreSQL', 'BigQuery', 'DuckDB SQL']
+  },
+  {
+    title: 'Visualisation and BI',
+    tools: ['Power BI', 'Tableau', 'Altair', 'Matplotlib', 'Plotly']
+  },
+  {
+    title: 'Modelling and statistics',
+    tools: ['Regression', 'PPML', 'Difference-in-difference', 'Gradient Boosting', 'Random Forest', 'Cross-validation']
+  },
+  {
+    title: 'Workflow and reproducibility',
+    tools: ['Git', 'pytest', 'Parquet', 'Schema validation', 'Data-quality diagnostics']
+  }
+];
 ---
 
-<BaseLayout title="Methods | Analytical Portfolio">
+<BaseLayout title="Analytical Approach | Yannis Daguenet">
   <section class="methods-section">
     <div class="container-narrow">
-      <h1>Methodology</h1>
-      
-      <section class="methods-content">
-        <h2>Overview</h2>
-        <p>
-          This work emphasizes institutional analysis, policy frameworks, and evidence-based assessment. The methodology integrates systematic approaches with clear communication of findings.
-        </p>
-      </section>
+      <p class="eyebrow">Methods</p>
+      <h1>Analytical Approach</h1>
 
-      <section class="methods-content">
-        <h2>Analytical Framework</h2>
-        <p>
-          Projects follow a structured approach to institutional and policy analysis:
-        </p>
-        <ol class="framework-list">
-          <li><strong>Scoping:</strong> Define research questions and institutional boundaries</li>
-          <li><strong>Mapping:</strong> Systematic mapping of actors, processes, and frameworks</li>
-          <li><strong>Analysis:</strong> Evidence synthesis and institutional assessment</li>
-          <li><strong>Synthesis:</strong> Development of findings and recommendations</li>
-          <li><strong>Communication:</strong> Clear presentation through writing and visualization</li>
-        </ol>
-      </section>
+      <p class="hero-text">
+        My work usually starts from a policy or economic question that is too broad to analyse directly. The first step is to turn that question into a measurable analytical object: a fiscal vulnerability score, a trade shock estimate, a carbon-flow network, a prediction target, or a transition pathway.
+      </p>
 
-      <section class="methods-content">
-        <h2>Methods and Tools</h2>
-        <p>
-          Analysis combines qualitative and quantitative approaches:
-        </p>
-        <ul class="methods-list">
-          <li>Document review and policy analysis</li>
-          <li>Institutional mapping and process analysis</li>
-          <li>Data synthesis and visualization</li>
-          <li>Structured stakeholder engagement</li>
-          <li>Evidence-based assessment frameworks</li>
-        </ul>
-      </section>
+      <p class="hero-text">
+        The common thread across the portfolio is not one single method, but multiple depending on the needs of the project.
+      </p>
     </div>
   </section>
 
-  <section class="methods-visual">
+  <section class="methods-section">
     <div class="container">
-      <VisualPanel
-        title="Analytical Process"
-        caption="Placeholder showing the systematic methodology for institutional analysis."
-        showAction={false}
-      />
+      <div class="container-narrow">
+        <h2>How the analytical process connects</h2>
+        <p>
+          Across projects, the workflow is not linear in a mechanical sense, but the same logic returns: define the object, build reliable data, choose the method, then make the result auditable and communicable.
+        </p>
+      </div>
+
+      <ProcessTimeline steps={analyticalSteps} />
     </div>
   </section>
 
-  <section class="methods-section">
-    <div class="container-narrow">
-      <section class="methods-content">
-        <h2>Data and Evidence</h2>
+  <section class="method-cards-section">
+    <div class="container">
+      <div class="container-narrow method-cards-header">
+        <h2>Methods used across the portfolio</h2>
         <p>
-          Projects prioritize transparency about data sources, limitations, and assumptions. Evidence is sourced from:
+          These methods are not used as a fixed checklist. They are selected depending on what the project needs to measure, explain, predict, or communicate.
         </p>
-        <ul class="methods-list">
-          <li>Published research and institutional documents</li>
-          <li>Official policy and governance frameworks</li>
-          <li>Structured stakeholder interviews</li>
-          <li>Publicly available data and analysis</li>
-        </ul>
-      </section>
+      </div>
 
-      <section class="methods-content">
-        <h2>Communication</h2>
+      <div class="method-grid">
+        <article class="method-card">
+          <h3>Data pipelines</h3>
+          <p>
+            Ingestion, cleaning, schema normalization, Parquet conversion, validation, and reproducible data preparation.
+          </p>
+        </article>
+
+        <article class="method-card">
+          <h3>Statistical analysis</h3>
+          <p>
+            Exploratory analysis, regression, difference-in-difference, PPML, diagnostics, and robustness-oriented interpretation.
+          </p>
+        </article>
+
+        <article class="method-card">
+          <h3>Machine learning</h3>
+          <p>
+            Feature engineering, imputation, model benchmarking, cross-validation, and predictive interpretation.
+          </p>
+        </article>
+
+        <article class="method-card">
+          <h3>Network and systems analysis</h3>
+          <p>
+            Input-output networks, embodied carbon flows, centrality, phase-space trajectories, and agent-based modelling.
+          </p>
+        </article>
+
+        <article class="method-card">
+          <h3>Policy interpretation</h3>
+          <p>
+            Translation of analytical results into concise explanations, limitations, and decision-relevant findings.
+          </p>
+        </article>
+
+        <article class="method-card">
+          <h3>Visual communication</h3>
+          <p>
+            Finding-based titles, readable charts, direct captions, and visual choices tied to the analytical question.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+    <section class="tools-section">
+    <div class="container">
+      <div class="container-narrow tools-header">
+        <h2>Tools used across the portfolio</h2>
         <p>
-          Findings are communicated through multiple formats designed for clarity and accessibility:
+          The portfolio combines analytical programming, data engineering, statistical modelling, visualisation, and reproducible workflow tools. The tools vary by project, but they are used to support the same objective: turning complex data into interpretable results.
         </p>
-        <ul class="methods-list">
-          <li>Written analysis and reports</li>
-          <li>Visual diagrams and data visualizations</li>
-          <li>Interactive frameworks and tools</li>
-          <li>Summary briefs and policy notes</li>
-        </ul>
-      </section>
+      </div>
+
+      <div class="tools-grid">
+        {toolGroups.map((group) => (
+          <article class="tool-group">
+            <h3>{group.title}</h3>
+            <div class="tool-list">
+              {group.tools.map((tool) => (
+                <span>{tool}</span>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .methods-section {
+  .methods-section,
+  .method-cards-section {
     padding: var(--space-3xl) 0;
   }
 
-  .methods-content {
-    margin-bottom: var(--space-3xl);
+  .eyebrow {
+    margin: 0 0 var(--space-md);
+    color: var(--color-text-muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-size: var(--font-size-xs);
   }
 
-  .methods-content h2 {
-    margin-top: var(--space-2xl);
-    margin-bottom: var(--space-lg);
+  h1 {
+    margin: 0 0 var(--space-lg);
+    font-size: var(--font-size-4xl);
+    line-height: 1.05;
   }
 
-  .methods-content p {
+  .hero-text,
+  .methods-section p,
+  .method-cards-header p {
     color: var(--color-text-secondary);
     line-height: 1.8;
     margin-bottom: var(--space-lg);
   }
 
-  .framework-list {
-    margin: var(--space-lg) 0;
-    padding-left: var(--space-xl);
+  .method-cards-header {
+    margin-bottom: var(--space-2xl);
   }
 
-  .framework-list li {
-    margin-bottom: var(--space-md);
-    color: var(--color-text-secondary);
-    line-height: 1.7;
+  .method-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-xl);
   }
 
-  .framework-list strong {
+  .method-card {
+    background-color: var(--color-panel);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+  }
+
+  .method-card h3 {
+    margin-top: 0;
+    margin-bottom: var(--space-sm);
     color: var(--color-text);
   }
 
-  .methods-list {
-    margin: var(--space-lg) 0;
-    padding-left: var(--space-xl);
-  }
-
-  .methods-list li {
-    margin-bottom: var(--space-md);
+  .method-card p {
+    margin: 0;
     color: var(--color-text-secondary);
-    line-height: 1.7;
+    line-height: 1.75;
   }
 
-  .methods-visual {
+    .tools-section {
     padding: var(--space-3xl) 0;
   }
 
-  @media (max-width: 768px) {
+  .tools-header {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .tools-header p {
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin-bottom: var(--space-lg);
+  }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-xl);
+  }
+
+  .tool-group {
+    background-color: var(--color-panel);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+  }
+
+  .tool-group h3 {
+    margin-top: 0;
+    margin-bottom: var(--space-md);
+    color: var(--color-text);
+  }
+
+  .tool-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .tool-list span {
+    display: inline-block;
+    padding: 0.45rem 0.75rem;
+    border-radius: 999px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+  }
+
+  @media (max-width: 640px) {
     .methods-section,
-    .methods-visual {
+    .method-cards-section,
+    .tools-section {
       padding: var(--space-2xl) 0;
     }
 
-    .methods-content {
-      margin-bottom: var(--space-2xl);
+    h1 {
+      font-size: var(--font-size-3xl);
+    }
+
+    .method-grid,
+    .tools-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>
