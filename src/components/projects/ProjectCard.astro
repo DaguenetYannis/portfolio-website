@@ -4,7 +4,7 @@ interface Props {
   title: string;
   description: string;
   tags: string[];
-  outputType?: 'analysis' | 'visualization' | 'simulation' | 'research';
+  outputType?: 'analysis' | 'visualization' | 'simulation' | 'research' | 'product';
   status?: 'completed' | 'in-progress' | 'planned';
   href?: string;
 }
@@ -28,7 +28,8 @@ const outputTypeLabels: Record<string, string> = {
   'analysis': 'Analysis',
   'visualization': 'Visualization',
   'simulation': 'Simulation',
-  'research': 'Research'
+  'research': 'Research',
+  'product': 'Product experiment'
 };
 ---
 
