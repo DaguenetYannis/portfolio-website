@@ -7,6 +7,9 @@ interface Props {
   outputType?: 'analysis' | 'visualization' | 'simulation' | 'research' | 'product';
   status?: 'completed' | 'in-progress' | 'planned';
   href?: string;
+  outputTypeLabel?: string;
+  statusLabel?: string;
+  ctaLabel?: string;
 }
 
 const {
@@ -15,7 +18,10 @@ const {
   tags,
   outputType = 'analysis',
   status = 'completed',
-  href = '#'
+  href = '#',
+  outputTypeLabel,
+  statusLabel,
+  ctaLabel = 'View Project →'
 } = Astro.props;
 
 const statusColors: Record<string, string> = {
@@ -39,9 +45,9 @@ const outputTypeLabels: Record<string, string> = {
       <a href={href}>{title}</a>
     </h3>
     <div class="card-meta">
-      <span class="output-type">{outputTypeLabels[outputType]}</span>
+      <span class="output-type">{outputTypeLabel ?? outputTypeLabels[outputType]}</span>
       <span class="status" style={{ color: statusColors[status] }}>
-        {status}
+        {statusLabel ?? status}
       </span>
     </div>
   </div>
@@ -54,7 +60,7 @@ const outputTypeLabels: Record<string, string> = {
     ))}
   </div>
   
-  <a href={href} class="card-link">View Project →</a>
+  <a href={href} class="card-link">{ctaLabel}</a>
 </article>
 
 <style>

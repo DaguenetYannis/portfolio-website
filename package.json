@@ -6,13 +6,26 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "test": "vitest run",
+    "occupation:split-territorial": "node scripts/splitOccupationTerritorialData.mjs",
+    "occupation:build-emergence-paths": "node scripts/buildOccupationEmergencePaths.mjs",
+    "occupation:build-complete-emergence-paths": "node scripts/buildCompleteEmergencePathWebData.mjs",
+    "occupation:measure": "node scripts/measureOccupationSpace.mjs"
   },
   "dependencies": {
+    "@astrojs/react": "^6.0.1",
     "astro": "latest",
-    "katex": "^0.16.46"
+    "graphology": "^0.26.0",
+    "graphology-layout": "^0.6.1",
+    "graphology-layout-forceatlas2": "^0.10.1",
+    "katex": "^0.16.46",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "sigma": "^3.0.3"
   },
   "devDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "vitest": "^4.1.10"
   }
 }

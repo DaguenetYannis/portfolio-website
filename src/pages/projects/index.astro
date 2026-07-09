@@ -10,6 +10,17 @@ const projectCategories = [
     overviewDescription: 'Policy analysis, economic systems, transition dynamics, and empirical modelling.',
     projects: [
       {
+        title: 'Espace des métiers',
+        description: 'Une exploration interactive de l’espace national des professions PCS, avec vues territoriales, densités locales, prédictions d’entrée et trajectoires d’émergence par département et par année.',
+        tags: ['complexité économique', 'réseaux PCS', 'analyse territoriale'],
+        outputType: 'research' as const,
+        outputTypeLabel: 'Recherche',
+        status: 'completed' as const,
+        statusLabel: 'Terminé',
+        ctaLabel: 'Voir le projet →',
+        href: '/research-and-economic-modelling/occupation-space'
+      },
+      {
         title: 'Adaptive Green Transition in Global Production Networks',
         description: 'A framework for studying green transition pathways as heterogeneous, path-dependent movements in a networked production system.',
         tags: ['agent-based modelling', 'economic complexity', 'network analysis'],
@@ -127,6 +138,9 @@ const projectCategories = [
                 tags={project.tags}
                 outputType={project.outputType}
                 status={project.status}
+                outputTypeLabel={project.outputTypeLabel}
+                statusLabel={project.statusLabel}
+                ctaLabel={project.ctaLabel}
                 href={project.href}
               />
             ))}
