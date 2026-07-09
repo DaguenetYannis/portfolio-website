@@ -5,17 +5,44 @@ import '@/styles/occupation-space.css';
 ---
 
 <BaseLayout
-  title="Espace des metiers | Research and Economic Modelling"
-  description="Prototype statique de l'espace national des metiers PCS."
+  title="Espace des métiers | Research and Economic Modelling"
+  description="Un outil interactif pour explorer les capacités professionnelles des territoires français."
 >
   <section class="occupation-hero">
-    <div class="container">
+    <div class="container-narrow">
       <p class="eyebrow">Research and Economic Modelling</p>
-      <h1>Espace des m&eacute;tiers</h1>
+      <h1>L'espace des métiers</h1>
+      <p class="hero-subtitle">
+        Pourquoi certains territoires parviennent-ils à développer de nouveaux
+        métiers, tandis que d'autres restent durablement enfermés dans les mêmes
+        spécialisations ?
+      </p>
+      <p class="hero-text">
+        Cette carte part d'une hypothèse simple : les transformations territoriales
+        ne surgissent pas dans le vide. Un nouveau métier apparaît plus facilement
+        lorsqu'il est proche de métiers déjà présents localement. L'espace des
+        métiers permet de rendre cette proximité visible.
+      </p>
+    </div>
+  </section>
+
+  <section class="occupation-introduction">
+    <div class="container-narrow">
+      <h2>Une carte des capacités productives</h2>
       <p>
-        Ce prototype rend visible l'espace national des professions PCS &agrave; partir des proximit&eacute;s
-        r&eacute;v&eacute;l&eacute;es entre m&eacute;tiers. Il se concentre ici sur le graphe global, sans filtrage
-        territorial ou temporel.
+        Chaque point représente une profession PCS. Deux métiers sont reliés
+        lorsqu'ils apparaissent souvent dans les mêmes départements, ce qui
+        suggère qu'ils partagent une partie des mêmes capacités productives :
+        savoir-faire, équipements, organisations, infrastructures ou écosystèmes
+        d'entreprises.
+      </p>
+      <p>
+        Le premier résultat est que les métiers ne forment pas une liste
+        indifférenciée. Ils s'organisent en régions cohérentes : production
+        industrielle, maintenance, santé, services publics, hôtellerie-restauration,
+        logistique, commerce, fonctions support ou recherche. Autrement dit,
+        l'économie des métiers possède une géographie propre, distincte de la
+        carte administrative des territoires.
       </p>
     </div>
   </section>
@@ -26,17 +53,81 @@ import '@/styles/occupation-space.css';
     </div>
   </section>
 
+  <section class="occupation-reading">
+    <div class="container-narrow">
+      <h2>Ce que l'on voit en sélectionnant un territoire</h2>
+      <p>
+        Lorsqu'un département et une année sont sélectionnés, la carte nationale
+        devient une carte locale des capacités. Les métiers déjà présents
+        s'illuminent. Les métiers absents restent en retrait. Certains métiers
+        absents apparaissent pourtant très proches de la structure existante :
+        ils sont entourés de professions déjà présentes et constituent donc des
+        opportunités de diversification plus plausibles que d'autres.
+      </p>
+      <p>
+        Cette lecture permet de passer d'une question descriptive à une question
+        stratégique. Il ne s'agit plus seulement de savoir quels métiers manquent
+        à un territoire, mais lesquels sont réellement à sa portée compte tenu
+        des capacités qu'il possède déjà.
+      </p>
+    </div>
+  </section>
+
+  <section class="occupation-emergence">
+    <div class="container-narrow">
+      <h2>Comment un métier peut-il émerger ici ?</h2>
+      <p>
+        La carte ne sert pas seulement à repérer des opportunités. Elle permet
+        aussi d'expliquer pourquoi une profession cible paraît plus ou moins
+        accessible. Pour chaque métier, l'outil identifie les professions déjà
+        présentes qui contribuent le plus à sa densité locale, puis les métiers
+        passerelles qui pourraient rapprocher progressivement le territoire de
+        cette cible.
+      </p>
+      <p>
+        Cette distinction est essentielle. Une politique territoriale ne crée pas
+        directement une spécialisation par décret. Elle agit sur des formations,
+        des entreprises, des infrastructures, des filières et des métiers
+        intermédiaires. L'espace des métiers aide donc à formuler des chemins
+        d'émergence : quelles capacités existent déjà, lesquelles manquent, et
+        quelles étapes rendraient une nouvelle spécialisation plus plausible ?
+      </p>
+    </div>
+  </section>
+
+  <section class="occupation-interpretation">
+    <div class="container-narrow">
+      <h2>Ce que cette carte ne dit pas</h2>
+      <p>
+        L'outil n'est pas une machine à prédire l'avenir local. Les investissements,
+        les stratégies d'entreprises, les politiques publiques, les institutions,
+        les formations et les chocs économiques restent déterminants. La carte
+        indique seulement la structure des possibilités : elle montre quelles
+        transformations sont proches de la base productive existante et lesquelles
+        demanderaient une accumulation plus importante de capacités nouvelles.
+      </p>
+      <p>
+        Elle doit donc être lue comme un instrument de diagnostic. Elle ne répond
+        pas seule à la question « que faut-il faire ? », mais elle aide à poser
+        une meilleure question : à partir de ce que le territoire sait déjà faire,
+        quelles transformations sont les plus crédibles, et quels métiers peuvent
+        servir de passerelles ?
+      </p>
+    </div>
+  </section>
+
   <section class="occupation-method-note">
     <div class="container-narrow">
-      <h2>Note methodologique</h2>
+      <h2>Note méthodologique</h2>
       <p>
-        Les liens repr&eacute;sentent des proximit&eacute;s de Hidalgo entre professions PCS lorsqu'elles franchissent
-        le seuil retenu dans l'export web. La taille des noeuds utilise le degr&eacute; pond&eacute;r&eacute;
-        disponible dans les d&eacute;tails m&eacute;tier, avec un repli sur le degr&eacute; observ&eacute; dans le
-        graphe statique. Les filtres d&eacute;partement, ann&eacute;e, pr&eacute;sence, densit&eacute; et
-        pr&eacute;dictions seront ajout&eacute;s dans une &eacute;tape ult&eacute;rieure.
+        Le réseau est construit à partir des professions PCS observées dans la
+        Base Tous Salariés de l'INSEE entre 2018 et 2023. Les liens mesurent des
+        proximités révélées entre métiers : deux professions sont considérées
+        comme proches lorsqu'elles tendent à coexister dans les mêmes
+        départements avec une intensité supérieure à ce que l'on observerait au
+        hasard. Les opportunités locales sont ensuite calculées à partir de la
+        densité des métiers absents autour des métiers déjà présents.
       </p>
     </div>
   </section>
 </BaseLayout>
-
