@@ -1,0 +1,121 @@
+[
+  {
+    "id": "1",
+    "name": "Logistique et entreposage",
+    "fallback_label": "Communaute 1",
+    "node_count": 4,
+    "color": "#79c7b0"
+  },
+  {
+    "id": "2",
+    "name": "Entrepreneuriat et commerce indépendant",
+    "fallback_label": "Communaute 2",
+    "node_count": 3,
+    "color": "#e0b16a"
+  },
+  {
+    "id": "3",
+    "name": "Industrie, maintenance et production",
+    "fallback_label": "Communaute 3",
+    "node_count": 58,
+    "color": "#d9879d"
+  },
+  {
+    "id": "4",
+    "name": "Construction spécialisée",
+    "fallback_label": "Communaute 4",
+    "node_count": 2,
+    "color": "#a4c86f"
+  },
+  {
+    "id": "5",
+    "name": "Services publics, santé et proximité",
+    "fallback_label": "Communaute 5",
+    "node_count": 49,
+    "color": "#b49ada"
+  },
+  {
+    "id": "6",
+    "name": "Hôtellerie-restauration",
+    "fallback_label": "Communaute 6",
+    "node_count": 5,
+    "color": "#6fb6c9"
+  },
+  {
+    "id": "7",
+    "name": "Commerce alimentaire et artisanat local",
+    "fallback_label": "Communaute 7",
+    "node_count": 5,
+    "color": "#d39a72"
+  },
+  {
+    "id": "8",
+    "name": "Management, finance et fonctions support",
+    "fallback_label": "Communaute 8",
+    "node_count": 13,
+    "color": "#9fb0c2"
+  },
+  {
+    "id": "9",
+    "name": "Forces armées",
+    "fallback_label": "Communaute 9",
+    "node_count": 2,
+    "color": "#8fb3ff"
+  },
+  {
+    "id": "10",
+    "name": "Santé spécialisée et protection sociale",
+    "fallback_label": "Communaute 10",
+    "node_count": 2,
+    "color": "#79c7b0"
+  },
+  {
+    "id": "11",
+    "name": "Enseignement supérieur et recherche publique",
+    "fallback_label": "Communaute 11",
+    "node_count": 8,
+    "color": "#e0b16a"
+  },
+  {
+    "id": "12",
+    "name": "Arts du spectacle",
+    "fallback_label": "Communaute 12",
+    "node_count": 2,
+    "color": "#d9879d"
+  },
+  {
+    "id": "13",
+    "name": "Restauration opérationnelle",
+    "fallback_label": "Communaute 13",
+    "node_count": 4,
+    "color": "#a4c86f"
+  },
+  {
+    "id": "14",
+    "name": "Marine marchande",
+    "fallback_label": "Communaute 14",
+    "node_count": 2,
+    "color": "#b49ada"
+  },
+  {
+    "id": "15",
+    "name": "Ingénierie, numérique et développement",
+    "fallback_label": "Communaute 15",
+    "node_count": 5,
+    "color": "#6fb6c9"
+  },
+  {
+    "id": "16",
+    "name": "Industrie agroalimentaire - viande",
+    "fallback_label": "Communaute 16",
+    "node_count": 2,
+    "color": "#d39a72"
+  },
+  {
+    "id": "17",
+    "name": "Administration hospitalière",
+    "fallback_label": "Communaute 17",
+    "node_count": 2,
+    "color": "#9fb0c2"
+  }
+]
