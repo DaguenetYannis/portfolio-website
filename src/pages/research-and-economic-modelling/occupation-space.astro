@@ -1,0 +1,42 @@
+---
+import BaseLayout from '@/components/layout/BaseLayout.astro';
+import OccupationSpaceExplorer from '@/components/OccupationSpaceExplorer';
+import '@/styles/occupation-space.css';
+---
+
+<BaseLayout
+  title="Espace des metiers | Research and Economic Modelling"
+  description="Prototype statique de l'espace national des metiers PCS."
+>
+  <section class="occupation-hero">
+    <div class="container">
+      <p class="eyebrow">Research and Economic Modelling</p>
+      <h1>Espace des m&eacute;tiers</h1>
+      <p>
+        Ce prototype rend visible l'espace national des professions PCS &agrave; partir des proximit&eacute;s
+        r&eacute;v&eacute;l&eacute;es entre m&eacute;tiers. Il se concentre ici sur le graphe global, sans filtrage
+        territorial ou temporel.
+      </p>
+    </div>
+  </section>
+
+  <section class="occupation-workspace-section">
+    <div class="container occupation-workspace-container">
+      <OccupationSpaceExplorer client:load />
+    </div>
+  </section>
+
+  <section class="occupation-method-note">
+    <div class="container-narrow">
+      <h2>Note methodologique</h2>
+      <p>
+        Les liens repr&eacute;sentent des proximit&eacute;s de Hidalgo entre professions PCS lorsqu'elles franchissent
+        le seuil retenu dans l'export web. La taille des noeuds utilise le degr&eacute; pond&eacute;r&eacute;
+        disponible dans les d&eacute;tails m&eacute;tier, avec un repli sur le degr&eacute; observ&eacute; dans le
+        graphe statique. Les filtres d&eacute;partement, ann&eacute;e, pr&eacute;sence, densit&eacute; et
+        pr&eacute;dictions seront ajout&eacute;s dans une &eacute;tape ult&eacute;rieure.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
