@@ -4,6 +4,7 @@ import type Sigma from 'sigma';
 import type { Attributes } from 'graphology-types';
 import OccupationDetailsPanel from './occupation-space/OccupationDetailsPanel';
 import OccupationSpaceLegend from './occupation-space/OccupationSpaceLegend';
+import { CompleteEmergencePartitionError } from '@/lib/occupationSpace/loadCompleteEmergencePartition';
 import { buildGraph } from '@/lib/occupationSpace/buildGraph';
 import {
   loadOccupationCommunityLabels,
@@ -468,7 +469,13 @@ export default function OccupationSpaceExplorer() {
       emergenceLoadPromiseRef.current = null;
       emergenceLoadKeyRef.current = '';
       setEmergencePathData(null);
-      setEmergenceError(loadError instanceof Error ? loadError.message : 'Erreur de chargement des trajectoires.');
+      setEmergenceError(
+        loadError instanceof CompleteEmergencePartitionError
+          ? 'Les donnees detaillees de trajectoire ne sont pas disponibles pour ce departement-annee.'
+          : loadError instanceof Error
+            ? loadError.message
+            : 'Erreur de chargement des trajectoires.'
+      );
       return null;
     } finally {
       setIsLoadingEmergence(false);

@@ -8,26 +8,12 @@ import type {
   OccupationTerritorialData,
   OccupationSpaceData
 } from './types';
+import { loadCompleteEmergencePartition } from './loadCompleteEmergencePartition';
 
 const DATA_ROOT = '/data/occupation-space';
-const emergencePartitionCache = new Map<string, DepartmentYearEmergencePaths>();
 
 async function fetchJson<T>(path: string): Promise<T> {
   const response = await fetch(path);
-
-  if (!response.ok) {
-    throw new Error(`Could not load ${path} (${response.status})`);
-  }
-
-  return response.json() as Promise<T>;
-}
-
-async function fetchJsonOrNull<T>(path: string): Promise<T | null> {
-  const response = await fetch(path);
-
-  if (response.status === 404) {
-    return null;
-  }
 
   if (!response.ok) {
     throw new Error(`Could not load ${path} (${response.status})`);
@@ -199,65 +185,5 @@ export async function loadOccupationEmergencePaths(
   departmentCode: string,
   year: number | string
 ): Promise<DepartmentYearEmergencePaths> {
-  const cacheKey = `${departmentCode}-${year}`;
-  const cached = emergencePartitionCache.get(cacheKey);
-
-  if (cached) {
-    return cached;
-  }
-
-  const payload = await fetchJsonOrNull<DepartmentYearEmergencePaths>(
-    `${DATA_ROOT}/emergence_paths_complete/by-department-year/${departmentCode}/${year}.json`
-  );
-  const targetEntries = Array.isArray(payload?.targets)
-    ? payload.targets.map((target) => [target.target_pcs, target] as const)
-    : Object.entries(payload?.targets ?? {});
-
-  const normalized = {
-    department: String(payload?.department ?? departmentCode),
-    year: Number(payload?.year ?? year),
-    targets: Object.fromEntries(
-      targetEntries.map(([targetPcs, target]) => {
-        const topPresentContributors = (target.top_present_contributors ?? target.present_contributors ?? []).map((contributor) => ({
-          ...contributor,
-          pcs: String(contributor.pcs),
-          relatedness: contributor.relatedness ?? contributor.hidalgo ?? contributor.weight ?? null
-        }));
-        const bestMissingBridges = (target.best_missing_bridges ?? target.missing_bridges ?? []).map((bridge) => ({
-          ...bridge,
-          pcs: String(bridge.pcs),
-          local_density: bridge.local_density ?? null,
-          opportunity_rank: bridge.opportunity_rank ?? null,
-          bridge_score: bridge.bridge_score ?? null,
-          relatedness: bridge.relatedness ?? bridge.hidalgo ?? bridge.weight ?? null,
-          gateway_flags: Array.isArray(bridge.gateway_flags) ? bridge.gateway_flags.map(String) : []
-        }));
-        const predictionProbability = target.prediction_probability ?? target.prediction?.probability ?? target.prediction?.score ?? null;
-
-        return [
-          String(target.target_pcs ?? targetPcs),
-          {
-            ...target,
-            target_pcs: String(target.target_pcs ?? targetPcs),
-            present: Boolean(target.present),
-            density_hidalgo: target.density_hidalgo ?? target.current_density ?? null,
-            density_cosine: target.density_cosine ?? null,
-            opportunity_rank_hidalgo: target.opportunity_rank_hidalgo ?? target.opportunity_rank ?? null,
-            opportunity_rank_cosine: target.opportunity_rank_cosine ?? null,
-            predicted_entry: target.predicted_entry ?? target.prediction?.predicted_entry ?? target.prediction?.entry_observed ?? null,
-            prediction_probability: predictionProbability,
-            present_contributors: topPresentContributors,
-            missing_bridges: bestMissingBridges,
-            top_present_contributors: topPresentContributors,
-            best_missing_bridges: bestMissingBridges,
-            local_explanation: target.local_explanation ?? {},
-            indicators: target.indicators ?? {}
-          }
-        ];
-      })
-    )
-  };
-
-  emergencePartitionCache.set(cacheKey, normalized);
-  return normalized;
+  return loadCompleteEmergencePartition(departmentCode, year);
 }
