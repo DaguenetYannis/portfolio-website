@@ -3,6 +3,8 @@ import type {
   OccupationEdge,
   OccupationNode,
   OccupationCommunityLabel,
+  OccupationSkillPayload,
+  OccupationSkillProfile,
   DepartmentYearEmergencePaths,
   DepartmentYearTerritorialData,
   OccupationTerritorialData,
@@ -64,6 +66,29 @@ function normalizeDetails(details: Record<string, OccupationDetails>): Record<st
   );
 }
 
+function repairStringList(values: string[] | undefined): string[] {
+  return (values ?? []).map((value) => repairText(value) ?? value);
+}
+
+function normalizeSkillProfile(profile: OccupationSkillProfile): OccupationSkillProfile {
+  return {
+    ...profile,
+    pcs_code: String(profile.pcs_code),
+    pcs_label: repairText(profile.pcs_label) ?? profile.pcs_label,
+    competences: repairStringList(profile.competences),
+    savoirs: repairStringList(profile.savoirs),
+    rome_links: (profile.rome_links ?? []).map((link) => ({
+      ...link,
+      code_rome: String(link.code_rome),
+      libelle_rome: repairText(link.libelle_rome) ?? link.libelle_rome,
+      competences: repairStringList(link.competences),
+      savoirs: repairStringList(link.savoirs),
+      source_pcs2020_labels: repairStringList(link.source_pcs2020_labels),
+      fap_labels: repairStringList(link.fap_labels)
+    }))
+  };
+}
+
 function normalizeTerritorialRows<T extends { label?: string }>(
   data: Record<string, Record<string, T[]>> | Array<T>
 ): typeof data {
@@ -113,6 +138,17 @@ export async function loadOccupationSpaceGraphData(): Promise<Omit<OccupationSpa
 export async function loadOccupationDetails(): Promise<Record<string, OccupationDetails>> {
   const details = await fetchJson<Record<string, OccupationDetails>>(`${DATA_ROOT}/occupation_details.json`);
   return normalizeDetails(details);
+}
+
+export async function loadOccupationSkillProfiles(): Promise<Record<string, OccupationSkillProfile>> {
+  const payload = await fetchJson<OccupationSkillPayload>(`${DATA_ROOT}/skills_by_pcs.json`);
+
+  return Object.fromEntries(
+    Object.entries(payload.profiles ?? {}).map(([code, profile]) => [
+      code,
+      normalizeSkillProfile(profile)
+    ])
+  );
 }
 
 export async function loadOccupationCommunityLabels(): Promise<OccupationCommunityLabel[]> {

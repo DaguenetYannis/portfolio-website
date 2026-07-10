@@ -376,11 +376,24 @@
   border-top: 1px solid var(--color-border-subtle);
 }
 
+.occupation-capability-profile {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
 .occupation-emergence-path h3,
+.occupation-capability-profile h3,
 .occupation-neighbors h3 {
   margin: 0 0 var(--space-md);
   color: var(--color-text);
   font-size: var(--font-size-base);
+}
+
+.occupation-capability-profile p {
+  margin: 0 0 var(--space-md);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
 }
 
 .occupation-path-metrics {
@@ -413,7 +426,17 @@
   margin-top: var(--space-md);
 }
 
+.occupation-capability-list {
+  margin-top: var(--space-md);
+}
+
 .occupation-path-list h4 {
+  margin: 0 0 var(--space-sm);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.occupation-capability-list h4 {
   margin: 0 0 var(--space-sm);
   color: var(--color-text-secondary);
   font-size: var(--font-size-sm);
@@ -422,6 +445,22 @@
 .occupation-path-list ol {
   display: grid;
   gap: var(--space-xs);
+}
+
+.occupation-capability-list ul {
+  display: grid;
+  gap: var(--space-xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.occupation-capability-list li {
+  padding: var(--space-xs) 0;
+  border-bottom: 1px solid var(--color-border-subtle);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: 1.35;
 }
 
 .occupation-path-list button {
@@ -454,10 +493,38 @@
 }
 
 .occupation-path-empty,
-.occupation-path-list p {
+.occupation-path-list p,
+.occupation-capability-list p {
   margin: 0;
   color: var(--color-text-muted);
   font-size: var(--font-size-sm);
+}
+
+.occupation-capability-coverage {
+  display: grid;
+  gap: var(--space-xs);
+  margin: 0 0 var(--space-md);
+}
+
+.occupation-capability-coverage div {
+  display: grid;
+  gap: var(--space-xs);
+  padding: var(--space-sm);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
+  background: rgba(15, 23, 42, 0.38);
+}
+
+.occupation-capability-coverage dt {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+}
+
+.occupation-capability-coverage dd {
+  margin: 0;
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
 }
 
 .occupation-neighbors ol {

@@ -33,6 +33,43 @@ export interface OccupationDetails {
   explanation_rows?: number | null;
 }
 
+export interface OccupationSkillRomeLink {
+  code_rome: string;
+  libelle_rome?: string;
+  competences: string[];
+  savoirs: string[];
+  source_pcs2020_labels?: string[];
+  pcs2020_codes?: string[];
+  pcs2003_codes?: string[];
+  fap_codes?: string[];
+  fap_labels?: string[];
+  n_exact_paths?: number;
+  n_source_pcs2020_labels?: number;
+}
+
+export interface OccupationSkillProfile {
+  pcs_code: string;
+  pcs_label?: string;
+  bridge_method?: string;
+  bridge_is_conservative?: boolean;
+  rome_count?: number;
+  competence_count?: number;
+  savoir_count?: number;
+  competences: string[];
+  savoirs: string[];
+  rome_links: OccupationSkillRomeLink[];
+}
+
+export interface OccupationSkillPayload {
+  metadata?: {
+    created_by?: string;
+    source_file?: string;
+    bridge_scope?: string;
+    profile_count?: number;
+  };
+  profiles: Record<string, OccupationSkillProfile>;
+}
+
 export interface OccupationCommunityLabel {
   id: string;
   name?: string;

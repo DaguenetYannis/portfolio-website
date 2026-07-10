@@ -11,6 +11,7 @@ import {
   loadOccupationDetails,
   loadOccupationDepartmentYearData,
   loadOccupationEmergencePaths,
+  loadOccupationSkillProfiles,
   loadOccupationSpaceGraphData,
   loadOccupationTerritorialMetadata
 } from '@/lib/occupationSpace/loadOccupationSpaceData';
@@ -26,6 +27,7 @@ import type {
   OccupationDetails,
   OccupationNode,
   OccupationCommunityLabel,
+  OccupationSkillProfile,
   OccupationSpaceData,
   OccupationTerritorialData,
   TerritorialNodeStatus
@@ -180,6 +182,7 @@ export default function OccupationSpaceExplorer() {
   const emergenceLoadKeyRef = useRef('');
   const [data, setData] = useState<OccupationGraphData | null>(null);
   const [details, setDetails] = useState<Record<string, OccupationDetails> | null>(null);
+  const [skillProfiles, setSkillProfiles] = useState<Record<string, OccupationSkillProfile> | null>(null);
   const [departmentYearData, setDepartmentYearData] = useState<DepartmentYearTerritorialData | null>(null);
   const [emergencePathData, setEmergencePathData] = useState<DepartmentYearEmergencePaths | null>(null);
   const [territorialMetadata, setTerritorialMetadata] = useState<Pick<OccupationTerritorialData, 'departments' | 'years'> | null>(null);
@@ -355,6 +358,26 @@ export default function OccupationSpaceExplorer() {
       .catch(() => {
         if (isMounted) {
           setCommunityLabelRows([]);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    loadOccupationSkillProfiles()
+      .then((profiles) => {
+        if (isMounted) {
+          setSkillProfiles(profiles);
+        }
+      })
+      .catch(() => {
+        if (isMounted) {
+          setSkillProfiles({});
         }
       });
 
@@ -779,6 +802,7 @@ export default function OccupationSpaceExplorer() {
   }
 
   const selectedDetails = selectedNode ? details?.[selectedNode.code ?? selectedNode.id] ?? null : null;
+  const selectedSkillProfile = selectedNode ? skillProfiles?.[selectedNode.code ?? selectedNode.id] ?? null : null;
 
   if (isLoading) {
     return <div className="occupation-state">Chargement du reseau national...</div>;
@@ -945,6 +969,8 @@ export default function OccupationSpaceExplorer() {
         <OccupationDetailsPanel
           selectedNode={selectedNode}
           details={selectedDetails}
+          skillProfile={selectedSkillProfile}
+          skillProfiles={skillProfiles}
           territorialStatus={selectedTerritorialStatus}
           emergencePath={selectedEmergencePath}
           nodeLabels={nodeLabelMap}

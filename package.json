@@ -11,6 +11,7 @@
     "occupation:split-territorial": "node scripts/splitOccupationTerritorialData.mjs",
     "occupation:build-emergence-paths": "node scripts/buildOccupationEmergencePaths.mjs",
     "occupation:build-complete-emergence-paths": "node scripts/buildCompleteEmergencePathWebData.mjs",
+    "occupation:build-skills": "node scripts/buildOccupationSkillsData.mjs",
     "occupation:measure": "node scripts/measureOccupationSpace.mjs"
   },
   "dependencies": {

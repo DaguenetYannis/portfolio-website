@@ -7,12 +7,15 @@ import type {
   EmergencePath,
   OccupationDetails,
   OccupationNode,
+  OccupationSkillProfile,
   TerritorialNodeStatus
 } from '@/lib/occupationSpace/types';
 
 interface Props {
   selectedNode?: OccupationNode | null;
   details?: OccupationDetails | null;
+  skillProfile?: OccupationSkillProfile | null;
+  skillProfiles?: Record<string, OccupationSkillProfile> | null;
   territorialStatus?: TerritorialNodeStatus | null;
   emergencePath?: EmergencePath | null;
   nodeLabels?: Map<string, string>;
@@ -31,6 +34,55 @@ function formatNumber(value: number | null | undefined, digits = 1): string {
 
 function labelFor(pcs: string, nodeLabels?: Map<string, string>) {
   return nodeLabels?.get(pcs) ?? pcs;
+}
+
+function uniqueItems(values: string[]): string[] {
+  return [...new Set(values.filter(Boolean))];
+}
+
+function collectProfileItems(
+  items: Array<EmergenceContributor | EmergenceBridge>,
+  profiles: Record<string, OccupationSkillProfile> | null | undefined,
+  field: 'competences' | 'savoirs'
+): Set<string> {
+  return new Set(
+    items.flatMap((item) => profiles?.[item.pcs]?.[field] ?? [])
+  );
+}
+
+function countCovered(targetItems: string[], sourceItems: Set<string>): number {
+  return targetItems.filter((item) => sourceItems.has(item)).length;
+}
+
+function sampleMissing(targetItems: string[], sourceItems: Set<string>, limit = 6): string[] {
+  return targetItems.filter((item) => !sourceItems.has(item)).slice(0, limit);
+}
+
+function CapabilityList({ title, items }: { title: string; items: string[] }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const visibleItems = items.slice(0, isExpanded ? 18 : 6);
+
+  return (
+    <div className="occupation-capability-list">
+      <h4>{title}</h4>
+      {items.length > 0 ? (
+        <>
+          <ul>
+            {visibleItems.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+          {items.length > 6 && (
+            <button className="occupation-show-more" type="button" onClick={() => setIsExpanded((value) => !value)}>
+              {isExpanded ? 'Afficher moins' : `Afficher plus (${Math.min(items.length, 18)})`}
+            </button>
+          )}
+        </>
+      ) : (
+        <p>Non disponible dans la correspondance exacte.</p>
+      )}
+    </div>
+  );
 }
 
 function PathList({
@@ -80,6 +132,8 @@ function PathList({
 export default function OccupationDetailsPanel({
   selectedNode,
   details,
+  skillProfile,
+  skillProfiles,
   territorialStatus,
   emergencePath,
   nodeLabels,
@@ -104,6 +158,16 @@ export default function OccupationDetailsPanel({
   const neighbors = details?.top_neighbors ?? [];
   const presentContributors = emergencePath?.top_present_contributors ?? emergencePath?.present_contributors ?? [];
   const missingBridges = emergencePath?.best_missing_bridges ?? emergencePath?.missing_bridges ?? [];
+  const targetCompetences = uniqueItems(skillProfile?.competences ?? []);
+  const targetSavoirs = uniqueItems(skillProfile?.savoirs ?? []);
+  const presentCompetences = collectProfileItems(presentContributors, skillProfiles, 'competences');
+  const presentSavoirs = collectProfileItems(presentContributors, skillProfiles, 'savoirs');
+  const bridgeCompetences = collectProfileItems(missingBridges, skillProfiles, 'competences');
+  const bridgeSavoirs = collectProfileItems(missingBridges, skillProfiles, 'savoirs');
+  const presentCompetenceCount = countCovered(targetCompetences, presentCompetences);
+  const presentSavoirCount = countCovered(targetSavoirs, presentSavoirs);
+  const bridgeCompetenceCount = countCovered(targetCompetences, bridgeCompetences);
+  const bridgeSavoirCount = countCovered(targetSavoirs, bridgeSavoirs);
   const densityHidalgo = emergencePath?.density_hidalgo ?? emergencePath?.current_density ?? null;
   const densityCosine = emergencePath?.density_cosine ?? null;
   const opportunityRankHidalgo = emergencePath?.opportunity_rank_hidalgo ?? emergencePath?.opportunity_rank ?? null;
@@ -224,6 +288,51 @@ export default function OccupationDetailsPanel({
           )}
         </div>
       )}
+
+      <div className="occupation-capability-profile">
+        <h3>Competences et savoirs</h3>
+        {skillProfile ? (
+          <>
+            <p>
+              Profil disponible via correspondance exacte conservatrice PCS-ROME:
+              {' '}
+              {skillProfile.rome_count ?? skillProfile.rome_links.length} ROME,
+              {' '}
+              {targetCompetences.length} competences,
+              {' '}
+              {targetSavoirs.length} savoirs.
+            </p>
+
+            {territorialStatus?.isTerritorialView && emergencePath && (
+              <dl className="occupation-capability-coverage">
+                <div>
+                  <dt>Deja portes par contributeurs presents</dt>
+                  <dd>{presentCompetenceCount}/{targetCompetences.length} competences - {presentSavoirCount}/{targetSavoirs.length} savoirs</dd>
+                </div>
+                <div>
+                  <dt>Portes par ponts manquants plausibles</dt>
+                  <dd>{bridgeCompetenceCount}/{targetCompetences.length} competences - {bridgeSavoirCount}/{targetSavoirs.length} savoirs</dd>
+                </div>
+              </dl>
+            )}
+
+            <CapabilityList title="Competences cibles" items={targetCompetences} />
+            <CapabilityList title="Savoirs cibles" items={targetSavoirs} />
+
+            {territorialStatus?.isTerritorialView && emergencePath && (
+              <CapabilityList
+                title="Blocs cibles non couverts par les contributeurs presents"
+                items={[
+                  ...sampleMissing(targetCompetences, presentCompetences, 4),
+                  ...sampleMissing(targetSavoirs, presentSavoirs, 4)
+                ]}
+              />
+            )}
+          </>
+        ) : (
+          <p>Aucun profil de competences disponible dans la correspondance exacte conservatrice pour ce PCS.</p>
+        )}
+      </div>
 
       <div className="occupation-neighbors">
         <h3>Voisins les plus proches</h3>
