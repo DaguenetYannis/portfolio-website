@@ -60,6 +60,16 @@ export interface OccupationSkillProfile {
   rome_links: OccupationSkillRomeLink[];
 }
 
+export interface OccupationSkillNeighbor {
+  pcs: string;
+  label?: string;
+  score: number;
+  competence_score: number;
+  savoir_score: number;
+  shared_competences: string[];
+  shared_savoirs: string[];
+}
+
 export interface OccupationSkillPayload {
   metadata?: {
     created_by?: string;

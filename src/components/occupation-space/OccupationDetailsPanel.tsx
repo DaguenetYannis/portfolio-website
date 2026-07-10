@@ -7,6 +7,7 @@ import type {
   EmergencePath,
   OccupationDetails,
   OccupationNode,
+  OccupationSkillNeighbor,
   OccupationSkillProfile,
   TerritorialNodeStatus
 } from '@/lib/occupationSpace/types';
@@ -16,6 +17,7 @@ interface Props {
   details?: OccupationDetails | null;
   skillProfile?: OccupationSkillProfile | null;
   skillProfiles?: Record<string, OccupationSkillProfile> | null;
+  skillNeighbors?: OccupationSkillNeighbor[];
   territorialStatus?: TerritorialNodeStatus | null;
   emergencePath?: EmergencePath | null;
   nodeLabels?: Map<string, string>;
@@ -85,6 +87,49 @@ function CapabilityList({ title, items }: { title: string; items: string[] }) {
   );
 }
 
+function SimilarSkillList({
+  neighbors,
+  onFocusNode
+}: {
+  neighbors: OccupationSkillNeighbor[];
+  onFocusNode?: (nodeId: string) => void;
+}) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const visibleNeighbors = neighbors.slice(0, isExpanded ? 12 : 5);
+
+  return (
+    <div className="occupation-skill-neighbors">
+      <h4>Metiers les plus proches par competences</h4>
+      {neighbors.length > 0 ? (
+        <>
+          <ol>
+            {visibleNeighbors.map((neighbor) => (
+              <li key={neighbor.pcs}>
+                <button type="button" onClick={() => onFocusNode?.(neighbor.pcs)}>
+                  <span>{neighbor.label ?? neighbor.pcs}</span>
+                  <strong>{formatNumber(neighbor.score, 3)}</strong>
+                  <small>
+                    {neighbor.shared_competences.length} competences partagees,
+                    {' '}
+                    {neighbor.shared_savoirs.length} savoirs partages
+                  </small>
+                </button>
+              </li>
+            ))}
+          </ol>
+          {neighbors.length > 5 && (
+            <button className="occupation-show-more" type="button" onClick={() => setIsExpanded((value) => !value)}>
+              {isExpanded ? 'Afficher moins' : `Afficher plus (${Math.min(neighbors.length, 12)})`}
+            </button>
+          )}
+        </>
+      ) : (
+        <p>Aucun autre PCS avec competences partagees dans la correspondance exacte.</p>
+      )}
+    </div>
+  );
+}
+
 function PathList({
   title,
   items,
@@ -134,6 +179,7 @@ export default function OccupationDetailsPanel({
   details,
   skillProfile,
   skillProfiles,
+  skillNeighbors = [],
   territorialStatus,
   emergencePath,
   nodeLabels,
@@ -294,7 +340,7 @@ export default function OccupationDetailsPanel({
         {skillProfile ? (
           <>
             <p>
-              Profil disponible via correspondance exacte conservatrice PCS-ROME:
+              Ce metier est en co-occurrence avec ces competences et savoirs dans les fiches ROME reliees par correspondance exacte conservatrice:
               {' '}
               {skillProfile.rome_count ?? skillProfile.rome_links.length} ROME,
               {' '}
@@ -302,6 +348,8 @@ export default function OccupationDetailsPanel({
               {' '}
               {targetSavoirs.length} savoirs.
             </p>
+
+            <SimilarSkillList neighbors={skillNeighbors} onFocusNode={onFocusNode} />
 
             {territorialStatus?.isTerritorialView && emergencePath && (
               <dl className="occupation-capability-coverage">

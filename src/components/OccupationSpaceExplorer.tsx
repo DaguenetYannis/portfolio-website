@@ -27,6 +27,7 @@ import type {
   OccupationDetails,
   OccupationNode,
   OccupationCommunityLabel,
+  OccupationSkillNeighbor,
   OccupationSkillProfile,
   OccupationSpaceData,
   OccupationTerritorialData,
@@ -46,9 +47,12 @@ interface CommunityLabelPosition {
 const READABLE_EDGE_THRESHOLD = 0.85;
 const ISOLATED_NODE_COLOR = 'rgba(148, 163, 184, 0.28)';
 const OPPORTUNITY_HALO_COLOR = '#f1c96d';
-const PREDICTION_BORDER_COLOR = '#8ff0c4';
 const EMERGENCE_CONTRIBUTOR_COLOR = '#f6d365';
 const EMERGENCE_BRIDGE_COLOR = '#82e6c6';
+const SKILL_PROFILE_COLOR = '#a8d8ff';
+const SKILL_NEIGHBOR_COLOR = '#ffcf7a';
+const COMPETENCE_WEIGHT = 0.8;
+const SAVOIR_WEIGHT = 0.2;
 
 function getNodeFromGraph(id: string, data: OccupationGraphData): OccupationNode | null {
   return data.nodes.find((node) => node.id === id || node.code === id) ?? null;
@@ -64,6 +68,42 @@ function formatNumber(value: number | null | undefined, digits = 2): string {
   }
 
   return new Intl.NumberFormat('fr-FR', { maximumFractionDigits: digits }).format(value);
+}
+
+function jaccard(left: string[], right: string[]): { score: number; shared: string[] } {
+  const leftSet = new Set(left);
+  const rightSet = new Set(right);
+  const shared = [...leftSet].filter((item) => rightSet.has(item)).sort((a, b) => a.localeCompare(b, 'fr'));
+  const unionSize = new Set([...leftSet, ...rightSet]).size;
+
+  return {
+    score: unionSize > 0 ? shared.length / unionSize : 0,
+    shared
+  };
+}
+
+function skillSimilarity(
+  source: OccupationSkillProfile,
+  target: OccupationSkillProfile,
+  label?: string
+): OccupationSkillNeighbor | null {
+  const competence = jaccard(source.competences, target.competences);
+  const savoir = jaccard(source.savoirs, target.savoirs);
+  const score = COMPETENCE_WEIGHT * competence.score + SAVOIR_WEIGHT * savoir.score;
+
+  if (score <= 0) {
+    return null;
+  }
+
+  return {
+    pcs: target.pcs_code,
+    label: label ?? target.pcs_label,
+    score,
+    competence_score: competence.score,
+    savoir_score: savoir.score,
+    shared_competences: competence.shared,
+    shared_savoirs: savoir.shared
+  };
 }
 
 function colorWithAlpha(hex: string, alpha: number): string {
@@ -194,7 +234,7 @@ export default function OccupationSpaceExplorer() {
   const [selectedYear, setSelectedYear] = useState<number | ''>('');
   const [showPresent, setShowPresent] = useState(true);
   const [showOpportunities, setShowOpportunities] = useState(true);
-  const [showPredictions, setShowPredictions] = useState(true);
+  const [showSkills, setShowSkills] = useState(false);
   const [showCommunityNames, setShowCommunityNames] = useState(true);
   const [communityLabels, setCommunityLabels] = useState<CommunityLabelPosition[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -289,6 +329,32 @@ export default function OccupationSpaceExplorer() {
 
   const selectedTerritorialStatus = selectedNode ? territorialStatuses.get(selectedNode.id) ?? null : null;
   const selectedEmergencePath = selectedNode ? emergencePathMap.get(selectedNode.code ?? selectedNode.id) ?? null : null;
+  const selectedSkillProfile = selectedNode ? skillProfiles?.[selectedNode.code ?? selectedNode.id] ?? null : null;
+  const skillNeighbors = useMemo(() => {
+    if (!selectedSkillProfile || !skillProfiles) {
+      return [];
+    }
+
+    return Object.values(skillProfiles)
+      .filter((profile) => profile.pcs_code !== selectedSkillProfile.pcs_code)
+      .map((profile) => skillSimilarity(
+        selectedSkillProfile,
+        profile,
+        nodeLabelMap.get(profile.pcs_code) ?? profile.pcs_label
+      ))
+      .filter((neighbor): neighbor is OccupationSkillNeighbor => Boolean(neighbor))
+      .sort((left, right) =>
+        right.score - left.score ||
+        right.competence_score - left.competence_score ||
+        right.savoir_score - left.savoir_score ||
+        left.pcs.localeCompare(right.pcs)
+      )
+      .slice(0, 12);
+  }, [selectedSkillProfile, skillProfiles, nodeLabelMap]);
+  const skillNeighborMap = useMemo(
+    () => new Map(skillNeighbors.map((neighbor) => [neighbor.pcs, neighbor])),
+    [skillNeighbors]
+  );
   const communityLabelMap = useMemo(
     () => new Map(communityLabelRows.map((label) => [label.id, label])),
     [communityLabelRows]
@@ -631,6 +697,10 @@ export default function OccupationSpaceExplorer() {
       const isPathBridge = Boolean(
         selectedEmergencePath?.best_missing_bridges?.some((bridge) => bridge.pcs === nodeCode)
       );
+      const skillNeighbor = skillNeighborMap.get(nodeCode);
+      const hasSkillProfile = Boolean(skillProfiles?.[nodeCode]);
+      const isSkillNeighbor = showSkills && Boolean(skillNeighbor);
+      const isSkillProfileVisible = showSkills && hasSkillProfile;
       const isSelectedOrHovered = selectedNode?.id === node || hoveredNode === node;
       const baseColor = (attributes.baseColor as string | undefined) ?? (attributes.community === null ? '#7f8794' : attributes.color);
       const baseSize = Number(attributes.baseSize ?? attributes.size) || 4;
@@ -647,26 +717,37 @@ export default function OccupationSpaceExplorer() {
         graph.mergeNodeAttributes(node, {
           x,
           y,
-          color: isIsolated ? ISOLATED_NODE_COLOR : subdued ? colorWithAlpha(baseColor, 0.34) : baseColor,
-          size: isIsolated ? Math.max(1.9, baseSize * 0.52) : subdued ? Math.max(2.4, baseSize * 0.72) : baseSize,
+          color: isIsolated
+            ? ISOLATED_NODE_COLOR
+            : isSkillNeighbor
+              ? SKILL_NEIGHBOR_COLOR
+              : isSkillProfileVisible
+                ? colorWithAlpha(SKILL_PROFILE_COLOR, selectedSkillProfile ? 0.38 : 0.78)
+                : subdued
+                  ? colorWithAlpha(baseColor, 0.34)
+                  : baseColor,
+          size: Math.max(
+            isIsolated ? 1.9 : 2.4,
+            (isIsolated ? baseSize * 0.52 : subdued ? baseSize * 0.72 : baseSize) +
+              (isSkillNeighbor ? 4 : isSkillProfileVisible ? 1.4 : 0)
+          ),
           hidden,
-          highlighted: isSelectedOrHovered,
-          showLabel: isSelectedOrHovered,
-          haloColor: isSelectedOrHovered ? baseColor : undefined,
-          zIndex: isSelectedOrHovered ? 4 : isIsolated ? -1 : subdued ? 0 : 1
+          highlighted: isSelectedOrHovered || isSkillNeighbor || isSkillProfileVisible,
+          showLabel: isSelectedOrHovered || isSkillNeighbor,
+          haloColor: isSkillNeighbor ? SKILL_NEIGHBOR_COLOR : isSelectedOrHovered ? baseColor : undefined,
+          zIndex: isSelectedOrHovered ? 4 : isSkillNeighbor ? 3 : isSkillProfileVisible ? 2 : isIsolated ? -1 : subdued ? 0 : 1
         });
         return;
       }
 
-      const isPredictionVisible = showPredictions && status.isPredictedEntry;
       const isOpportunityVisible = showOpportunities && status.isHighDensityOpportunity;
       const isPresentVisible = showPresent && status.isPresent;
       const isSelectedTarget = Boolean(selectedEmergencePath && selectedEmergencePath.target_pcs === nodeCode);
       const isPathNode = isPathContributor || isPathBridge;
-      const muted = !isPresentVisible && !isOpportunityVisible && !isPredictionVisible;
+      const muted = !isPresentVisible && !isOpportunityVisible && !isSkillProfileVisible;
       const opacity = isPresentVisible
         ? 0.95
-        : isOpportunityVisible || isPredictionVisible
+        : isOpportunityVisible || isSkillProfileVisible
           ? 0.82
           : 0.22;
 
@@ -677,32 +758,37 @@ export default function OccupationSpaceExplorer() {
           ? ISOLATED_NODE_COLOR
           : isSelectedTarget
             ? '#f8fafc'
+            : isSkillNeighbor
+              ? SKILL_NEIGHBOR_COLOR
             : isPathBridge
             ? colorWithAlpha(EMERGENCE_BRIDGE_COLOR, 0.9)
             : isPathContributor
               ? colorWithAlpha(EMERGENCE_CONTRIBUTOR_COLOR, 0.9)
-              : colorWithAlpha(baseColor, subdued ? Math.min(opacity, 0.34) : muted ? 0.16 : opacity),
+              : isSkillProfileVisible
+                ? colorWithAlpha(SKILL_PROFILE_COLOR, selectedSkillProfile ? 0.38 : 0.78)
+                : colorWithAlpha(baseColor, subdued ? Math.min(opacity, 0.34) : muted ? 0.16 : opacity),
         size: Math.max(
           isIsolated ? 1.8 : 2,
           baseSize * (isIsolated ? 0.52 : subdued ? 0.78 : 1) +
-            (isSelectedOrHovered || isSelectedTarget ? 4.8 : isPathNode ? 3.2 : isPredictionVisible ? 4 : isOpportunityVisible ? 2.5 : isPresentVisible ? 1 : -1)
+            (isSelectedOrHovered || isSelectedTarget ? 4.8 : isSkillNeighbor ? 4 : isPathNode ? 3.2 : isSkillProfileVisible ? 1.5 : isOpportunityVisible ? 2.5 : isPresentVisible ? 1 : -1)
         ),
         hidden,
-        highlighted: isSelectedOrHovered || isSelectedTarget || isPathNode || isPredictionVisible || isOpportunityVisible,
-        showLabel: isSelectedOrHovered || isSelectedTarget || isPathNode,
+        highlighted: isSelectedOrHovered || isSelectedTarget || isPathNode || isSkillNeighbor || isSkillProfileVisible || isOpportunityVisible,
+        showLabel: isSelectedOrHovered || isSelectedTarget || isPathNode || isSkillNeighbor,
         haloColor: isSelectedTarget
           ? '#f8fafc'
+          : isSkillNeighbor
+            ? SKILL_NEIGHBOR_COLOR
           : isPathBridge
           ? EMERGENCE_BRIDGE_COLOR
           : isPathContributor
             ? EMERGENCE_CONTRIBUTOR_COLOR
-            : isPredictionVisible
-              ? PREDICTION_BORDER_COLOR
-              : isOpportunityVisible
+            : isOpportunityVisible
                 ? OPPORTUNITY_HALO_COLOR
-                : baseColor,
-        borderColor: isPredictionVisible ? PREDICTION_BORDER_COLOR : undefined,
-        zIndex: isSelectedOrHovered || isSelectedTarget ? 6 : isPathNode || isPredictionVisible ? 5 : isOpportunityVisible ? 4 : isPresentVisible ? 2 : 0
+                : isSkillProfileVisible
+                  ? SKILL_PROFILE_COLOR
+                  : baseColor,
+        zIndex: isSelectedOrHovered || isSelectedTarget ? 6 : isSkillNeighbor || isPathNode ? 5 : isOpportunityVisible ? 4 : isSkillProfileVisible ? 3 : isPresentVisible ? 2 : 0
       });
     });
 
@@ -715,8 +801,11 @@ export default function OccupationSpaceExplorer() {
     hoveredNode,
     showPresent,
     showOpportunities,
-    showPredictions,
-    selectedEmergencePath
+    showSkills,
+    selectedEmergencePath,
+    selectedSkillProfile,
+    skillNeighborMap,
+    skillProfiles
   ]);
 
   function handleDepartmentChange(departmentCode: string) {
@@ -802,7 +891,6 @@ export default function OccupationSpaceExplorer() {
   }
 
   const selectedDetails = selectedNode ? details?.[selectedNode.code ?? selectedNode.id] ?? null : null;
-  const selectedSkillProfile = selectedNode ? skillProfiles?.[selectedNode.code ?? selectedNode.id] ?? null : null;
 
   if (isLoading) {
     return <div className="occupation-state">Chargement du reseau national...</div>;
@@ -866,6 +954,13 @@ export default function OccupationSpaceExplorer() {
               >
                 Communautes
               </button>
+              <button
+                type="button"
+                className={showSkills ? 'is-active' : ''}
+                onClick={() => setShowSkills((value) => !value)}
+              >
+                Competences
+              </button>
             </div>
 
             {isTerritorialView && (
@@ -883,13 +978,6 @@ export default function OccupationSpaceExplorer() {
                   onClick={() => setShowOpportunities((value) => !value)}
                 >
                   Opportunites
-                </button>
-                <button
-                  type="button"
-                  className={showPredictions ? 'is-active' : ''}
-                  onClick={() => setShowPredictions((value) => !value)}
-                >
-                  Predictions
                 </button>
               </div>
             )}
@@ -971,6 +1059,7 @@ export default function OccupationSpaceExplorer() {
           details={selectedDetails}
           skillProfile={selectedSkillProfile}
           skillProfiles={skillProfiles}
+          skillNeighbors={skillNeighbors}
           territorialStatus={selectedTerritorialStatus}
           emergencePath={selectedEmergencePath}
           nodeLabels={nodeLabelMap}
